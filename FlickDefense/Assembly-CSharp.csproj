@@ -46,7 +46,9 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\InputBehaviior.cs" />
+     <Compile Include="Assets\Scripts\UpgradeSystem.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Kart.cs" />
