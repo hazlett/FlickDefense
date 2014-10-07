@@ -3,8 +3,15 @@ using System.Collections;
 
 public class GameStateManager  {
 
-    private GameStateManager instance;
-    public GameStateManager Instance { get { return instance; } set { instance = value; } }
+    private int castleHealth;
+    public int CastleHealth { get { return castleHealth; } }
+    private static  GameStateManager instance = new GameStateManager();
+    public static GameStateManager Instance { get { return instance; } set { instance = value; } }
+
+    private GameStateManager()
+    {
+        castleHealth = 5;
+    }
 
     internal enum GameState
     {
@@ -18,13 +25,16 @@ public class GameStateManager  {
 
     internal GameState currentState;
 
-	// Use this for initialization
-	void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+    public void Initialize(int castleHealth)
+    {
+        this.castleHealth = castleHealth;
+    }
+    public void DamageCastle()
+    {
+        castleHealth--;
+    }
+    public void DamageCastle(int damage)
+    {
+        castleHealth -= damage;
+    }
 }

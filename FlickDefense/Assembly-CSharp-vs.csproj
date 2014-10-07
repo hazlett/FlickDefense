@@ -46,10 +46,34 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Scripts\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\Flick.cs" />
      <Compile Include="Assets\Scripts\FlickBehaviour.cs" />
+     <Compile Include="Assets\Scripts\GameStateManager.cs" />
+     <Compile Include="Assets\Scripts\GruntBehaviour.cs" />
      <Compile Include="Assets\Scripts\InputBehaviour.cs" />
+     <Compile Include="Assets\Scripts\UpgradeSystem.cs" />
+     <Compile Include="Assets\Scripts\WallManager.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Kart.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\LevelJump.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\RotateObject.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Spawner.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\BillboardLaub.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\BillboardLaub1.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Butterfly.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\FpsCounter.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTLiquidSpriteSheet.cs" />
+     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTSpriteSheet.cs" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
+     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim2.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

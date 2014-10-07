@@ -22,7 +22,6 @@ public class InputBehaviour : MonoBehaviour
 
     void Update()
     {
-
         if (hit)
         {
             deltaTime += Time.deltaTime;
@@ -39,6 +38,13 @@ public class InputBehaviour : MonoBehaviour
                         startPos = userTouch.position;
                         ray = Camera.main.ScreenPointToRay(startPos);
                         hit = Physics.Raycast(ray, out raycastHit, 100.0f);
+                        if (hit)
+                        {
+                            if (raycastHit.collider.tag != "Enemy")
+                            {
+                                hit = false;
+                            }
+                        }
                     }
                     break;
                 default:
@@ -102,9 +108,9 @@ public class InputBehaviour : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box("Start Pos: (" + startPos.x + ", " + startPos.y + ")");
-        GUILayout.Box("Current Pos: (" + movePos.x + ", " + movePos.y + ")");
-        GUILayout.Box("End Pos: (" + endPos.x + ", " + endPos.y + ")");
-        GUILayout.Box("Velocity: (" + velocity.x + ", " + velocity.y + ")");
+        //GUILayout.Box("Start Pos: (" + startPos.x + ", " + startPos.y + ")");
+        //GUILayout.Box("Current Pos: (" + movePos.x + ", " + movePos.y + ")");
+        //GUILayout.Box("End Pos: (" + endPos.x + ", " + endPos.y + ")");
+        //GUILayout.Box("Velocity: (" + velocity.x + ", " + velocity.y + ")");
     }
 }
