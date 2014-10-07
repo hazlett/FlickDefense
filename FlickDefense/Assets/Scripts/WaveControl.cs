@@ -14,7 +14,13 @@ public class WaveControl : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.Space))
         {
             WaveSystem.Instance.currentState++;
+            if ((int)WaveSystem.Instance.currentState > 2)
+            {
+                WaveSystem.Instance.currentState = 0;
+            }
         }
+
+        //Debug.Log(WaveSystem.Instance.currentState.ToString());
 
         switch (WaveSystem.Instance.currentState)
         {

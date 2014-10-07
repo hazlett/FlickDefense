@@ -7,9 +7,7 @@ public class GruntSpawner : MonoBehaviour {
     public static GruntSpawner Instance { get { return instance; } set { instance = value; } }
 
     internal bool spawning;
-    internal int gruntNumber;
-
-    private int gruntsSpawned = 0;
+    internal int gruntNumber, gruntsSpawned;
     private float frequency = 1.0f;
 
 	// Use this for initialization
