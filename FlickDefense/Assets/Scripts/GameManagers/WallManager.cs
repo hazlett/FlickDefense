@@ -4,6 +4,12 @@ using System.Collections;
 public class WallManager : MonoBehaviour {
 
     private int health;
+    private GameObject gruntLocationManager;
+    void Awake()
+    {
+        gruntLocationManager = GameObject.Instantiate(Resources.Load("Prefabs/Locations/GruntLocation")) as GameObject;
+        gruntLocationManager.transform.position = transform.position;
+    }
 	void Start () {
         health = 5;
 	}
@@ -12,31 +18,6 @@ public class WallManager : MonoBehaviour {
 	
 	}
 
-    void OnTriggerEnter(Collider collider)
-    { 
-        switch (collider.tag)
-        {
-            case "Enemy":
-                {
-                    collider.GetComponent<EnemyBehaviour>().AtLocation();
-                }
-                break;
-        }
-    }
-    //void OnTriggerStay(Collider collider)
-    //{
-
-    //}
-    void OnTriggerExit(Collider collider)
-    {
-        switch (collider.tag)
-        {
-            case "Enemy":
-                {
-                    collider.GetComponent<EnemyBehaviour>().OffLocation();
-                }
-                break;
-        }
-    }
+    
 
 }
