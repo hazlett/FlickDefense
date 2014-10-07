@@ -23,7 +23,7 @@ public class GameStateManager  {
         GAMEOVER
     }
 
-    internal GameState currentState;
+    internal GameState currentState = GameState.MAINMENU;
 
     public void Initialize(int castleHealth)
     {
