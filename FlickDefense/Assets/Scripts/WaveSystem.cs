@@ -3,7 +3,7 @@ using System.Collections;
 
 public class WaveSystem {
 
-    internal int waveNumber = 1;
+    internal int waveNumber = 0;
 
     private static WaveSystem instance = new WaveSystem();
     public static WaveSystem Instance { get { return instance; } set { instance = value; } } 
@@ -86,6 +86,7 @@ public class WaveSystem {
     {
         if (!enemyRangeSet)
         {
+            waveNumber++;
             switch (waveNumber)
             {
                 case 1: minGrunt = 8;
@@ -146,11 +147,17 @@ public class WaveSystem {
         Debug.Log("GruntNumber: " + gruntNumber);
         GruntSpawner.Instance.spawning = true;
         GruntSpawner.Instance.gruntNumber = gruntNumber;
+        GruntSpawner.Instance.gruntsSpawned = 0;
         GruntSpawner.Instance.StartSpawn();
     }
 
     void SpawnArchers()
     {
+        Debug.Log("ArcherNumber: " + archerNumber);
+        ArcherSpawner.Instance.spawning = true;
+        ArcherSpawner.Instance.archerNumber = archerNumber;
+        ArcherSpawner.Instance.archersSpawned = 0;
+        ArcherSpawner.Instance.StartSpawn();
     }
 
     void SpawnBombers()
