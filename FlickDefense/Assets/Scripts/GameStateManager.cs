@@ -16,7 +16,7 @@ public class GameStateManager  {
         GAMEOVER
     }
 
-    internal GameState currentState;
+    internal GameState currentState = GameState.MAINMENU;
 
 	// Use this for initialization
 	void Start () {
