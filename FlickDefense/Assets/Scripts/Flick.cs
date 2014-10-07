@@ -3,7 +3,6 @@ using System.Collections;
 
 public class Flick : MonoBehaviour {
 
-    public FlickBehaviour flickBehaviour;
     public MonoBehaviour behaviour;
     private Vector3 velocity;
     private Vector3 screenToWorld, touchToWorld;

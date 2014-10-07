@@ -51,9 +51,12 @@
      <Compile Include="Assets\Scripts\FlickBehaviour.cs" />
      <Compile Include="Assets\Scripts\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\GruntBehaviour.cs" />
+     <Compile Include="Assets\Scripts\GruntSpawner.cs" />
      <Compile Include="Assets\Scripts\InputBehaviour.cs" />
      <Compile Include="Assets\Scripts\UpgradeSystem.cs" />
      <Compile Include="Assets\Scripts\WallManager.cs" />
+     <Compile Include="Assets\Scripts\WaveControl.cs" />
+     <Compile Include="Assets\Scripts\WaveSystem.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Kart.cs" />
