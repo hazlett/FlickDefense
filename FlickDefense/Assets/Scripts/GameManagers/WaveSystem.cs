@@ -77,6 +77,7 @@ public class WaveSystem {
             SpawnBombers();
             SpawnFlyers();
             SpawnCatapults();
+            SpawnBosses();
 
             enemiesSpawning = true;
         }
@@ -162,17 +163,37 @@ public class WaveSystem {
 
     void SpawnBombers()
     {
+        Debug.Log("BomberNumber: " + bomberNumber);
+        BomberSpawner.Instance.spawning = true;
+        BomberSpawner.Instance.bomberNumber = bomberNumber;
+        BomberSpawner.Instance.bombersSpawned = 0;
+        BomberSpawner.Instance.StartSpawn();
     }
 
     void SpawnFlyers()
     {
+        Debug.Log("FlyerNumber: " + flyingGruntNumber);
+        FlyerSpawner.Instance.spawning = true;
+        FlyerSpawner.Instance.flyerNumber = flyingGruntNumber;
+        FlyerSpawner.Instance.flyersSpawned = 0;
+        FlyerSpawner.Instance.StartSpawn();
     }
 
     void SpawnCatapults()
     {
+        Debug.Log("CatapultNumber: " + catapultNumber);
+        CatapultSpawner.Instance.spawning = true;
+        CatapultSpawner.Instance.catapultNumber = catapultNumber;
+        CatapultSpawner.Instance.catapultsSpawned = 0;
+        CatapultSpawner.Instance.StartSpawn();
     }
 
     void SpawnBosses()
     {
+        Debug.Log("BossNumber: " + bossNumber);
+        BossSpawner.Instance.spawning = true;
+        BossSpawner.Instance.bossNumber = bossNumber;
+        BossSpawner.Instance.bossesSpawned = 0;
+        BossSpawner.Instance.StartSpawn();
     }
 }
