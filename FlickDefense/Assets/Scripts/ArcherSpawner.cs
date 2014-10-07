@@ -4,7 +4,7 @@ using System.Collections;
 public class ArcherSpawner : MonoBehaviour
 {
 
-    private static ArcherSpawner instance = new ArcherSpawner();
+    private static ArcherSpawner instance;
     public static ArcherSpawner Instance { get { return instance; } set { instance = value; } }
 
     internal bool spawning;
@@ -14,7 +14,6 @@ public class ArcherSpawner : MonoBehaviour
     // Use this for initialization
     void Awake()
     {
-
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);

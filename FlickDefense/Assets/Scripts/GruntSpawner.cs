@@ -12,7 +12,6 @@ public class GruntSpawner : MonoBehaviour {
 
 	// Use this for initialization
 	void Awake () {
-        instance = this;
         if (instance == null)
         {
             DontDestroyOnLoad(gameObject);
