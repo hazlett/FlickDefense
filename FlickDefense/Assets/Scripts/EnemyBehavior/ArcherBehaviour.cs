@@ -13,15 +13,22 @@ public class ArcherBehaviour : EnemyBehaviour {
         GameObject location = GameObject.Instantiate(Resources.Load("Prefabs/Locations/PersonalLocation")) as GameObject;
         location.transform.position = moveLocation;
         location.GetComponent<PersonalLocationManager>().SetObject(gameObject);
-
         atLocation = false;
         agent.SetDestination(moveLocation);
 	}
     
+
+
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
         FireProjectile();
+    }
+    public override void AtLocation()
+    {
+        transform.rotation = Quaternion.Euler(lookAt);
+        transform.GetChild(0).Rotate(Vector3.up, 45.0f);
+        base.AtLocation();
     }
 
     void FireProjectile()

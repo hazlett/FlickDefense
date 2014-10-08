@@ -46,6 +46,14 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FX Mega Pack\Scripts\SmoothCameraOrbit.cs" />
+     <Compile Include="Assets\GUI\Scripts\GameoverGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\GameplayGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\MainMenuGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\PostgameGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\SkillGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\UpgradeGUI.cs" />
+     <Compile Include="Assets\GUI\Scripts\WaveGUI.cs" />
      <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AbstractTargetFollower.cs" />
      <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AutoCam.cs" />
      <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\FreeLookCam.cs" />
@@ -66,6 +74,7 @@
      <Compile Include="Assets\Scripts\EnemyBehavior\FlyerBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\GruntBehaviour.cs" />
      <Compile Include="Assets\Scripts\GameManagers\DeathLimit.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\GameControl.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GruntLocationManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\PersonalLocationManager.cs" />
@@ -81,6 +90,7 @@
      <Compile Include="Assets\Scripts\Spawners\CatapultSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\FlyerSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\GruntSpawner.cs" />
+     <Compile Include="Assets\Scripts\User\UserStatus.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Kart.cs" />
@@ -96,12 +106,14 @@
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Low Poly Archer\Read Me.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
+     <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />

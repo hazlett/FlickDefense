@@ -77,6 +77,7 @@
   <ItemGroup>
     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\ButterflyInspector.cs" />
     <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\MaxAtlasSize.cs" />
+    <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\Animations\LittleHeroes_Animation_frames.txt" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline Diffuse.shader" />
@@ -84,6 +85,7 @@
     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
+    <None Include="Assets\Low Poly Archer\Read Me.txt" />
     <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />

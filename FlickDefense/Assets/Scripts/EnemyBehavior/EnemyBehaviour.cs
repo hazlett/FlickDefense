@@ -7,6 +7,7 @@ public class EnemyBehaviour : MonoBehaviour {
     protected float speed = 3.5f, timer;
     protected bool atLocation;
     protected float deathHeight = 5.0f;
+    protected Vector3 lookAt = Vector3.forward;
     public GameObject weapon;
     public NavMeshAgent agent;
     public Animator animator;
@@ -27,7 +28,7 @@ public class EnemyBehaviour : MonoBehaviour {
         agent.enabled = false;
     }
 	void Update () {
-        transform.LookAt(Vector3.forward);
+        transform.LookAt(lookAt);
         if (!atLocation)
         {
             try
@@ -38,6 +39,7 @@ public class EnemyBehaviour : MonoBehaviour {
             {
 
             }
+            agent.updateRotation = true;
             agent.SetDestination(moveLocation);
             animator.SetFloat("Speed", agent.velocity.magnitude);
         }
@@ -51,12 +53,12 @@ public class EnemyBehaviour : MonoBehaviour {
             {
 
             }
+            agent.updateRotation = false;
             animator.SetFloat("Speed", 0);
         }
     }
     void OnDestroy()
     {
-        Debug.Log("Destroying");
         //Remove from gameManager list
     }
     public virtual void Landed(float fallHeight)
@@ -68,22 +70,23 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     protected virtual void Die()
     {
-        Debug.Log("Killed me: " + gameObject.name);
+        animator.SetTrigger("Kill");
+        StartCoroutine("DeathAnimation");
+    }
+    protected virtual IEnumerator DeathAnimation()
+    {
+        yield return new WaitForSeconds(animator.animation.clip.length);
         GameObject.Destroy(gameObject);
     }
     protected virtual void Attack()
     {
-<<<<<<< HEAD
         animator.SetTrigger("Attack");
-        GameStateManager.Instance.DamageCastle();
-=======
-        Debug.Log("Generic Attack");
         UserStatus.Instance.DamageCastle();
->>>>>>> origin/master
         timer = 0;
     }
     public virtual void AtLocation()
     {
+        animator.SetTrigger("AtLocation");
         atLocation = true;
         InvokeRepeating("Attack", 1, 3);
     }
@@ -93,8 +96,4 @@ public class EnemyBehaviour : MonoBehaviour {
         CancelInvoke("Attack");
     }
 
-    void OnGUI()
-    {
-        GUILayout.Box("HEALTH: " + UserStatus.Instance.CastleHealth);
-    }
 }

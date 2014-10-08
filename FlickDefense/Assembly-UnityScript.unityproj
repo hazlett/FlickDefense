@@ -46,18 +46,23 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FX Mega Pack\Scripts\ParticleSpawner.js" />
+     <Compile Include="Assets\FX Mega Pack\Scripts\RandomRotate.js" />
+     <Compile Include="Assets\FX Mega Pack\Scripts\RotateY.js" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\NightWitch.js" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\SimpleTurn.js" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\AnimatedTextureUV.js" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Low Poly Archer\Read Me.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
+     <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
