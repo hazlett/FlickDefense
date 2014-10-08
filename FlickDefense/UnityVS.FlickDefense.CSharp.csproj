@@ -52,7 +52,11 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FX Mega Pack\Scripts\SmoothCameraOrbit.cs" />
+    <Compile Include="Assets\GUI\Scripts\GameoverGUI.cs" />
+    <Compile Include="Assets\GUI\Scripts\GameplayGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\MainMenuGUI.cs" />
+    <Compile Include="Assets\GUI\Scripts\PostgameGUI.cs" />
+    <Compile Include="Assets\GUI\Scripts\UpgradeGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\WaveGUI.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\ArcherBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\BomberBehaviour.cs" />
@@ -61,6 +65,7 @@
     <Compile Include="Assets\Scripts\EnemyBehavior\EnemyBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\FlyerBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\GruntBehaviour.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\GameControl.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GruntLocationManager.cs" />
     <Compile Include="Assets\Scripts\GameManagers\PersonalLocationManager.cs" />

@@ -17,12 +17,13 @@ public class MainMenuGUI : MonoBehaviour
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
         GameStateManager.Instance.IsMainMenu();
+
+        InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }
 
     void Update()
     {
 
-        TimedScreenResize();
     }
 
     void OnGUI()
@@ -56,9 +57,6 @@ public class MainMenuGUI : MonoBehaviour
 
     private void TimedScreenResize()
     {
-        if (Time.time > updateGUI)
-        {
-            scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-        }
+        scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
     }
 }

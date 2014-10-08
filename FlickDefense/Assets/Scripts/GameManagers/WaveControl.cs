@@ -23,5 +23,6 @@ public class WaveControl : MonoBehaviour {
                 break;
             default: break;
         }
+
 	}
 }
