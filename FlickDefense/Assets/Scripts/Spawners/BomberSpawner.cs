@@ -46,6 +46,7 @@ public class BomberSpawner : MonoBehaviour
 
             newbomber = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Bomber"));
             newbomber.transform.position = new Vector3(xStart, 0, zStart);
+            newbomber.GetComponent<EnemyBehaviour>().enabled = true;
             bombersSpawned++;
             frequency = Random.Range(4.5f, 6.5f);
         }

@@ -46,6 +46,7 @@ public class ArcherSpawner : MonoBehaviour
 
             newarcher = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Archer"));
             newarcher.transform.position = new Vector3(xStart, 0, zStart);
+            newarcher.GetComponent<EnemyBehaviour>().enabled = true;
             archersSpawned++;
             frequency = Random.Range(0.5f, 2.5f);
         }

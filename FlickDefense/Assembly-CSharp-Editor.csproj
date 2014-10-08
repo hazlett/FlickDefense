@@ -48,14 +48,21 @@
   <ItemGroup>
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\ButterflyInspector.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\MaxAtlasSize.cs" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim2.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Animations\LittleHeroes_Animation_frames.txt" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline Diffuse.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

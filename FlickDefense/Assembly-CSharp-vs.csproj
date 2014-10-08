@@ -46,6 +46,18 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AbstractTargetFollower.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AutoCam.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\FreeLookCam.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\HandHeldCam.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\LookatTarget.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\PivotBasedCameraRig.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\ProtectCameraFromWallClip.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\TargetFieldOfView.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\ThirdPersonCamera.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\CrossPlatformInput.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\PlatformSpecific\StandaloneInput.cs" />
+     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\VirtualInput.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\ArcherBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\BomberBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\BossBehaviour.cs" />
@@ -53,6 +65,7 @@
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\FlyerBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\GruntBehaviour.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\DeathLimit.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameStateManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GruntLocationManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\PersonalLocationManager.cs" />
@@ -61,7 +74,6 @@
      <Compile Include="Assets\Scripts\GameManagers\WaveControl.cs" />
      <Compile Include="Assets\Scripts\GameManagers\WaveSystem.cs" />
      <Compile Include="Assets\Scripts\Input\Flick.cs" />
-     <Compile Include="Assets\Scripts\Input\FlickBehaviour.cs" />
      <Compile Include="Assets\Scripts\Input\InputBehaviour.cs" />
      <Compile Include="Assets\Scripts\Spawners\ArcherSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\BomberSpawner.cs" />
@@ -81,14 +93,21 @@
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\FpsCounter.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTLiquidSpriteSheet.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTSpriteSheet.cs" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-Basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim2.shader" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Animations\LittleHeroes_Animation_frames.txt" />
+     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline Diffuse.shader" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/UnityEngine.UI.dll</HintPath>
  </Reference>

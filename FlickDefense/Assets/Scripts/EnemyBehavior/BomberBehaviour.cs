@@ -7,9 +7,9 @@ public class BomberBehaviour : EnemyBehaviour {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
         moveLocation.z += Random.Range(-10, 10);
         atLocation = false;
-        agent.SetDestination(moveLocation);
         speed *= 5.0f;
-        agent.speed = speed;;
+        agent.speed = speed;
+        agent.SetDestination(moveLocation);
     }
 
     protected override void Attack()

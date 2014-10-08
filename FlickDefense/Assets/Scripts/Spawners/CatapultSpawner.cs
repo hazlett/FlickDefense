@@ -46,6 +46,7 @@ public class CatapultSpawner : MonoBehaviour
 
             newcatapult = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Catapult"));
             newcatapult.transform.position = new Vector3(xStart, 0, zStart);
+            newcatapult.GetComponent<EnemyBehaviour>().enabled = true;
             catapultsSpawned++;
             frequency = Random.Range(6.5f, 8.5f);
         }

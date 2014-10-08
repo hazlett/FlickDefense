@@ -46,6 +46,7 @@ public class FlyerSpawner : MonoBehaviour
 
             newflyer = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Flyer"));
             newflyer.transform.position = new Vector3(xStart, 10, zStart);
+            newflyer.GetComponent<EnemyBehaviour>().enabled = true;
             flyersSpawned++;
             frequency = Random.Range(2.5f, 5.5f);
         }
