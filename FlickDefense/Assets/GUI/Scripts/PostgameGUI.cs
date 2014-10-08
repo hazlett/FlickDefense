@@ -31,17 +31,21 @@ public class PostgameGUI : MonoBehaviour
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Postwave Stats", "Header");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Wave: " + (WaveSystem.Instance.waveNumber - 1).ToString() + " Stats", "Header");
 
+
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 3, nativeVerticalResolution / 4 - labelSize.y, labelSize.x, labelSize.y), "Wave # (Total #)", "SmallLabel");
         // Left Side Stats
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Grunts Slaughtered: ");
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Archers Slaughtered: ");
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bombers Defused: ");
+        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Grunts Slaughtered:\t" + UserStatus.Instance.GruntsPastWave() + " (" + UserStatus.Instance.GruntsKilled + ")");
+        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Archers Slaughtered:\t" + UserStatus.Instance.ArchersPastWave() + " (" + UserStatus.Instance.ArchersKilled + ")");
+        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y),"Catapults Demolished:\t" + UserStatus.Instance.CatapultsPastWave() + " (" + UserStatus.Instance.CatapultsKilled + ")");
 
+
+        GUI.Label(new Rect(scaledResolutionWidth / 2 + labelSize.x * 2 / 3, nativeVerticalResolution / 4 - labelSize.y, labelSize.x, labelSize.y), "Wave # (Total #)", "SmallLabel");
         // Right Side Stats
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Flyers Shot Down: ");
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Catapults Demolished: ");
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bosses Slain: ");
+        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Flyers Downed:\t" + UserStatus.Instance.FlyersPastWave() + " (" + UserStatus.Instance.FlyersKilled + ")");
+        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Bombers Defused:\t" + UserStatus.Instance.BombersPastWave() + " (" + UserStatus.Instance.BombersKilled + ")");
+        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bosses Slain:\t" + UserStatus.Instance.BossesPastWave() + " (" + UserStatus.Instance.BossesKilled + ")");
 
         GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 3 / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold Earned: ");
 

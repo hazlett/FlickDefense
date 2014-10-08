@@ -15,7 +15,7 @@ public class BomberBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         Debug.Log("Bomber Suicide");
-        GameStateManager.Instance.DamageCastle(2);
+        UserStatus.Instance.DamageCastle(2);
         GameObject.Destroy(gameObject);
     }
     public override void AtLocation()
