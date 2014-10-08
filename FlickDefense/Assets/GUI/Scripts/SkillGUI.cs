@@ -112,4 +112,5 @@ public class SkillGUI : MonoBehaviour
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution / 4 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[4]);
 
     }
+
 }
