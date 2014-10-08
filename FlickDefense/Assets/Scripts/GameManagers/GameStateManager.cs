@@ -26,7 +26,7 @@ public class GameStateManager  {
         GAMEOVER
     }
 
-    internal GameState currentState = GameState.MAINMENU;
+    private GameState currentState = GameState.MAINMENU;
 
     public void Initialize(int castleHealth)
     {
@@ -39,5 +39,38 @@ public class GameStateManager  {
     public void DamageCastle(int damage)
     {
         castleHealth -= damage;
+    }
+
+    public void IsMainMenu()
+    {
+        currentState = GameState.MAINMENU;
+    }
+
+    public void IsPrewave()
+    {
+        currentState = GameState.PREWAVE;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.PREWAVE;
+    }
+
+    public void IsPlaying()
+    {
+        currentState = GameState.PLAYING;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.INWAVE;
+    }
+
+    public void IsPostWave()
+    {
+        currentState = GameState.POSTWAVE;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.POSTWAVE;
+    }
+
+    public void IsUpgrading()
+    {
+        currentState = GameState.UPGRADE;
+    }
+
+    public void IsGameOver()
+    {
+        currentState = GameState.GAMEOVER;
     }
 }

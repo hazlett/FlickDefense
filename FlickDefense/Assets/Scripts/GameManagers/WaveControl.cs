@@ -11,17 +11,6 @@ public class WaveControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetTouch(0).position.x < 100)
-        {
-            WaveSystem.Instance.currentState++;
-            if ((int)WaveSystem.Instance.currentState > 2)
-            {
-                WaveSystem.Instance.currentState = 0;
-            }
-        }
-
-        //Debug.Log(WaveSystem.Instance.currentState.ToString());
-
         switch (WaveSystem.Instance.currentState)
         {
             case WaveSystem.WaveState.PREWAVE: WaveSystem.Instance.SetWaveEnemies();
