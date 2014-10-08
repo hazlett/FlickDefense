@@ -3,7 +3,7 @@ using System.Collections;
 
 public class EnemyBehaviour : MonoBehaviour {
     protected Vector3 moveLocation;
-    protected float speed = 0.05f, timer;
+    protected float speed = 3.5f, timer;
     protected bool atLocation;
     public NavMeshAgent agent;
 	void Start () {
@@ -21,15 +21,7 @@ public class EnemyBehaviour : MonoBehaviour {
         agent.enabled = false;
     }
 	void Update () {
-        if (atLocation)
-        {
-            timer += Time.deltaTime;
-            if (timer > 3)
-            {
-                Attack();
-            }
-        }
-        else
+        if (!atLocation)
         {
             agent.SetDestination(moveLocation);
         }
@@ -37,13 +29,14 @@ public class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void Attack()
     {
+        Debug.Log("Generic Attack");
         GameStateManager.Instance.DamageCastle();
         timer = 0;
     }
-    public void AtLocation()
+    public virtual void AtLocation()
     {
         atLocation = true;
-        Attack();
+        InvokeRepeating("Attack", 1, 3);
     }
     public void OffLocation()
     {
