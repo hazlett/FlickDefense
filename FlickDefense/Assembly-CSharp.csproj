@@ -46,6 +46,7 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\FX Mega Pack\Scripts\SmoothCameraOrbit.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\EnemyBehaviour.cs" />
      <Compile Include="Assets\Scripts\EnemyBehavior\GruntBehaviour.cs" />
      <Compile Include="Assets\Scripts\GameManagers\GameStateManager.cs" />
@@ -80,6 +81,7 @@
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
+     <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim2.shader" />
  <Reference Include="UnityEngine.UI">

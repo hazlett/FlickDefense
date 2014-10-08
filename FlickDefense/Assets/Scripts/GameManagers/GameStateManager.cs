@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameStateManager  {
 
@@ -7,6 +8,8 @@ public class GameStateManager  {
     public int CastleHealth { get { return castleHealth; } }
     private static  GameStateManager instance = new GameStateManager();
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
+
+    internal List<GameObject> enemyList = new List<GameObject>();
 
     private GameStateManager()
     {

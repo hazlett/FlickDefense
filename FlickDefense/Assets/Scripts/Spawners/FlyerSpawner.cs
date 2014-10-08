@@ -42,11 +42,13 @@ public class FlyerSpawner : MonoBehaviour
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newflyer;
+            GameObject newFlyer;
 
-            newflyer = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Flyer"));
-            newflyer.transform.position = new Vector3(xStart, 10, zStart);
+            newFlyer = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Flyer"));
+            newFlyer.transform.position = new Vector3(xStart, 10, zStart);
             flyersSpawned++;
+
+            GameStateManager.Instance.enemyList.Add(newFlyer);
             frequency = Random.Range(2.5f, 5.5f);
         }
         else if (flyersSpawned == flyerNumber)

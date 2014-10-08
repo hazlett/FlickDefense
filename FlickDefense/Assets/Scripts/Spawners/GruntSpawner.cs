@@ -46,6 +46,8 @@ public class GruntSpawner : MonoBehaviour {
             newGrunt.transform.position = new Vector3(xStart, 0, zStart);
             newGrunt.GetComponent<EnemyBehaviour>().enabled = true;
             gruntsSpawned++;
+
+            GameStateManager.Instance.enemyList.Add(newGrunt);
             frequency = Random.Range(0.5f, 2.5f);
         }
         else if(gruntsSpawned == gruntNumber)

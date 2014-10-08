@@ -42,11 +42,13 @@ public class BossSpawner : MonoBehaviour
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newboss;
+            GameObject newBoss;
 
-            newboss = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Boss"));
-            newboss.transform.position = new Vector3(xStart, 0, zStart);
+            newBoss = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Boss"));
+            newBoss.transform.position = new Vector3(xStart, 0, zStart);
             bossesSpawned++;
+
+            GameStateManager.Instance.enemyList.Add(newBoss);
             frequency = Random.Range(0.5f, 2.5f);
         }
         else if (bossesSpawned == bossNumber)

@@ -42,10 +42,12 @@ public class BomberSpawner : MonoBehaviour
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newbomber;
+            GameObject newBomber;
 
-            newbomber = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Bomber"));
-            newbomber.transform.position = new Vector3(xStart, 0, zStart);
+            newBomber = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Bomber"));
+            newBomber.transform.position = new Vector3(xStart, 0, zStart);
+
+            GameStateManager.Instance.enemyList.Add(newBomber);
             bombersSpawned++;
             frequency = Random.Range(4.5f, 6.5f);
         }

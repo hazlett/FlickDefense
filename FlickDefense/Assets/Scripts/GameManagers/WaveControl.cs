@@ -11,7 +11,7 @@ public class WaveControl : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetTouch(0).position.x < 100)
         {
             WaveSystem.Instance.currentState++;
             if ((int)WaveSystem.Instance.currentState > 2)

@@ -42,11 +42,13 @@ public class ArcherSpawner : MonoBehaviour
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newarcher;
+            GameObject newArcher;
 
-            newarcher = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Archer"));
-            newarcher.transform.position = new Vector3(xStart, 0, zStart);
+            newArcher = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Archer"));
+            newArcher.transform.position = new Vector3(xStart, 0, zStart);
             archersSpawned++;
+
+            GameStateManager.Instance.enemyList.Add(newArcher);
             frequency = Random.Range(0.5f, 2.5f);
         }
         else if (archersSpawned == archerNumber)
