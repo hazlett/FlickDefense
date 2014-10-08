@@ -3,7 +3,8 @@ using System.Collections;
 
 public class CatapultBehaviour : EnemyBehaviour {
 
-	void Start () {
+    void Start()
+    {
         float z = Random.Range(-5.0f, 5.0f);
         float x = 10 - (0.5f * Mathf.Abs(z));
         moveLocation = GameObject.Find("CastleDoor").transform.position;

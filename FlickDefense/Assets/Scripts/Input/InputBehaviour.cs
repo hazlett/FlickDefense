@@ -25,7 +25,7 @@ public class InputBehaviour : MonoBehaviour
         if (hit)
         {
             deltaTime += Time.deltaTime;
-        }
+        } 
 
         if (Input.touchCount > 0)
         {
@@ -34,15 +34,30 @@ public class InputBehaviour : MonoBehaviour
             switch (userTouch.phase)
             {
                 case TouchPhase.Began:
-                    {
+                    {                     
                         startPos = userTouch.position;
                         ray = Camera.main.ScreenPointToRay(startPos);
-                        hit = Physics.Raycast(ray, out raycastHit, 100.0f);
+                        hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
+                        Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green, 1.0f);
                         if (hit)
                         {
-                            if (raycastHit.collider.tag != "Enemy")
+                            switch (raycastHit.collider.tag)
                             {
-                                hit = false;
+                                case "Archer":
+                                case "Bomber":
+                                case "Boss":
+                                case "Catapult":
+                                case "Flyer":
+                                case "Grunt":
+                                    {
+
+                                    }
+                                    break;
+                                default:
+                                    {
+                                        hit = false;
+                                    }
+                                    break;
                             }
                         }
                     }

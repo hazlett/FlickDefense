@@ -3,19 +3,22 @@ using System.Collections;
 
 public class Flick : MonoBehaviour {
 
-    public MonoBehaviour behaviour;
+    public EnemyBehaviour behaviour;
     private Vector3 velocity;
     private Vector3 screenToWorld, touchToWorld;
     private Vector3 screen, world;
+    private float fallHeight;
+    private bool falling;
     void Start () {
- 
+        
 	}
 	
     void OnEnable()
     {
-
+        falling = false;
+        fallHeight = 0;
     }
-
+    
 	void Update () {
         screen = Camera.main.WorldToScreenPoint(transform.position);
         screen.x = Mathf.Clamp(screen.x, 0, Screen.width);
@@ -23,6 +26,11 @@ public class Flick : MonoBehaviour {
         world = Camera.main.ScreenToWorldPoint(screen);
         world.z = Mathf.Clamp(transform.position.z, -5.0f, 25.0f);
         transform.position = world;
+        if ((rigidbody.velocity.y < 0) && (!falling))
+        {
+            falling = true;
+            fallHeight = transform.position.y;
+        }
 	}
 
     public void SetPosition(Vector2 position)
@@ -47,10 +55,15 @@ public class Flick : MonoBehaviour {
     }
     void OnCollisionEnter(Collision collision)
     {
-        rigidbody.useGravity = false;
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
-        behaviour.enabled = true;
+        if (collision.collider.tag == "Ground")
+        {
+            rigidbody.useGravity = false;
+            rigidbody.velocity = Vector3.zero;
+            rigidbody.angularVelocity = Vector3.zero;
+            behaviour.enabled = true;
+            behaviour.Landed(fallHeight);
+            this.enabled = false;
+        }
     }
     void OnGUI()
     {

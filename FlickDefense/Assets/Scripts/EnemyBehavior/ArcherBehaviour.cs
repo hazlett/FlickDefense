@@ -20,11 +20,12 @@ public class ArcherBehaviour : EnemyBehaviour {
     
     protected override void Attack()
     {
+        animator.SetTrigger("Attack");
         FireProjectile();
     }
 
     void FireProjectile()
     {
-        Debug.Log("Fire Arrow");
+        Debug.Log("Firing arrow");
     }
 }

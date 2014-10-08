@@ -42,13 +42,12 @@ public class CatapultSpawner : MonoBehaviour
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newCatapult;
+            GameObject newcatapult;
 
-            newCatapult = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Catapult"));
-            newCatapult.transform.position = new Vector3(xStart, 0, zStart);
+            newcatapult = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Catapult"));
+            newcatapult.transform.position = new Vector3(xStart, 0, zStart);
+            newcatapult.GetComponent<EnemyBehaviour>().enabled = true;
             catapultsSpawned++;
-
-            GameStateManager.Instance.enemyList.Add(newCatapult);
             frequency = Random.Range(6.5f, 8.5f);
         }
         else if (catapultsSpawned == catapultNumber)
