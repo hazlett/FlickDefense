@@ -36,6 +36,7 @@ public class GameStateManager  {
         PLAYING,
         POSTWAVE,
         UPGRADE,
+        SKILLS,
         GAMEOVER
     }
 
@@ -74,10 +75,9 @@ public class GameStateManager  {
         WaveSystem.Instance.currentState = WaveSystem.WaveState.POSTWAVE;
     }
 
-    public void IsUpgrading()
-    {
-        currentState = GameState.UPGRADE;
-    }
+    public void IsUpgrading() { currentState = GameState.UPGRADE; }
+
+    public void IsSkills() { currentState = GameState.SKILLS; }
 
     public void IsGameOver() { currentState = GameState.GAMEOVER; }
 

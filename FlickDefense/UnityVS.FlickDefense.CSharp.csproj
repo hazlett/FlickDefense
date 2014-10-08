@@ -56,6 +56,7 @@
     <Compile Include="Assets\GUI\Scripts\GameplayGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\MainMenuGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\PostgameGUI.cs" />
+    <Compile Include="Assets\GUI\Scripts\SkillGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\UpgradeGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\WaveGUI.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\ArcherBehaviour.cs" />

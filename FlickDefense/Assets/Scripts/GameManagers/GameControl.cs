@@ -7,6 +7,7 @@ public class GameControl : MonoBehaviour
     public GameplayGUI gameplayGUI;
     public PostgameGUI postgameGUI;
     public UpgradeGUI upgradeGUI;
+    public SkillGUI skillGUI;
     public GameoverGUI gameoverGUI;
 
     // Update is called once per frame
@@ -26,6 +27,8 @@ public class GameControl : MonoBehaviour
             case GameStateManager.GameState.POSTWAVE: postgameGUI.enabled = true;
                 break;
             case GameStateManager.GameState.UPGRADE: upgradeGUI.enabled = true;
+                break;
+            case GameStateManager.GameState.SKILLS: skillGUI.enabled = true;
                 break;
             case GameStateManager.GameState.GAMEOVER: gameoverGUI.enabled = true;
                 break;

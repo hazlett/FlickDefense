@@ -3,7 +3,7 @@ using System.Collections;
 using System.Text.RegularExpressions;
 using System;
 
-public class PostgameGUI : MonoBehaviour
+public class SkillGUI : MonoBehaviour
 {
     public GUISkin postgameSkin;
 
@@ -31,19 +31,7 @@ public class PostgameGUI : MonoBehaviour
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Postwave Stats", "Header");
-
-        // Left Side Stats
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Grunts Slaughtered: ");
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Archers Slaughtered: ");
-        GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bombers Defused: ");
-
-        // Right Side Stats
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Flyers Shot Down: ");
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Catapults Demolished: ");
-        GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bosses Slain: ");
-
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 3 / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold Earned: ");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Skill Upgrades", "Header");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {
@@ -51,7 +39,7 @@ public class PostgameGUI : MonoBehaviour
             this.enabled = false;
         }
 
-        if (GUI.Button(new Rect(scaledResolutionWidth / 2 - buttonSize.x / 2, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Upgrades"))
+        if (GUI.Button(new Rect(scaledResolutionWidth / 2 - buttonSize.x / 2, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Castle Upgrades"))
         {
             GameStateManager.Instance.IsUpgrading();
             this.enabled = false;
