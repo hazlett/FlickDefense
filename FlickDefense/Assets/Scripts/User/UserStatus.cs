@@ -9,25 +9,32 @@ public class UserStatus : MonoBehaviour {
     private UserStatus()
     {
         castleHealth = 5;
-        gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
+        iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
 
     private int castleHealth;
     public int CastleHealth { get { return castleHealth; } }
-    private int gruntsKilled;
+
+    // Enemy Killed Stats
+    private int gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled;
     public int GruntsKilled { get { return gruntsKilled; } }
-    private int archersKilled;
     public int ArchersKilled { get { return archersKilled; } }
-    private int bombersKilled;
     public int BombersKilled { get { return bombersKilled; } }
-    private int flyersKilled;
     public int FlyersKilled { get { return flyersKilled; } }
-    private int catapultsKilled;
     public int CatapultsKilled { get { return catapultsKilled; } }
-    private int bossesKilled;
     public int BossesKilled { get { return bossesKilled; } }
 
     private int pastGruntsKilled, pastArchersKilled, pastBombersKilled, pastFlyersKilled, pastCatapultsKilled, pastBossesKilled;
+
+    // Skills Purchased
+    private int lightningLevel, fireLevel, iceLevel;
+    public int LightningLevel { get { return lightningLevel; } }
+    public int FireLevel { get { return fireLevel; } }
+    public int IceLevel { get { return iceLevel; } }
+
+    // Upgrades Purchased
+    private bool barracks, archeryRange, alchemyLab, workshop;
+    private int castleLevel, multiFingerLevel;
 
     void Awake()
     {
@@ -79,4 +86,50 @@ public class UserStatus : MonoBehaviour {
     public int CatapultsPastWave() { return catapultsKilled - pastCatapultsKilled; }
 
     public int BossesPastWave() { return bossesKilled - pastBossesKilled; }
+
+    public void IncreaseLightning()
+    {
+        if (lightningLevel < 5)
+        {
+            lightningLevel++;
+        }
+    }
+
+    public void IncreaseFire()
+    {
+        if (fireLevel < 5)
+        {
+            fireLevel++;
+        }
+    }
+
+    public void IncreaseIce()
+    {
+        if (iceLevel < 5)
+        {
+            iceLevel++;
+        }
+    }
+
+    public void SetBarracks() { barracks = true; }
+    public void SetArcheryRange() { archeryRange = true; }
+    public void SetAlchemyLab() { alchemyLab = true; }
+    public void SetWorkshop() { workshop = true; }
+
+    public void IncreaseCastle()
+    {
+        if (castleLevel < 5)
+        {
+            castleLevel++;
+            castleHealth += 50 * castleLevel;
+        }
+    }
+
+    public void IncreaseFlicks()
+    {
+        if (multiFingerLevel < 5)
+        {
+            multiFingerLevel++;
+        }
+    }
 }

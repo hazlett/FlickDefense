@@ -49,6 +49,7 @@
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\ButterflyInspector.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\MaxAtlasSize.cs" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
+     <None Include="Assets\Low Poly Archer\Read Me.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />

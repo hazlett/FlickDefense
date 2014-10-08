@@ -78,7 +78,6 @@
      <Compile Include="Assets\Scripts\Spawners\CatapultSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\FlyerSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\GruntSpawner.cs" />
-     <Compile Include="Assets\Scripts\User\UserSkills.cs" />
      <Compile Include="Assets\Scripts\User\UserStatus.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
      <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
@@ -93,6 +92,7 @@
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTLiquidSpriteSheet.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\HTSpriteSheet.cs" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
+     <None Include="Assets\Low Poly Archer\Read Me.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
