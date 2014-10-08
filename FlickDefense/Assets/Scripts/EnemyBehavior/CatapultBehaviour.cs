@@ -23,7 +23,7 @@ public class CatapultBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         Debug.Log("Catapult Launch");
-        GameStateManager.Instance.DamageCastle(3);
+        UserStatus.Instance.DamageCastle(3);
     }
     public override void AtLocation()
     {

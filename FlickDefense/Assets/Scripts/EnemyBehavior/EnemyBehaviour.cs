@@ -73,8 +73,13 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     protected virtual void Attack()
     {
+<<<<<<< HEAD
         animator.SetTrigger("Attack");
         GameStateManager.Instance.DamageCastle();
+=======
+        Debug.Log("Generic Attack");
+        UserStatus.Instance.DamageCastle();
+>>>>>>> origin/master
         timer = 0;
     }
     public virtual void AtLocation()
@@ -90,6 +95,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void OnGUI()
     {
-        GUILayout.Box("HEALTH: " + GameStateManager.Instance.CastleHealth);
+        GUILayout.Box("HEALTH: " + UserStatus.Instance.CastleHealth);
     }
 }

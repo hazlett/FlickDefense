@@ -1,17 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
 public class GameStateManager  {
 
-    private int castleHealth;
-    public int CastleHealth { get { return castleHealth; } }
     private static  GameStateManager instance = new GameStateManager();
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
-    private GameStateManager()
-    {
-        castleHealth = 5;
-    }
+    internal List<GameObject> enemyList = new List<GameObject>();
 
     internal enum GameState
     {
@@ -20,21 +16,36 @@ public class GameStateManager  {
         PLAYING,
         POSTWAVE,
         UPGRADE,
+        SKILLS,
         GAMEOVER
     }
 
     internal GameState currentState = GameState.MAINMENU;
 
-    public void Initialize(int castleHealth)
+    public void IsMainMenu() { currentState = GameState.MAINMENU; }
+
+    public void IsPrewave()
     {
-        this.castleHealth = castleHealth;
+        currentState = GameState.PREWAVE;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.PREWAVE;
     }
-    public void DamageCastle()
+
+    public void IsPlaying()
     {
-        castleHealth--;
+        currentState = GameState.PLAYING;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.INWAVE;
     }
-    public void DamageCastle(int damage)
+
+    public void IsPostWave()
     {
-        castleHealth -= damage;
+        currentState = GameState.POSTWAVE;
+        WaveSystem.Instance.currentState = WaveSystem.WaveState.POSTWAVE;
     }
+
+    public void IsUpgrading() { currentState = GameState.UPGRADE; }
+
+    public void IsSkills() { currentState = GameState.SKILLS; }
+
+    public void IsGameOver() { currentState = GameState.GAMEOVER; }
+
 }

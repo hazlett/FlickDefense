@@ -15,6 +15,6 @@ public class BossBehaviour : EnemyBehaviour {
 
     protected override void Attack()
     {
-        GameStateManager.Instance.DamageCastle(5);
+        UserStatus.Instance.DamageCastle(5);
     }
 }
