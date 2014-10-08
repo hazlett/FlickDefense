@@ -73,13 +73,9 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     protected virtual void Attack()
     {
-<<<<<<< HEAD
         animator.SetTrigger("Attack");
-        GameStateManager.Instance.DamageCastle();
-=======
         Debug.Log("Generic Attack");
         UserStatus.Instance.DamageCastle();
->>>>>>> origin/master
         timer = 0;
     }
     public virtual void AtLocation()
