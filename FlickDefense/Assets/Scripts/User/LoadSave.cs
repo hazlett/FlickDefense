@@ -18,11 +18,13 @@ public class LoadSave
     }
 
     [XmlArray("Users"), XmlArrayItem("User")]
-    public UserData[] Users = new UserData[3];
+    public List<UserData> Users = new List<UserData>();
+
+    private UserData blank1 = new UserData(), blank2 = new UserData(), blank3 = new UserData();
 
     public void Save(string path)
     {
-        Debug.Log("Saving");
+        Debug.Log("Saving to " + path);
         XmlSerializer serializer = new XmlSerializer(typeof(LoadSave));
         using (FileStream stream = new FileStream(path, FileMode.Create))
         {
@@ -41,5 +43,12 @@ public class LoadSave
                 instance = serializer.Deserialize(stream) as LoadSave;
             }
         }
+    }
+
+    public void BlankList()
+    {
+        Users.Add(blank1);
+        Users.Add(blank2);
+        Users.Add(blank3);
     }
 }

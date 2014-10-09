@@ -6,7 +6,7 @@ public class UserStatus : MonoBehaviour {
     private static UserStatus instance;
     public static UserStatus Instance { get { return instance; } set { instance = value; } }
 
-    public UserData currentUser;
+    public UserData currentUser = new UserData();
         
     private UserStatus()
     {

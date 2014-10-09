@@ -4,66 +4,74 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
-public class UserData : MonoBehaviour
+public class UserData 
 {
-
-    [XmlAttribute("UserName")]
-    internal string userName;
+    [XmlAttribute("WaveNumber")]
+    public int waveLevel;
 
     [XmlAttribute("BarracksUpgrade")]
-    private bool barracks;
+    public bool barracks;
 
     [XmlAttribute("ArcheryRangeUpgrade")]
-    private bool archeryRange;
+    public bool archeryRange;
 
     [XmlAttribute("AlchemyLabUpgrade")]
-    private bool alchemyLab;
+    public bool alchemyLab;
 
     [XmlAttribute("CastleLevel")]
-    private int castleLevel;
+    public int castleLevel;
 
     [XmlAttribute("LightningSkillLevel")]
-    private int lightningLevel;
+    public int lightningLevel;
 
     [XmlAttribute("FireSkillLevel")]
-    private int fireLevel;
+    public int fireLevel;
 
     [XmlAttribute("IceSkillLevel")]
-    private int iceLevel;
+    public int iceLevel;
 
     [XmlAttribute("GruntsKilled")]
-    private int gruntsKilled;
+    public int gruntsKilled;
 
     [XmlAttribute("ArchersKilled")]
-    private int archersKilled;
+    public int archersKilled;
 
     [XmlAttribute("BombersKilled")]
-    private int bombersKilled;
+    public int bombersKilled;
 
     [XmlAttribute("FlyersKilled")]
-    private int flyersKilled;
+    public int flyersKilled;
 
     [XmlAttribute("CatapultsKilled")]
-    private int catapultsKilled;
+    public int catapultsKilled;
 
     [XmlAttribute("BossesKilled")]
-    private int bossesKilled;
+    public int bossesKilled;
 
     [XmlAttribute("MaxCastleHealth")]
-    private int maxCastleHealth;
+    public int maxCastleHealth;
 
     [XmlAttribute("CurrenCastleHealth")]
-    private int castleHealth;
+    public int castleHealth;
 
     [XmlAttribute("Gold")]
-    private int gold;
+    public int gold;
 
     [XmlAttribute("UserID")]
-    internal int userID;
+    public int userID;
 
-    void Start()
+    public UserData()
     {
-        DontDestroyOnLoad(gameObject);
+        SetDefaultValues();
+    }
+
+    public void SetDefaultValues()
+    {
+        waveLevel = gold = gruntsKilled = archersKilled = bombersKilled = catapultsKilled = flyersKilled = bossesKilled = iceLevel = fireLevel = lightningLevel = 0;
+        castleHealth = maxCastleHealth = 50;
+        castleLevel = 1;
+        barracks = archeryRange = alchemyLab = false;
+        userID = -1;
     }
 
     public void SetUserStatus()
@@ -73,6 +81,7 @@ public class UserData : MonoBehaviour
 
     public void UpdateUserData(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)
     {
+        waveLevel = WaveSystem.Instance.waveNumber;
         gold = goldAmount;
         castleHealth = currentCastleHeath;
         maxCastleHealth = maximumCastleHealth;
@@ -89,10 +98,9 @@ public class UserData : MonoBehaviour
         barracks = barracksUpgrade;
         archeryRange = archeryRangeUpgrade;
         alchemyLab = alchemyLabUpgrade;
-
     }
 
-    public void SaveData(string path)
+    public void SaveData()
     {
         LoadSave.Instance.Users[userID] = this;
         LoadSave.Instance.Save(Path.Combine(Application.persistentDataPath, "users.xml"));
@@ -105,8 +113,8 @@ public class UserData : MonoBehaviour
 
     public void LoadData(int userNumber)
     {
-        userName = LoadSave.Instance.Users[userNumber].userName;
-        userID = userNumber;
+        waveLevel = LoadSave.Instance.Users[userNumber].waveLevel;
+        userID = LoadSave.Instance.Users[userNumber].userID;
         gold = LoadSave.Instance.Users[userNumber].gold;
         castleHealth = LoadSave.Instance.Users[userNumber].castleHealth;
         maxCastleHealth = LoadSave.Instance.Users[userNumber].maxCastleHealth;
