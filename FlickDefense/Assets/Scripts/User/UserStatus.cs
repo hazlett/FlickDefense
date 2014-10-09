@@ -8,9 +8,13 @@ public class UserStatus : MonoBehaviour {
         
     private UserStatus()
     {
+        gold = 5000;
         castleHealth = 5;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
+
+    private int gold;
+    public int Gold { get { return gold; } }
 
     private int castleHealth;
     public int CastleHealth { get { return castleHealth; } }
@@ -48,6 +52,8 @@ public class UserStatus : MonoBehaviour {
             Destroy(gameObject);
         }
     }
+
+    public void GoldExchange(int amount) { gold += amount; }
 
     public void DamageCastle() { castleHealth--; }
 

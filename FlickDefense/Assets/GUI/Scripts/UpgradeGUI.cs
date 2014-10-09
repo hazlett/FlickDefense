@@ -33,7 +33,7 @@ public class UpgradeGUI : MonoBehaviour
 
         GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Castle Upgrades", "Header");
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 3 / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: ");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 5.5f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserStatus.Instance.Gold.ToString(), "CenterLabel");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {
@@ -52,6 +52,11 @@ public class UpgradeGUI : MonoBehaviour
             GameStateManager.Instance.IsPrewave();
             this.enabled = false;
         }
+    }
+
+    private void OnDisable()
+    {
+        CancelInvoke("TimedScreenResize");
     }
 
     private void TimedScreenResize()
