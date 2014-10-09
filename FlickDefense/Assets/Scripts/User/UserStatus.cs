@@ -10,6 +10,8 @@ public class UserStatus : MonoBehaviour {
     {
         gold = 5000;
         castleHealth = 5;
+        maxCastleHealth = 10;
+        castleLevel = 1;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
 
@@ -18,6 +20,8 @@ public class UserStatus : MonoBehaviour {
 
     private int castleHealth;
     public int CastleHealth { get { return castleHealth; } }
+    private int maxCastleHealth;
+    public int MaxCastleHealth { get { return maxCastleHealth; } }
 
     // Enemy Killed Stats
     private int gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled;
@@ -37,8 +41,12 @@ public class UserStatus : MonoBehaviour {
     public int IceLevel { get { return iceLevel; } }
 
     // Upgrades Purchased
-    private bool barracks, archeryRange, alchemyLab, workshop;
+    private bool barracks, archeryRange, alchemyLab;
     private int castleLevel, multiFingerLevel;
+    public bool Barracks { get { return barracks; } }
+    public bool ArcheryRange { get { return archeryRange; } }
+    public bool AlchemyLab { get { return alchemyLab; } }
+    public int CastleLevel { get { return castleLevel; } }
 
     void Awake()
     {
@@ -120,7 +128,6 @@ public class UserStatus : MonoBehaviour {
     public void SetBarracks() { barracks = true; }
     public void SetArcheryRange() { archeryRange = true; }
     public void SetAlchemyLab() { alchemyLab = true; }
-    public void SetWorkshop() { workshop = true; }
 
     public void IncreaseCastle()
     {

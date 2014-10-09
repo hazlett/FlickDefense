@@ -95,6 +95,7 @@
     <Compile Include="Assets\Scripts\Spawners\CatapultSpawner.cs" />
     <Compile Include="Assets\Scripts\Spawners\FlyerSpawner.cs" />
     <Compile Include="Assets\Scripts\Spawners\GruntSpawner.cs" />
+    <Compile Include="Assets\Scripts\User\UserData.cs" />
     <Compile Include="Assets\Scripts\User\UserStatus.cs" />
     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\CarCamera.cs" />
     <Compile Include="Assets\Toon_Level_Kit\Examples\Script\Fog.cs" />
