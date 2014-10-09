@@ -9,7 +9,6 @@ public class GruntBehaviour : EnemyBehaviour {
         moveLocation.z += Random.Range(-5, 5);
         atLocation = false;
         agent.SetDestination(moveLocation);
-        Debug.Log("Started Grunt");
     }
 
     protected override void Attack()

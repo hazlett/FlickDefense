@@ -8,6 +8,8 @@ public class EnemyBehaviour : MonoBehaviour {
     protected bool atLocation;
     protected float deathHeight = 5.0f;
     protected Vector3 lookAt = Vector3.forward;
+    protected bool weaponVisibleRun = false;
+    protected bool weaponVisibleAttack = true;
     public GameObject weapon;
     public NavMeshAgent agent;
     public Animator animator;
@@ -33,7 +35,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = false;
+                weapon.renderer.enabled = weaponVisibleRun;
             }
             catch(Exception)
             {
@@ -47,7 +49,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = true;
+                weapon.renderer.enabled = weaponVisibleAttack;
             }
             catch (Exception)
             {
