@@ -5,6 +5,8 @@ public class UserStatus : MonoBehaviour {
 
     private static UserStatus instance;
     public static UserStatus Instance { get { return instance; } set { instance = value; } }
+
+    public UserData currentUser;
         
     private UserStatus()
     {
@@ -59,6 +61,31 @@ public class UserStatus : MonoBehaviour {
         {
             Destroy(gameObject);
         }
+    }
+
+    public void SetStatusValues(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)
+    {
+        gold = goldAmount;
+        castleHealth = currentCastleHeath;
+        maxCastleHealth = maximumCastleHealth;
+        gruntsKilled = gruntNumber;
+        archersKilled = archerNumber;
+        bombersKilled = bomberNumber;
+        flyersKilled = flyerNumber;
+        catapultsKilled = catapultNumber;
+        bossesKilled = bossNumber;
+        lightningLevel = lightningSkill;
+        fireLevel = fireSkill;
+        iceLevel = iceSkill;
+        castleLevel = userCastleLevel;
+        barracks = barracksUpgrade;
+        archeryRange = archeryRangeUpgrade;
+        alchemyLab = alchemyLabUpgrade;
+    }
+
+    public void UpdateUserDataValues()
+    {
+        currentUser.UpdateUserData(gold, castleHealth, maxCastleHealth, gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled, lightningLevel, fireLevel, iceLevel, castleLevel, barracks, archeryRange, alchemyLab);
     }
 
     public void GoldExchange(int amount) { gold += amount; }
