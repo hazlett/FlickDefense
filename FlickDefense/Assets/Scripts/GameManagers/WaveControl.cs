@@ -10,7 +10,14 @@ public class WaveControl : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
+        if (Input.GetKeyUp(KeyCode.Space))
+        {
+            WaveSystem.Instance.currentState++;
+            if ((int)WaveSystem.Instance.currentState > 2)
+            {
+                WaveSystem.Instance.currentState = 0;
+            }
+        }
         switch (WaveSystem.Instance.currentState)
         {
             case WaveSystem.WaveState.PREWAVE: WaveSystem.Instance.SetWaveEnemies();
