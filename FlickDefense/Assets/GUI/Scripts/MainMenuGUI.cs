@@ -10,20 +10,23 @@ public class MainMenuGUI : MonoBehaviour
 
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
     private Vector2 buttonSize = new Vector2(500, 100);
+    private string userSlot1, userSlot2, userSlot3, loadNew;
+    private int selectedUser;
+
+    private bool chooseUserWindow, overwriteWindow, optionsWindow, slotSelected, newUser;
 
     void Start()
     {
+        slotSelected = chooseUserWindow = overwriteWindow = false;
+        optionsWindow = true;
         updateGUI = 0.5f;
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
         GameStateManager.Instance.IsMainMenu();
+        LoadSave.Instance.BlankList();
+        UserStatus.Instance.currentUser.LoadAllUsers();
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
-    }
-
-    void Update()
-    {
-
     }
 
     void OnGUI()
@@ -42,21 +45,163 @@ public class MainMenuGUI : MonoBehaviour
 
         GUI.DrawTexture(new Rect(scaledResolutionWidth / 4 - gameLogo.width / 2, nativeVerticalResolution / 2 - gameLogo.height / 2, gameLogo.width, gameLogo.height), gameLogo);
 
-        if(GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution / 2 - 3 * buttonSize.y / 2 - 50, buttonSize.x, buttonSize.y), "Start")){
-            GameStateManager.Instance.IsPrewave();
+        if (optionsWindow)
+        {
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
+            {
+                GameStateManager.Instance.IsPrewave();
+            }
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))
+            {
+                chooseUserWindow = true;
+                optionsWindow = false;
+            }
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 4 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Settings"))
+            {
+            }
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 5 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Quit"))
+            {
+            }
         }
 
-        if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution / 2 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Settings"))
-        {
-        }
-
-        if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution / 2 + buttonSize.y / 2 + 50, buttonSize.x, buttonSize.y), "Quit"))
-        {
-        }
+        DrawChooseUser();
+        DrawOverwriteWindow();
     }
 
     private void TimedScreenResize()
     {
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
+    }
+
+    private void DrawChooseUser()
+    {
+        if (chooseUserWindow)
+        {
+            SlotLabels();
+            GUI.Box(new Rect(scaledResolutionWidth * 3 / 4 - 400, nativeVerticalResolution / 2 - 450, 800, 900), "");
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 1.5f / 7 - 75, 700, 150), userSlot1))
+            {
+                selectedUser = 0;
+                slotSelected = true;
+                NewOrLoad();
+            }
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 3f / 7 - 75, 700, 150), userSlot2))
+            {
+                selectedUser = 1;
+                slotSelected = true;
+                NewOrLoad();
+            }
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 4.5f / 7 - 75, 700, 150), userSlot3))
+            {
+                selectedUser = 2;
+                slotSelected = true;
+                NewOrLoad();
+            }
+
+            if (!slotSelected)
+            {
+                if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Cancel"))
+                {
+                    chooseUserWindow = false;
+                    optionsWindow = true;
+                }
+            }
+            else
+            {
+                if (!newUser)
+                {
+                    if (GUI.Button(new Rect(scaledResolutionWidth * 5 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Overwrite Data"))
+                    {
+                        CheckOverwrite();
+                    }
+                }
+                if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), loadNew))
+                {
+                    chooseUserWindow = false;
+                    optionsWindow = true;
+                    if (!newUser)
+                    {
+                        UserStatus.Instance.currentUser.LoadData(selectedUser);
+                    }
+                    else
+                    {
+                        UserStatus.Instance.currentUser.SetDefaultValues();
+                        UserStatus.Instance.currentUser.userID = selectedUser;
+                        UserStatus.Instance.currentUser.SaveData();
+                    }
+
+                }
+            }
+        }
+    }
+
+    private void SlotLabels()
+    {
+        if (LoadSave.Instance.Users[0].userID == -1) { userSlot1 = "New User"; }
+        else { userSlot1 = "Wave " + LoadSave.Instance.Users[0].waveLevel.ToString(); }
+
+        if (LoadSave.Instance.Users[1].userID == -1) { userSlot2 = "New User"; }
+        else { userSlot2 = "Wave " + LoadSave.Instance.Users[1].waveLevel.ToString(); }
+
+        if (LoadSave.Instance.Users[2].userID == -1) { userSlot3 = "New User"; }
+        else { userSlot3 = "Wave " + LoadSave.Instance.Users[2].waveLevel.ToString(); }
+    }
+
+    private void NewOrLoad()
+    {
+        if (LoadSave.Instance.Users[selectedUser].userID == -1)
+        {
+            newUser = true;
+            loadNew = "Use Selected";
+        }
+        else
+        {
+            newUser = false;
+            loadNew = "Load Selected";
+        }
+    }
+
+    private void CheckOverwrite()
+    {
+        if (LoadSave.Instance.Users[selectedUser].userID == -1)
+        {
+            UserStatus.Instance.currentUser.userID = selectedUser;
+            chooseUserWindow = false;
+            optionsWindow = true;
+        }
+        else
+        {
+            overwriteWindow = true;
+            chooseUserWindow = false;
+        }
+    }
+
+    private void DrawOverwriteWindow()
+    {
+        if (overwriteWindow)
+        {
+            GUI.Box(new Rect(scaledResolutionWidth * 3 / 4 - 400, nativeVerticalResolution / 2 - 200, 800, 400), "Are you sure you want to overwrite this data?");
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 5 / 8 - 150, nativeVerticalResolution / 2 + 50, 300, 100), "NO"))
+            {
+                overwriteWindow = false;
+                chooseUserWindow = true;
+            }
+            if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution / 2 + 50, 300, 100), "YES"))
+            {
+                UserStatus.Instance.currentUser.SetDefaultValues();
+                UserStatus.Instance.currentUser.userID = selectedUser;
+                LoadSave.Instance.Users[selectedUser] = UserStatus.Instance.currentUser;
+                UserStatus.Instance.currentUser.SaveData();
+                overwriteWindow = chooseUserWindow = false;
+                optionsWindow = true;
+            }
+
+        }
+
     }
 }
