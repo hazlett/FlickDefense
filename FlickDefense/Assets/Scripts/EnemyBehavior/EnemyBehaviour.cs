@@ -70,6 +70,10 @@ public class EnemyBehaviour : MonoBehaviour {
             Die();
         }
     }
+    public virtual void Damage()
+    {
+
+    }
     protected virtual void Die()
     {
         animator.SetTrigger("Kill");

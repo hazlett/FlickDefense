@@ -53,6 +53,11 @@ public class InputBehaviour : MonoBehaviour
 
                                     }
                                     break;
+                                case "Rock":
+                                    {
+                                        collider.GetComponent<RockBehaviour>().Tap();
+                                    }
+                                    break;
                                 default:
                                     {
                                         hit = false;

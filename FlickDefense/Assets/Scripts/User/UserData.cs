@@ -3,7 +3,6 @@ using System.Collections;
 using System.Xml;
 using System.Xml.Serialization;
 
-[XmlRoot "User"]
 public class UserData : MonoBehaviour {
 
     private bool barracks;

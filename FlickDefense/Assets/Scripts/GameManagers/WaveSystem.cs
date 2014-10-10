@@ -72,12 +72,12 @@ public class WaveSystem {
         if (!enemiesSpawning)
         {
             Debug.Log("Spawning Enemies");
-            SpawnGrunts();
-            SpawnArchers();
-            SpawnBombers();
-            SpawnFlyers();
+            //SpawnGrunts();
+            //SpawnArchers();
+            //SpawnBombers();
+            //SpawnFlyers();
             SpawnCatapults();
-            SpawnBosses();
+            //SpawnBosses();
 
             enemiesSpawning = true;
         }

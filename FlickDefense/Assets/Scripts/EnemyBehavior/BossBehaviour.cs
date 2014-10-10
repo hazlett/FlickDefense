@@ -9,12 +9,15 @@ public class BossBehaviour : EnemyBehaviour {
 
         GameObject location = GameObject.Instantiate(Resources.Load("Prefabs/Locations/PersonalLocation")) as GameObject;
         location.transform.position = moveLocation;
+        location.GetComponent<PersonalLocationManager>().SetObject(gameObject);
         speed *= 0.5f;
         agent.speed = speed;
     }
 
     protected override void Attack()
     {
+        animator.SetTrigger("Attack");
         UserStatus.Instance.DamageCastle(5);
+        timer = 0;
     }
 }

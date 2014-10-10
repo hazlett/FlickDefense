@@ -89,6 +89,9 @@
     <Compile Include="Assets\Scripts\GameManagers\WaveSystem.cs" />
     <Compile Include="Assets\Scripts\Input\Flick.cs" />
     <Compile Include="Assets\Scripts\Input\InputBehaviour.cs" />
+    <Compile Include="Assets\Scripts\Input\TapRock.cs" />
+    <Compile Include="Assets\Scripts\RockBehaviour\CatapultDeath.cs" />
+    <Compile Include="Assets\Scripts\RockBehaviour\RockBehaviour.cs" />
     <Compile Include="Assets\Scripts\Spawners\ArcherSpawner.cs" />
     <Compile Include="Assets\Scripts\Spawners\BomberSpawner.cs" />
     <Compile Include="Assets\Scripts\Spawners\BossSpawner.cs" />

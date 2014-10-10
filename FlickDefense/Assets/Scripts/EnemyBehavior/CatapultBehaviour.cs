@@ -2,7 +2,8 @@
 using System.Collections;
 
 public class CatapultBehaviour : EnemyBehaviour {
-
+    public BoxCollider deathCollider;
+    public GameObject leftHand, rightHand;
     void Start()
     {
         float z = Random.Range(-5.0f, 5.0f);
@@ -19,15 +20,22 @@ public class CatapultBehaviour : EnemyBehaviour {
         atLocation = false;
         agent.SetDestination(moveLocation);
 	}
-
+    public override void Damage()
+    {
+        Die();
+    }
     protected override void Attack()
     {
-        Debug.Log("Catapult Launch");
+        animator.SetTrigger("Attack");
+        GameObject rock = GameObject.Instantiate(Resources.Load("Prefabs/Rocks/Rock")) as GameObject;
+        rock.GetComponent<RockBehaviour>().Set(deathCollider, rightHand, leftHand);
+        rock.transform.position = new Vector3(transform.position.x - 1.0f, transform.position.y - 0.25f, transform.position.z - 0.5f);
         UserStatus.Instance.DamageCastle(3);
     }
     public override void AtLocation()
     {
         atLocation = true;
+        animator.SetTrigger("AtLocation");
         InvokeRepeating("Attack", 7, 7);
     }
 	

@@ -52,6 +52,7 @@ ModelImporter:
     7400030: dizzy
     7400032: talk
     7400034: laugh
+    9500000: //RootNode
     11100000: //RootNode
     13700000: micro_dragon
   materials:
@@ -63,7 +64,7 @@ ModelImporter:
     bakeSimulation: 0
     optimizeGameObjects: 0
     motionNodeName: 
-    animationCompression: 1
+    animationCompression: 3
     animationRotationError: .5
     animationPositionError: .5
     animationScaleError: .5
@@ -547,6 +548,6 @@ ModelImporter:
     feetSpacing: 0
     rootMotionBoneName: 
   lastHumanDescriptionAvatarSource: {instanceID: 0}
-  animationType: 1
+  animationType: 2
   additionalBone: 0
   userData: 
