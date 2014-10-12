@@ -7,23 +7,24 @@ public class MainMenuGUI : MonoBehaviour
 {
     public GUISkin mainMenuSkin;
     public Texture2D gameLogo;
-    public UserData currentUser;
 
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
     private Vector2 buttonSize = new Vector2(500, 100);
-    private string userSlot1, userSlot2, userSlot3;
+    private string userSlot1, userSlot2, userSlot3, loadNew;
     private int selectedUser;
 
-    private bool chooseUserWindow, overwriteWindow, optionsWindow, slotSelected;
+    private bool chooseUserWindow, overwriteWindow, optionsWindow, slotSelected, newUser, toggle, toggle2active, toggle3active;
 
     void Start()
     {
-        slotSelected = chooseUserWindow = overwriteWindow = false;
+        toggle2active = toggle3active = toggle = slotSelected = chooseUserWindow = overwriteWindow = false;
         optionsWindow = true;
         updateGUI = 0.5f;
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
         GameStateManager.Instance.IsMainMenu();
+        LoadSave.Instance.BlankList();
+        UserStatus.Instance.currentUser.LoadAllUsers();
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }
@@ -67,6 +68,7 @@ public class MainMenuGUI : MonoBehaviour
         }
 
         DrawChooseUser();
+        DrawOverwriteWindow();
     }
 
     private void TimedScreenResize()
@@ -78,23 +80,39 @@ public class MainMenuGUI : MonoBehaviour
     {
         if (chooseUserWindow)
         {
+            bool toggle1 = false, toggle2 = false, toggle3 = false;
             SlotLabels();
             GUI.Box(new Rect(scaledResolutionWidth * 3 / 4 - 400, nativeVerticalResolution / 2 - 450, 800, 900), "");
 
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 1.5f / 7 - 75, 700, 150), userSlot1))
+            toggle1 = GUI.Toggle(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 1.5f / 7 - 75, 700, 150), toggle, userSlot1, mainMenuSkin.button);
+            if(toggle1 != toggle)
             {
+                toggle = toggle1;
+                toggle2 = toggle3 = toggle2active = toggle3active = false;
                 selectedUser = 0;
+                slotSelected = true;
+                NewOrLoad();
             }
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 3f / 7 - 75, 700, 150), userSlot2))
+            toggle2 = GUI.Toggle(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 3f / 7 - 75, 700, 150), toggle2active, userSlot2, mainMenuSkin.button);
+            if (toggle2 != toggle2active)
             {
+                toggle2active = toggle2;
+                toggle1 = toggle3 = toggle = toggle3active = false;
                 selectedUser = 1;
+                slotSelected = true;
+                NewOrLoad();
             }
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 4.5f / 7 - 75, 700, 150), userSlot3))
+            toggle3 = GUI.Toggle(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 4.5f / 7 - 75, 700, 150), toggle3active, userSlot3, mainMenuSkin.button);
+            if (toggle3 != toggle3active)
             {
+                toggle3active = toggle3;
+                toggle1 = toggle2 = toggle = toggle2active = false;
                 selectedUser = 2;
+                slotSelected = true;
+                NewOrLoad();
             }
 
-            if (slotSelected)
+            if (!slotSelected)
             {
                 if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Cancel"))
                 {
@@ -104,14 +122,28 @@ public class MainMenuGUI : MonoBehaviour
             }
             else
             {
-                if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Overwrite Data"))
+                if (!newUser)
                 {
-                    CheckOverwrite();
+                    if (GUI.Button(new Rect(scaledResolutionWidth * 5 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Overwrite Data"))
+                    {
+                        CheckOverwrite();
+                    }
                 }
-                if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), "Load Data"))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), loadNew))
                 {
                     chooseUserWindow = false;
                     optionsWindow = true;
+                    if (!newUser)
+                    {
+                        UserStatus.Instance.currentUser.LoadData(selectedUser);
+                    }
+                    else
+                    {
+                        UserStatus.Instance.currentUser.SetDefaultValues();
+                        UserStatus.Instance.currentUser.userID = selectedUser;
+                        UserStatus.Instance.currentUser.SaveData();
+                    }
+
                 }
             }
         }
@@ -119,21 +151,35 @@ public class MainMenuGUI : MonoBehaviour
 
     private void SlotLabels()
     {
-        if (LoadSave.Instance.Users[0] == null) { userSlot1 = "New User"; }
-        else { userSlot1 = "Slot 1 Data"; }
+        if (LoadSave.Instance.Users[0].userID == -1) { userSlot1 = "New User"; }
+        else { userSlot1 = "Wave " + LoadSave.Instance.Users[0].waveLevel.ToString(); }
 
-        if (LoadSave.Instance.Users[1] == null) { userSlot2 = "New User"; }
-        else { userSlot2 = "Slot 2 Data"; }
+        if (LoadSave.Instance.Users[1].userID == -1) { userSlot2 = "New User"; }
+        else { userSlot2 = "Wave " + LoadSave.Instance.Users[1].waveLevel.ToString(); }
 
-        if (LoadSave.Instance.Users[2] == null) { userSlot3 = "New User"; }
-        else { userSlot3 = "Slot 3 Data"; }
+        if (LoadSave.Instance.Users[2].userID == -1) { userSlot3 = "New User"; }
+        else { userSlot3 = "Wave " + LoadSave.Instance.Users[2].waveLevel.ToString(); }
+    }
+
+    private void NewOrLoad()
+    {
+        if (LoadSave.Instance.Users[selectedUser].userID == -1)
+        {
+            newUser = true;
+            loadNew = "Use Selected";
+        }
+        else
+        {
+            newUser = false;
+            loadNew = "Load Selected";
+        }
     }
 
     private void CheckOverwrite()
     {
-        if (LoadSave.Instance.Users[selectedUser] == null)
+        if (LoadSave.Instance.Users[selectedUser].userID == -1)
         {
-            currentUser.userID = selectedUser;
+            UserStatus.Instance.currentUser.userID = selectedUser;
             chooseUserWindow = false;
             optionsWindow = true;
         }
@@ -150,11 +196,19 @@ public class MainMenuGUI : MonoBehaviour
         {
             GUI.Box(new Rect(scaledResolutionWidth * 3 / 4 - 400, nativeVerticalResolution / 2 - 200, 800, 400), "Are you sure you want to overwrite this data?");
 
-            if(GUI.Button(new Rect(scaledResolutionWidth * 2 / 5 - 150, nativeVerticalResolution / 2 + 100, 300, 100), "NO")){
+            if (GUI.Button(new Rect(scaledResolutionWidth * 5 / 8 - 150, nativeVerticalResolution / 2 + 50, 300, 100), "NO"))
+            {
                 overwriteWindow = false;
                 chooseUserWindow = true;
             }
-            if(GUI.Button(new Rect(scaledResolutionWidth * 3 / 5 - 150, nativeVerticalResolution / 2 + 100, 300, 100), "YES")){
+            if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution / 2 + 50, 300, 100), "YES"))
+            {
+                UserStatus.Instance.currentUser.SetDefaultValues();
+                UserStatus.Instance.currentUser.userID = selectedUser;
+                LoadSave.Instance.Users[selectedUser] = UserStatus.Instance.currentUser;
+                UserStatus.Instance.currentUser.SaveData();
+                overwriteWindow = chooseUserWindow = false;
+                optionsWindow = true;
             }
 
         }
