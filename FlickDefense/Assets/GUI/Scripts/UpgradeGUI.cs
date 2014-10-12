@@ -6,7 +6,7 @@ using System;
 public class UpgradeGUI : MonoBehaviour
 {
     public GUISkin postgameSkin;
-    public Texture2D castleUpgradeTexture;
+    public Texture2D castleUpgradeTexture, background;
 
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
     private Vector2 labelSize = new Vector2(700, 150), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100);
@@ -29,6 +29,8 @@ public class UpgradeGUI : MonoBehaviour
 
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
+
+        GUI.DrawTexture(new Rect(0, 0, scaledResolutionWidth, nativeVerticalResolution), background);
 
         GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Castle Upgrades", "Header");
 

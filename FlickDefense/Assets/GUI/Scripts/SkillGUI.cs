@@ -7,6 +7,7 @@ public class SkillGUI : MonoBehaviour
 {
     public GUISkin postgameSkin;
     public Texture2D[] fireTexture = new Texture2D[15], lightningTexture = new Texture2D[15], iceTexture = new Texture2D[15];
+    public Texture2D background;
 
     private Texture2D[] fire = new Texture2D[5], lightning = new Texture2D[5], ice = new Texture2D[5];
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
@@ -37,6 +38,8 @@ public class SkillGUI : MonoBehaviour
 
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
+
+        GUI.DrawTexture(new Rect(0, 0, scaledResolutionWidth, nativeVerticalResolution), background);
 
         GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Skill Upgrades", "Header");
 

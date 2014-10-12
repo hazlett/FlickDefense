@@ -120,13 +120,13 @@ public class MainMenuGUI : MonoBehaviour
     private void SlotLabels()
     {
         if (LoadSave.Instance.Users[0] == null) { userSlot1 = "New User"; }
-        else { userSlot1 = "Slot 1 Data" }
+        else { userSlot1 = "Slot 1 Data"; }
 
         if (LoadSave.Instance.Users[1] == null) { userSlot2 = "New User"; }
-        else { userSlot2 = "Slot 2 Data" }
+        else { userSlot2 = "Slot 2 Data"; }
 
         if (LoadSave.Instance.Users[2] == null) { userSlot3 = "New User"; }
-        else { userSlot3 = "Slot 3 Data" }
+        else { userSlot3 = "Slot 3 Data"; }
     }
 
     private void CheckOverwrite()
