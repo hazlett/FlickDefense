@@ -196,4 +196,9 @@ public class WaveSystem {
         BossSpawner.Instance.bossesSpawned = 0;
         BossSpawner.Instance.StartSpawn();
     }
+
+    internal int EnemyCount()
+    {
+        return gruntNumber + archerNumber + bomberNumber + flyingGruntNumber + catapultNumber + bossNumber;
+    }
 }
