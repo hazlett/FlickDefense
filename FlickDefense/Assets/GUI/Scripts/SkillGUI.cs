@@ -270,7 +270,7 @@ public class SkillGUI : MonoBehaviour
     {
         if (skillWindow)
         {
-            GUI.Box(new Rect(scaledResolutionWidth / 2 - 600, nativeVerticalResolution / 2 - 350, 1200, 600), skillName, "Name");
+            GUI.Box(new Rect(scaledResolutionWidth / 2 - 600, nativeVerticalResolution / 2 - 425, 1200, 750), skillName, "Name");
             if (GUI.Button(new Rect(scaledResolutionWidth / 2 - 350, nativeVerticalResolution / 2 + 125, 300, 100), "Cancel"))
             {
                 skillWindow = false;

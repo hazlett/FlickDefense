@@ -15,7 +15,8 @@ public class GameControl : MonoBehaviour
     {
         switch (GameStateManager.Instance.currentState)
         {
-            case GameStateManager.GameState.PREWAVE: waveGUI.enabled = true;
+            case GameStateManager.GameState.PREWAVE: UpdateAndSave();
+                waveGUI.enabled = true;
                 break;
             case GameStateManager.GameState.PLAYING: gameplayGUI.enabled = true;
                 if (GameStateManager.Instance.enemyList.Count == 0)
@@ -24,16 +25,25 @@ public class GameControl : MonoBehaviour
                     GameStateManager.Instance.IsPostWave();
                 }
                 break;
-            case GameStateManager.GameState.POSTWAVE: postgameGUI.enabled = true;
+            case GameStateManager.GameState.POSTWAVE: UpdateAndSave();
+                postgameGUI.enabled = true;
                 break;
-            case GameStateManager.GameState.UPGRADE: upgradeGUI.enabled = true;
+            case GameStateManager.GameState.UPGRADE: UpdateAndSave();
+                upgradeGUI.enabled = true;
                 break;
-            case GameStateManager.GameState.SKILLS: skillGUI.enabled = true;
+            case GameStateManager.GameState.SKILLS: UpdateAndSave();
+                skillGUI.enabled = true;
                 break;
             case GameStateManager.GameState.GAMEOVER: gameoverGUI.enabled = true;
                 break;
             default:
                 break;
         }
+    }
+
+    private void UpdateAndSave()
+    {
+        UserStatus.Instance.UpdateUserDataValues();
+        UserStatus.Instance.currentUser.SaveData();
     }
 }

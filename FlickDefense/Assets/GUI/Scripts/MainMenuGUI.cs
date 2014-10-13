@@ -105,8 +105,7 @@ public class MainMenuGUI : MonoBehaviour
             toggle3 = GUI.Toggle(new Rect(scaledResolutionWidth * 3 / 4 - 350, nativeVerticalResolution * 4.5f / 7 - 75, 700, 150), toggle3active, userSlot3, mainMenuSkin.button);
             if (toggle3 != toggle3active)
             {
-                toggle3active = toggle3;
-                toggle1 = toggle2 = toggle = toggle2active = false;
+                toggle3active = toggle = toggle2active = false;
                 selectedUser = 2;
                 slotSelected = true;
                 NewOrLoad();
@@ -132,7 +131,8 @@ public class MainMenuGUI : MonoBehaviour
                 if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), loadNew))
                 {
                     chooseUserWindow = false;
-                    optionsWindow = true;
+                    optionsWindow = true; 
+                    toggle3active = toggle3 = toggle1 = toggle2 = toggle = toggle2active = false;
                     if (!newUser)
                     {
                         UserStatus.Instance.currentUser.LoadData(selectedUser);
@@ -203,6 +203,7 @@ public class MainMenuGUI : MonoBehaviour
             }
             if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution / 2 + 50, 300, 100), "YES"))
             {
+                toggle3active = toggle = toggle2active = false;
                 UserStatus.Instance.currentUser.SetDefaultValues();
                 UserStatus.Instance.currentUser.userID = selectedUser;
                 LoadSave.Instance.Users[selectedUser] = UserStatus.Instance.currentUser;
