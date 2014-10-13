@@ -6,20 +6,24 @@ public class RockBehaviour : MonoBehaviour {
     private GameObject rightHand, leftHand;
     private bool tapped = false;
     private bool grabbed = false;
+    private bool thrown = false;
     private float timer = 0;
     void Update()
     {
-        if (tapped)
+        if (!thrown)
         {
-            timer += Time.deltaTime;
-            if (timer > 10)
+            if (tapped)
             {
-                Destroy(gameObject);
+                timer += Time.deltaTime;
+                if (timer > 10)
+                {
+                    Destroy(gameObject);
+                }
             }
-        }
-        else if (grabbed)
-        {
-            transform.position = leftHand.transform.position;
+            else if (grabbed)
+            {
+                transform.position = leftHand.transform.position;
+            }
         }
     }
     public void Set(BoxCollider boxCollider, GameObject rightHand, GameObject leftHand)
@@ -44,14 +48,35 @@ public class RockBehaviour : MonoBehaviour {
                     collider.GetComponent<CatapultDeath>().Catapult.GetComponent<EnemyBehaviour>().Damage();
                 }
                 break;
-                case "Wall":
+            case "Wall":
                 {
 
                 }
                 break;
-                case "Hand":
+            case "Hand":
                 {
                     grabbed = true;
+                    ((SphereCollider)this.collider).radius = 0.5f;
+                }
+                break;
+            case "ThrowRock":
+                {
+                    grabbed = false;
+                    thrown = true;
+                    rigidbody.angularDrag = 0;
+                    rigidbody.useGravity = true;
+                    rigidbody.AddForce(-1000.0f, 100.0f, 10.0f);
+                }
+                break;
+        }
+    }
+    void OnTriggerExit(Collider collider)
+    {
+        switch (collider.tag)
+        {
+            case "ThrowRock":
+                {
+                    this.collider.isTrigger = false;
                 }
                 break;
         }

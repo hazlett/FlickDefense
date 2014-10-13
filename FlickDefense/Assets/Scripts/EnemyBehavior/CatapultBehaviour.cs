@@ -1,12 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class CatapultBehaviour : EnemyBehaviour {
     public BoxCollider deathCollider;
     public GameObject leftHand, rightHand;
     void Start()
     {
-        float z = Random.Range(-5.0f, 5.0f);
+        float z = UnityEngine.Random.Range(-5.0f, 5.0f);
         float x = 10 - (0.5f * Mathf.Abs(z));
         moveLocation = GameObject.Find("CastleDoor").transform.position;
         moveLocation.x += x;
@@ -20,6 +21,39 @@ public class CatapultBehaviour : EnemyBehaviour {
         atLocation = false;
         agent.SetDestination(moveLocation);
 	}
+
+    void Update()
+    {
+        transform.LookAt(lookAt);
+        if (!atLocation)
+        {
+            try
+            {
+                weapon.renderer.enabled = weaponVisibleRun;
+            }
+            catch (Exception)
+            {
+
+            }
+            agent.updateRotation = true;
+            agent.SetDestination(moveLocation);
+            animator.SetFloat("Speed", agent.velocity.magnitude);
+        }
+        else
+        {
+            try
+            {
+                weapon.renderer.enabled = weaponVisibleAttack;
+            }
+            catch (Exception)
+            {
+
+            }
+            agent.updateRotation = false;
+            animator.SetFloat("Speed", 0);
+        }
+    }
+
     public override void Damage()
     {
         Die();
@@ -36,7 +70,7 @@ public class CatapultBehaviour : EnemyBehaviour {
     {
         atLocation = true;
         animator.SetTrigger("AtLocation");
-        InvokeRepeating("Attack", 7, 7);
+        InvokeRepeating("Attack", 1, 7);
     }
 	
 
