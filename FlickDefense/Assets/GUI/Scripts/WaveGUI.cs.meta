@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: 10eccd79bf3b95b438e5419a9823ae48
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - waveSkin: {fileID: 11400000, guid: 67f1fa6038b849142a9009bb1ee49988, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

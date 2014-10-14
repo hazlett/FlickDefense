@@ -2,7 +2,8 @@ fileFormatVersion: 2
 guid: d896eb0fd82ecd54991b3136376feded
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - gameplaySkin: {fileID: 11400000, guid: 8b62f2477cf1dd8419b0ff157f4d89e6, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

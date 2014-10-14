@@ -2,7 +2,11 @@ fileFormatVersion: 2
 guid: ab7d21cb206983247acf165558c83c1d
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - postgameSkin: {fileID: 11400000, guid: a385bc39cba93554ba2804d813931c30, type: 2}
+  - castleUpgradeTexture: {fileID: 2800000, guid: b3a01cf45f3f9de49b155eab67f83632,
+      type: 3}
+  - background: {fileID: 2800000, guid: 661af1396eb8eab43b786844d6513b59, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
