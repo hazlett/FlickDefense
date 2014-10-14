@@ -11,23 +11,26 @@ public class SkillGUI : MonoBehaviour
 
     private Texture2D[] fire = new Texture2D[5], lightning = new Texture2D[5], ice = new Texture2D[5];
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
-    private Vector2 labelSize = new Vector2(700, 150), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100);
+    private Vector2 labelSize = new Vector2(700, 150), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100), skillBlock = new Vector2(200, 200);
     private bool skillWindow;
     private string skillName, skillDescription, skillType;
     private int skillPrice;
 
-    void OnEnable()
+    void Start()
     {
-        updateGUI = 0.5f;
-        nativeVerticalResolution = 1080.0f;
-        scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-
         for (int i = 0; i < 5; i++)
         {
             fire[i] = fireTexture[i + 5];
             lightning[i] = lightningTexture[i + 5];
             ice[i] = iceTexture[i + 5];
         }
+    }
+
+    void OnEnable()
+    {
+        updateGUI = 0.5f;
+        nativeVerticalResolution = 1080.0f;
+        scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }
@@ -86,150 +89,153 @@ public class SkillGUI : MonoBehaviour
     private void LightningSkill()
     {
 
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[0]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[1]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[2]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[3]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[4]);
+
         switch (UserStatus.Instance.LightningLevel)
         {
-            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, 
-                lightningTexture[0].width, lightningTexture[0].height), new GUIContent(lightningTexture[0], "Level 1 Lightning\n\nShock 1 enemy with a powerful lightning spell")))
+            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, 
+                skillBlock.x, skillBlock.y), lightningTexture[0], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(100, "Something ", "Lightning Strike", "Lightning");
+                    SetSkillInfo(100, "Strike down 1 enemy with a powerful lightning spell.  Kills any enemy (aside from bosses) on contact. ", "Lightning Strike", "Lightning");
                 }
                 break;
             case 1:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution  * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightningTexture[1]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightningTexture[1], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(200, "Something ", "Chain Strike 1", "Lightning");
+                    SetSkillInfo(200, "Strike down up to 4 enemies with this more powerful spell. Lighting will chain from one enemy to another.", "Chain Strike 1", "Lightning");
                 }
                 break;
             case 2:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightningTexture[2]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightningTexture[2], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(300, "Something ", "Chain Strike 2", "Lightning");
+                    SetSkillInfo(300, "Strike down up to 7 enemies with this more powerful spell. Lighting will chain from one enemy to another.", "Chain Strike 2", "Lightning");
                 }
                 break;
             case 3:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightningTexture[3]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightningTexture[3], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(400, "Something ", "Chain Strike 3", "Lightning");
+                    SetSkillInfo(400, "Strike down up to 10 enemies with this more powerful spell. Lighting will chain from one enemy to another.", "Chain Strike 3", "Lightning");
                 }
                 break;
             case 4:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightningTexture[4]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightningTexture[4], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(500, "Something ", "Lightning Storm", "Lightning");
+                    SetSkillInfo(500, "Summon a powerful storm of lighting that will shock enemies all over the map for a short amount of time.", "Lightning Storm", "Lightning");
                 }
                 break;
             default:
                 break;
         }
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[0]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[1]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7 - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[2]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7  - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[3]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - lightningTexture[0].width / 2, nativeVerticalResolution * 1.5f / 7  - lightningTexture[0].height / 2, lightningTexture[0].width, lightningTexture[0].height), lightning[4]);
     }
 
     private void FireSkill()
     {
 
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[0]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[1]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[2]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[3]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[4]);
+
         switch (UserStatus.Instance.FireLevel)
         {
-            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fireTexture[0]))
+            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[0], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(100, "Something ", "Fireball", "Fire");
+                    SetSkillInfo(100, "Unleash a fireball that will engulf your foe and burn them over time. ", "Fireball", "Fire");
                 }
                 break;
             case 1:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fireTexture[1]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[1], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(200, "Something ", "Fire Blast", "Fire");
+                    SetSkillInfo(200, "The fireball will now damage surrounding enemies (Up to 3) and damage them over time. ", "Fire Blast", "Fire");
                 }
                 break;
             case 2:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fireTexture[2]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[2], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(300, "Something ", "Fire Wall", "Fire");
+                    SetSkillInfo(300, "All enemies who try to pass through the fire storm will be burned, damaging them over time.", "Fire Storm", "Fire");
                 }
                 break;
             case 3:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fireTexture[3]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[3], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(400, "Something ", "Fire Storm", "Fire");
+                    SetSkillInfo(400, "A wall of fire will be summoned in the path of your foes, damaging any that attempt to pass through.", "Fire Wall", "Fire");
                 }
                 break;
             case 4:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fireTexture[4]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[4], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(500, "Something ", "Rain of Fire", "Fire");
+                    SetSkillInfo(500, "Open up the sky and rain fire down upon all foes for a short period of time.", "Rain of Fire", "Fire");
                 }
                 break;
             default:
                 break;
         }
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fire[0]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fire[1]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fire[2]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fire[3]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - fireTexture[0].width / 2, nativeVerticalResolution * 3 / 7 - fireTexture[0].height / 2, fireTexture[0].width, fireTexture[0].height), fire[4]);
 
     }
 
     private void IceSkill()
     {
 
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[0]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[1]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[2]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[3]);
+        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[4]);
+
         switch (UserStatus.Instance.IceLevel)
         {
-            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), iceTexture[0]))
+            case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[0], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(100, "Something ", "Iceball", "Ice");
+                    SetSkillInfo(100, "Slows down 1 enemy for a short amount of time. ", "Iceball", "Ice");
                 }
                 break;
             case 1:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), iceTexture[1]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 6 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[1], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(200, "Something ", "Ice Blast", "Ice");
+                    SetSkillInfo(200, "Slows down up to 3 enemies for a short amount of time. ", "Ice Blast", "Ice");
                 }
                 break;
             case 2:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), iceTexture[2]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 8 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[2], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(300, "Something ", "Ice Explosion", "Ice");
+                    SetSkillInfo(300, "Slows down enemies that it hits for a short amount of time ", "Ice Explosion", "Ice");
                 }
                 break;
             case 3:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), iceTexture[3]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[3], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(400, "Something ", "Ice Storm", "Ice");
+                    SetSkillInfo(400, "Slows down all enemies who pass through a set area for a short amount of time.  Helpful to hold back a lot of enemies. ", "Ice Storm", "Ice");
                 }
                 break;
             case 4:
-                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), iceTexture[4]))
+                if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[4], "BlankButton"))
                 {
                     skillWindow = true;
-                    SetSkillInfo(500, "Something ", "Blizzard", "Ice");
+                    SetSkillInfo(500, "Slows down all of the enemies on screen for a short amount of time.  Very useful when you're being overwhelmed.", "Blizzard", "Ice");
                 }
                 break;
             default:
                 break;
         }
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 4 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), ice[0]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 6 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), ice[1]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 8 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), ice[2]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), ice[3]);
-        GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - iceTexture[0].width / 2, nativeVerticalResolution * 4.5f / 7 - iceTexture[0].height / 2, iceTexture[0].width, iceTexture[0].height), ice[4]);
 
     }
 
@@ -248,7 +254,7 @@ public class SkillGUI : MonoBehaviour
     {
         if (UserStatus.Instance.Gold > (level + 1) * 100)
         {
-            fire[level] = fire[level];
+            fire[level] = fireTexture[level];
             UserStatus.Instance.GoldExchange(-(level + 1) * 100);
             UserStatus.Instance.IncreaseFire();
             skillWindow = false;
