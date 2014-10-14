@@ -48,7 +48,7 @@ public class FlyerSpawner : MonoBehaviour
             newflyer.transform.position = new Vector3(xStart, 10, zStart);
             newflyer.GetComponent<EnemyBehaviour>().enabled = true;
             flyersSpawned++;
-            frequency = Random.Range(2.5f, 5.5f);
+            frequency = Random.Range(3.5f, 5.5f);
         }
         else if (flyersSpawned == flyerNumber)
         {

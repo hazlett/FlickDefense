@@ -31,7 +31,7 @@ public class GameplayGUI : MonoBehaviour
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
-        GUI.Label(new Rect(scaledResolutionWidth - labelSize.x - 10, 10, labelSize.x, labelSize.y), "Enemies: " + GameStateManager.Instance.enemyList.Count + " out of " + WaveSystem.Instance.EnemyCount());
+        GUI.Label(new Rect(scaledResolutionWidth - labelSize.x - 10, 10, labelSize.x, labelSize.y), "Enemies: " + GameStateManager.Instance.enemyCount + " out of " + WaveSystem.Instance.EnemyCount());
     }
 
     private void TimedScreenResize()
