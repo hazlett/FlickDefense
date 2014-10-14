@@ -45,7 +45,7 @@ public class GameControl : MonoBehaviour
     private void UpdateAndSave()
     {
         UserStatus.Instance.UpdateUserDataValues();
-        UserStatus.Instance.currentUser.SaveData();
+       // UserStatus.Instance.currentUser.SaveData();
     }
 
     private void CheckEnemyList()
