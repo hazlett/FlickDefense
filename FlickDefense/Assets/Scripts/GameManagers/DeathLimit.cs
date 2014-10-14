@@ -5,7 +5,7 @@ public class DeathLimit : MonoBehaviour {
 
     void OnTriggerEnter(Collider collider)
     {
-        Debug.Log("DeathLimit....muwahahahaha");
+        Debug.Log("DeathLimit");
         GameObject.Destroy(collider.gameObject);
     }
 

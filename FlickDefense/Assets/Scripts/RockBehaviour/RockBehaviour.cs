@@ -3,7 +3,7 @@ using System.Collections;
 
 public class RockBehaviour : MonoBehaviour {
     public BoxCollider boxCollider;
-    private GameObject rightHand, leftHand;
+    private GameObject rockPosition;
     private bool tapped = false;
     private bool grabbed = false;
     private bool thrown = false;
@@ -22,15 +22,14 @@ public class RockBehaviour : MonoBehaviour {
             }
             else if (grabbed)
             {
-                transform.position = leftHand.transform.position;
+                transform.position = rockPosition.transform.position;
             }
         }
     }
-    public void Set(BoxCollider boxCollider, GameObject rightHand, GameObject leftHand)
+    public void Set(BoxCollider boxCollider, GameObject rockPosition)
     {
         this.boxCollider = boxCollider;
-        this.rightHand = rightHand;
-        this.leftHand = leftHand;
+        this.rockPosition = rockPosition;
     }
     public void Tap()
     {
