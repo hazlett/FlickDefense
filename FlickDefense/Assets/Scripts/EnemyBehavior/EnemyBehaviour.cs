@@ -6,19 +6,32 @@ public class EnemyBehaviour : MonoBehaviour {
     protected Vector3 moveLocation;
     protected float speed = 3.5f, timer;
     protected bool atLocation;
-    protected float deathHeight = 5.0f;
+    protected float damageHeight = 5.0f;
     protected Vector3 lookAt = Vector3.forward;
     protected bool weaponVisibleRun = false;
     protected bool weaponVisibleAttack = true;
     public GameObject weapon;
     public NavMeshAgent agent;
     public Animator animator;
+    protected int health = 1;
+    protected int level = 0;
+    protected int attackAmount = 1;
 	void Start () {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
         atLocation = false;
         agent.SetDestination(moveLocation);
 	}
-
+    protected virtual void SetStats(float speed, int health, float damageHeight, int attackAmount)
+    {
+        this.speed = speed;
+        this.health = health;
+        this.damageHeight = damageHeight;
+    }
+    public virtual void SetLevel(int level)
+    {
+        this.level = level;
+        SetStats(speed * (1 + (level / 10)), health * (1 + level), damageHeight * (1 + (level / 10)), attackAmount * (1 + (level / 5)));
+    }
     void OnEnable()
     {
         animator.SetBool("InAir", false);
@@ -65,14 +78,22 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     public virtual void Landed(float fallHeight)
     {
-        if (fallHeight > deathHeight)
+        if (fallHeight > damageHeight)
         {
-            Die();
+            Damage((int)(fallHeight/damageHeight));
         }
     }
     public virtual void Damage()
     {
-
+        Damage(1);
+    }
+    public virtual void Damage(int damage)
+    {
+        health -= damage;
+        if (health <= 0)
+        {
+            Die();
+        }
     }
     protected virtual void Die()
     {
@@ -87,7 +108,7 @@ public class EnemyBehaviour : MonoBehaviour {
     protected virtual void Attack()
     {
         animator.SetTrigger("Attack");
-        UserStatus.Instance.DamageCastle();
+        UserStatus.Instance.DamageCastle(attackAmount);
         timer = 0;
     }
     public virtual void AtLocation()

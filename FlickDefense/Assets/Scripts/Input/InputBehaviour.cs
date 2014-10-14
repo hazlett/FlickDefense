@@ -34,30 +34,35 @@ public class InputBehaviour : MonoBehaviour
             switch (userTouch.phase)
             {
                 case TouchPhase.Began:
-                    {                     
+                    {           
                         startPos = userTouch.position;
                         ray = Camera.main.ScreenPointToRay(startPos);
                         hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
-                        Debug.DrawRay(ray.origin, ray.direction * 100.0f, Color.green, 1.0f);
                         if (hit)
                         {
                             switch (raycastHit.collider.tag)
                             {
                                 case "Archer":
                                 case "Bomber":
-                                case "Boss":
-                                case "Catapult":
-                                case "Flyer":
                                 case "Grunt":
                                     {
 
                                     }
                                     break;
-                                case "Rock":
+                                case "RockCast":
                                     {
-                                        collider.GetComponent<RockBehaviour>().Tap();
+                                        hit = false;
+                                        raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
                                     }
                                     break;
+                                case "Flyer":
+                                    {
+                                        raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
+                                        hit = false;
+                                    }
+                                    break;
+                                case "Catapult":
+                                case "Boss":
                                 default:
                                     {
                                         hit = false;

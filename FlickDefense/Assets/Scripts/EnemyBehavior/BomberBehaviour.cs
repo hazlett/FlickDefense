@@ -6,7 +6,7 @@ public class BomberBehaviour : EnemyBehaviour {
     void Start()
     {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
-        moveLocation.z += Random.Range(-10, 10);
+        moveLocation.z += Random.Range(-6, 6);
         atLocation = false;
         speed *= 2.5f;
         agent.speed = speed;
