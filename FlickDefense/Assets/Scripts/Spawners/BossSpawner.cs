@@ -48,7 +48,7 @@ public class BossSpawner : MonoBehaviour
             newboss.transform.position = new Vector3(xStart, 0, zStart);
             newboss.GetComponent<EnemyBehaviour>().enabled = true;
             bossesSpawned++;
-            frequency = Random.Range(0.5f, 2.5f);
+            frequency = Random.Range(10.5f, 20.5f);
         }
         else if (bossesSpawned == bossNumber)
         {

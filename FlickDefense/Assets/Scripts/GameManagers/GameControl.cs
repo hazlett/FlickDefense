@@ -13,13 +13,14 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(GameStateManager.Instance.currentState.ToString());
         switch (GameStateManager.Instance.currentState)
         {
             case GameStateManager.GameState.PREWAVE: UpdateAndSave();
                 waveGUI.enabled = true;
                 break;
             case GameStateManager.GameState.PLAYING: gameplayGUI.enabled = true;
-                if (GameStateManager.Instance.enemyList.Count == 0)
+                if (GameStateManager.Instance.enemyCount == 0)
                 {
                     gameplayGUI.enabled = false;
                     GameStateManager.Instance.IsPostWave();
@@ -45,5 +46,9 @@ public class GameControl : MonoBehaviour
     {
         UserStatus.Instance.UpdateUserDataValues();
         UserStatus.Instance.currentUser.SaveData();
+    }
+
+    private void CheckEnemyList()
+    {
     }
 }

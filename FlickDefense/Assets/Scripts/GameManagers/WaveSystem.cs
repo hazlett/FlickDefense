@@ -74,7 +74,7 @@ public class WaveSystem {
             Debug.Log("Spawning Enemies");
             //SpawnGrunts();
             //SpawnArchers();
-            //SpawnBombers();
+            SpawnBombers();
             //SpawnFlyers();
             SpawnCatapults();
             //SpawnBosses();

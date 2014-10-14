@@ -2,6 +2,7 @@
 using System.Collections;
 
 public class BomberBehaviour : EnemyBehaviour {
+
     void Start()
     {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
@@ -13,6 +14,13 @@ public class BomberBehaviour : EnemyBehaviour {
         weaponVisibleRun = true;
     }
 
+    protected override void Die()
+    {
+        base.Die();
+
+        Explode();
+    }
+
     protected override void Attack()
     {
         UserStatus.Instance.DamageCastle(2);
@@ -22,5 +30,12 @@ public class BomberBehaviour : EnemyBehaviour {
     {
         atLocation = true;
         Attack();
+        Explode();
+    }
+
+    private void Explode()
+    {
+        GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
+        explosion.transform.position = this.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
     }
 }

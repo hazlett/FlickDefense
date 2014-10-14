@@ -48,7 +48,7 @@ public class BomberSpawner : MonoBehaviour
             newbomber.transform.position = new Vector3(xStart, 0, zStart);
             newbomber.GetComponent<EnemyBehaviour>().enabled = true;
             bombersSpawned++;
-            frequency = Random.Range(4.5f, 6.5f);
+            frequency = Random.Range(8.5f, 12.5f);
         }
         else if (bombersSpawned == bomberNumber)
         {

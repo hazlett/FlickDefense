@@ -7,7 +7,7 @@ public class GameStateManager  {
     private static  GameStateManager instance = new GameStateManager();
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
-    internal List<GameObject> enemyList = new List<GameObject>();
+    internal int enemyCount = 0;
 
     internal enum GameState
     {
@@ -33,6 +33,7 @@ public class GameStateManager  {
     public void IsPlaying()
     {
         currentState = GameState.PLAYING;
+        enemyCount = WaveSystem.Instance.EnemyCount();
         WaveSystem.Instance.currentState = WaveSystem.WaveState.INWAVE;
     }
 

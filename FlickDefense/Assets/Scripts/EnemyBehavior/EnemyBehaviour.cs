@@ -61,7 +61,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     void OnDestroy()
     {
-        //Remove from gameManager list
+        GameStateManager.Instance.enemyCount--;
     }
     public virtual void Landed(float fallHeight)
     {
@@ -77,12 +77,12 @@ public class EnemyBehaviour : MonoBehaviour {
     protected virtual void Die()
     {
         animator.SetTrigger("Kill");
-        StartCoroutine("DeathAnimation");
+        //StartCoroutine("DeathAnimation");
+        GameObject.Destroy(this.gameObject);
     }
     protected virtual IEnumerator DeathAnimation()
     {
         yield return new WaitForSeconds(animator.animation.clip.length);
-        GameObject.Destroy(gameObject);
     }
     protected virtual void Attack()
     {
@@ -96,7 +96,7 @@ public class EnemyBehaviour : MonoBehaviour {
         atLocation = true;
         InvokeRepeating("Attack", 1, 3);
     }
-    public void OffLocation()
+    public virtual void OffLocation()
     {
         atLocation = false;
         CancelInvoke("Attack");

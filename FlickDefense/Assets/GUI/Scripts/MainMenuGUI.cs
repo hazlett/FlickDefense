@@ -50,6 +50,7 @@ public class MainMenuGUI : MonoBehaviour
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
             {
                 GameStateManager.Instance.IsPrewave();
+                Application.LoadLevel("TowerPrefabs");
             }
 
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))

@@ -48,7 +48,7 @@ public class ArcherSpawner : MonoBehaviour
             newarcher.transform.position = new Vector3(xStart, 0, zStart);
             newarcher.GetComponent<EnemyBehaviour>().enabled = true;
             archersSpawned++;
-            frequency = Random.Range(0.5f, 2.5f);
+            frequency = Random.Range(3.5f, 4.5f);
         }
         else if (archersSpawned == archerNumber)
         {
