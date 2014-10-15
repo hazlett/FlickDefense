@@ -44,7 +44,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
 	void Update () {
         transform.LookAt(lookAt);
-        if (!atLocation)
+        if ((!atLocation) && (agent.enabled))
         {
             try
             {
@@ -68,7 +68,10 @@ public class EnemyBehaviour : MonoBehaviour {
             {
 
             }
-            agent.updateRotation = false;
+            if (agent.enabled)
+            {
+                agent.updateRotation = false;
+            }
             animator.SetFloat("Speed", 0);
         }
     }
@@ -82,6 +85,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             Damage((int)(fallHeight/damageHeight));
         }
+        agent.enabled = true;
     }
     public virtual void Damage()
     {
@@ -123,4 +127,11 @@ public class EnemyBehaviour : MonoBehaviour {
         CancelInvoke("Attack");
     }
 
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.tag == "Ground")
+        {
+            Landed(0);
+        }
+    }
 }
