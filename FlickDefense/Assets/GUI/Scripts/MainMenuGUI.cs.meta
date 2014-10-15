@@ -2,7 +2,9 @@ fileFormatVersion: 2
 guid: e7bb7b83ebf058b40826163039da5531
 MonoImporter:
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - mainMenuSkin: {fileID: 11400000, guid: d4c740171b1f3c8408b9266f43deb6a6, type: 2}
+  - gameLogo: {fileID: 2800000, guid: 0871c1c125e8eda44af3df3ae81f2463, type: 3}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

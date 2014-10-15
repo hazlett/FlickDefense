@@ -10,7 +10,7 @@ public class Flick : MonoBehaviour {
     private float fallHeight;
     private bool falling;
     void Start () {
-        
+    
 	}
 	
     void OnEnable()

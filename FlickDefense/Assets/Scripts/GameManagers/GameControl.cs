@@ -13,7 +13,7 @@ public class GameControl : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(GameStateManager.Instance.currentState.ToString());
+        //Debug.Log(GameStateManager.Instance.currentState.ToString());
         switch (GameStateManager.Instance.currentState)
         {
             case GameStateManager.GameState.PREWAVE: UpdateAndSave();

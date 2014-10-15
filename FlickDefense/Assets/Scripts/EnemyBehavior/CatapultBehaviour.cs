@@ -4,8 +4,7 @@ using System;
 
 public class CatapultBehaviour : EnemyBehaviour {
     public BoxCollider deathCollider;
-    public GameObject rockPosition;
-    private float rootMotionTime = 4.766f;
+    public GameObject rightHand, leftHand;
     void Start()
     {
         float z = UnityEngine.Random.Range(-5.0f, 5.0f);
@@ -21,6 +20,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         agent.speed = speed;
         atLocation = false;
         agent.SetDestination(moveLocation);
+        attackAmount = 3;
 	}
 
     void Update()
@@ -56,26 +56,22 @@ public class CatapultBehaviour : EnemyBehaviour {
         if (animator.applyRootMotion)
         {
             timer += Time.deltaTime;
-            if (timer > rootMotionTime)
+            if (timer > 4.677)
             {
-                timer = 0;
                 animator.applyRootMotion = false;
+                timer = 0;
             }
         }
     }
 
-    public override void Damage()
-    {
-        Die();
-    }
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        animator.applyRootMotion = true;
+        //animator.applyRootMotion = true;
         GameObject rock = GameObject.Instantiate(Resources.Load("Prefabs/Rocks/Rock")) as GameObject;
-        rock.GetComponent<RockBehaviour>().Set(deathCollider, rockPosition);
+        rock.GetComponent<RockBehaviour>().Set(deathCollider, rightHand, leftHand, attackAmount);
         rock.transform.position = new Vector3(transform.position.x - 1.0f, transform.position.y - 0.25f, transform.position.z - 0.5f);
-        UserStatus.Instance.DamageCastle(3);
+
         timer = 0;
     }
     public override void AtLocation()
