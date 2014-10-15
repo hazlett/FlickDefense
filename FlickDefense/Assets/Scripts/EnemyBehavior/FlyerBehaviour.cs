@@ -5,17 +5,20 @@ public class FlyerBehaviour : EnemyBehaviour {
     public Transform leftWing, rightWing;
     private int initialHealth;
     private bool dying = false;
+    private bool grounded = false;
+    private FlyerLocation flyerLocation;
     void Start()
     {
         health = 2;
-        float y = Random.Range(2.0f, 5.0f);
-        moveLocation = GameObject.Find("CastleDoor").transform.position;
-        moveLocation.x -= 2.0f;
-        moveLocation.y += y;
-
-        GameObject location = GameObject.Instantiate(Resources.Load("Prefabs/Locations/PersonalLocation")) as GameObject;
-        location.transform.position = moveLocation;
-        location.GetComponent<PersonalLocationManager>().SetObject(gameObject);
+        
+        GameObject locations = GameObject.Find("FlyerLocations");
+        flyerLocation = locations.GetComponent<FlyerLocationsManager>().AssignLocation(gameObject);
+        lookAt = locations.transform.position;
+        if (flyerLocation == null)
+        {
+            Destroy(gameObject);
+        }
+        moveLocation = flyerLocation.gameObject.transform.position;
         speed = 0.05f;
         atLocation = false;
         attackAmount = 2;
@@ -25,6 +28,14 @@ public class FlyerBehaviour : EnemyBehaviour {
     {
         base.SetStats(speed, health, damageHeight, attackAmount);
         initialHealth = this.health;
+    }
+    void OnDestroy()
+    {
+        GameStateManager.Instance.enemyCount--;
+        if (flyerLocation != null)
+        {
+            flyerLocation.UnAssign();
+        }
     }
     void OnEnable()
     {
@@ -36,6 +47,7 @@ public class FlyerBehaviour : EnemyBehaviour {
     }
     public override void Damage()
     {
+        animator.SetTrigger("Hurt");
         health--;
         if (health == initialHealth / 2)
         {
@@ -51,39 +63,68 @@ public class FlyerBehaviour : EnemyBehaviour {
             wingPosition.y -= 0.4f;
             speed *= 0.0f;
             dying = true;
+            animator.SetTrigger("Dying");
+            if (grounded)
+            {
+                Die();
+            }
         }
    
     }
+    protected override void Die()
+    {
+        Explode();
+        Destroy(gameObject);
+    }
     void Update()
     {
-        if ((!atLocation) && (!dying))
-        {
-            transform.position = Vector3.MoveTowards(transform.position, moveLocation, speed);
-        }
-        else if (dying)
+        if (dying)
         {
             rigidbody.useGravity = true;
+        }
+        else if ((!atLocation) && (!dying))
+        {
+            transform.LookAt(moveLocation);
+            transform.position = Vector3.MoveTowards(transform.position, moveLocation, speed);
+        }
+        else if ((atLocation) && (!dying))
+        {
+            transform.LookAt(lookAt);
+            rigidbody.useGravity = true;
+            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;        
         }
     }
     public override void AtLocation()
     {
+        animator.SetBool("Landing", true);
         atLocation = true;
-        Attack();
     }
     protected override void Attack()
     {
+        animator.SetTrigger("Attack");
+        GameObject fireBreath = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/FireBreath"));
+        fireBreath.transform.position = transform.position;
         UserStatus.Instance.DamageCastle(attackAmount);
-        GameObject.Destroy(gameObject);
     }
     void OnCollisionEnter(Collision collision)
     {
-        switch(collision.collider.tag)
+        if (dying)
         {
-            case "Ground":
-                {
-                    Destroy(gameObject);
-                }
-                break;
+            Die();
+        }
+        else
+        {
+            switch (collision.collider.tag)
+            {
+                case "Wall":
+                    {
+                        grounded = true;
+                        animator.SetBool("Grounded", true);
+                        animator.SetTrigger("Landed");
+                        InvokeRepeating("Attack", 1, 5);
+                    }
+                    break;
+            }
         }
     }
 }

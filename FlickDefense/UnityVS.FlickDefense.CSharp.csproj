@@ -96,6 +96,8 @@
     <Compile Include="Assets\Scripts\EnemyBehavior\GruntBehaviour.cs" />
     <Compile Include="Assets\Scripts\GameManagers\DeathLimit.cs" />
     <Compile Include="Assets\Scripts\GameManagers\ExplosionBehaviour.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\FlyerLocation.cs" />
+    <Compile Include="Assets\Scripts\GameManagers\FlyerLocationsManager.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameControl.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GameStateManager.cs" />
     <Compile Include="Assets\Scripts\GameManagers\GruntLocationManager.cs" />

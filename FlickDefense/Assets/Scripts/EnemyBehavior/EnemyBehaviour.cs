@@ -134,4 +134,9 @@ public class EnemyBehaviour : MonoBehaviour {
             Landed(0);
         }
     }
+    protected virtual void Explode()
+    {
+        GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
+        explosion.transform.position = this.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
+    }
 }
