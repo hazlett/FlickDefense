@@ -21,6 +21,7 @@ public class FireSkill : MonoBehaviour {
         if (usingSkill)
         {
             timer += Time.deltaTime;
+            UseSkill();
         }
     }
 
@@ -60,6 +61,17 @@ public class FireSkill : MonoBehaviour {
 
     private void RainOfFire()
     {
+        if (!rainOfFire.activeSelf)
+        {
+            rainOfFire.SetActive(true);
+        } 
+        else if (rainOfFire.activeSelf)
+        {
+            if (timer > skillDuration)
+            {
+                rainOfFire.SetActive(false);
+            }
+        }
 
     }
 }
