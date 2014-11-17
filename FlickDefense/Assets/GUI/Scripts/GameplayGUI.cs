@@ -19,11 +19,6 @@ public class GameplayGUI : MonoBehaviour
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }
 
-    void Update()
-    {
-
-    }
-
     void OnGUI()
     {
         GUI.skin = gameplaySkin;
@@ -32,6 +27,14 @@ public class GameplayGUI : MonoBehaviour
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
         GUI.Label(new Rect(scaledResolutionWidth - labelSize.x - 10, 10, labelSize.x, labelSize.y), "Enemies: " + GameStateManager.Instance.enemyCount + " out of " + WaveSystem.Instance.EnemyCount());
+    
+
+    }
+
+    internal bool Clicked(Vector2 touchPosition)
+    {
+        // Check if skill element was clicked
+        return false;
     }
 
     private void TimedScreenResize()

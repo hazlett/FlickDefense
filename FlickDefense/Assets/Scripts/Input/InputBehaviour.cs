@@ -27,81 +27,83 @@ public class InputBehaviour : MonoBehaviour
             deltaTime += Time.deltaTime;
         } 
 
-        if (Input.touchCount > 0)
-        {
-            userTouch = Input.GetTouch(0);
-
-            switch (userTouch.phase)
+        if(SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE){
+            if (Input.touchCount > 0)
             {
-                case TouchPhase.Began:
-                    {           
-                        startPos = userTouch.position;
-                        ray = Camera.main.ScreenPointToRay(startPos);
-                        hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
-                        if (hit)
-                        {
-                            switch (raycastHit.collider.tag)
-                            {
-                                case "Archer":
-                                case "Bomber":
-                                case "Grunt":
-                                    {
+                userTouch = Input.GetTouch(0);
 
-                                    }
-                                    break;
-                                case "RockCast":
-                                    {
-                                        hit = false;
-                                        raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
-                                    }
-                                    break;
-                                case "Flyer":
-                                    {
-                                        raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
-                                        hit = false;
-                                    }
-                                    break;
-                                case "Catapult":
-                                case "Boss":
-                                default:
-                                    {
-                                        hit = false;
-                                    }
-                                    break;
-                            }
-                        }
-                    }
-                    break;
-                default:
-                case TouchPhase.Moved:
-                    {
-                        if (hit)
+                switch (userTouch.phase)
+                {
+                    case TouchPhase.Began:
                         {
-                            try
+                            startPos = userTouch.position;
+                            ray = Camera.main.ScreenPointToRay(startPos);
+                            hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
+                            if (hit)
                             {
-                                raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
-                            }
-                            catch (Exception e)
-                            {
-                                Debug.LogError("ERROR in TouchPhase.Moved: " + e.Message);
-                            }
-                        }
-                    }
-                    break;
-                case TouchPhase.Ended:
-                    {
-                        if (hit)
-                        {
-                            endPos = userTouch.position;
-                            velocity.x = userTouch.deltaPosition.x / deltaTime;
-                            velocity.y = userTouch.deltaPosition.y / deltaTime;
-                            raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
-                        }
-                        deltaTime = 0.0000001f;
-                        hit = false;
-                    }
-                    break;
+                                switch (raycastHit.collider.tag)
+                                {
+                                    case "Archer":
+                                    case "Bomber":
+                                    case "Grunt":
+                                        {
 
+                                        }
+                                        break;
+                                    case "RockCast":
+                                        {
+                                            hit = false;
+                                            raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
+                                        }
+                                        break;
+                                    case "Flyer":
+                                        {
+                                            raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
+                                            hit = false;
+                                        }
+                                        break;
+                                    case "Ground":
+                                    case "Catapult":
+                                    case "Boss":
+                                    default:
+                                        {
+                                            hit = false;
+                                        }
+                                        break;
+                                }
+                            }
+                        }
+                        break;
+                    default:
+                    case TouchPhase.Moved:
+                        {
+                            if (hit)
+                            {
+                                try
+                                {
+                                    raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
+                                }
+                                catch (Exception e)
+                                {
+                                    Debug.LogError("ERROR in TouchPhase.Moved: " + e.Message);
+                                }
+                            }
+                        }
+                        break;
+                    case TouchPhase.Ended:
+                        {
+                            if (hit)
+                            {
+                                endPos = userTouch.position;
+                                velocity.x = userTouch.deltaPosition.x / deltaTime;
+                                velocity.y = userTouch.deltaPosition.y / deltaTime;
+                                raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
+                            }
+                            deltaTime = 0.0000001f;
+                            hit = false;
+                        }
+                        break;
+                }
             }
 
 
