@@ -4,7 +4,7 @@ using System.Collections;
 public class FireballBehavior : MonoBehaviour {
 
     internal Vector3 direction;
-    internal bool level1;
+    internal bool level1 = true;
 	
 	void Update () {
         MoveFireball();
@@ -25,14 +25,11 @@ public class FireballBehavior : MonoBehaviour {
 
     private void ExplodeFireball()
     {
-        GameObject explosion;
-        if (level1)
+        GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
+            explosion.GetComponent<ExplosionBehaviour>().SetExplosion(damage: 5);
+        if (!level1)
         {
-            explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
-        }
-        else
-        {
-            explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
+            explosion.GetComponent<ExplosionBehaviour>().SetExplosionMultiplier(3.0f, 3, 3.0f);
         }
         explosion.transform.position = this.transform.position + new Vector3(0.0f, 0.5f, 0.0f);
 

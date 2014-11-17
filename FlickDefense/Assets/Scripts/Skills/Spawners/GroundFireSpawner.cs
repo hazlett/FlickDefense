@@ -1,12 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FirewallSpawner : MonoBehaviour {
+public class GroundFireSpawner : MonoBehaviour {
 
-    private static FirewallSpawner instance;
-    public static FirewallSpawner Instance { get { return instance; } set { instance = value; } }
+    private static GroundFireSpawner instance;
+    public static GroundFireSpawner Instance { get { return instance; } set { instance = value; } }
 
-    public float cooldownPeriod;
+    public float stormCooldown, wallCooldown;
 
     private Ray rayBegin, rayEnd;
     private RaycastHit hitBegin, hitEnd;
@@ -37,6 +37,20 @@ public class FirewallSpawner : MonoBehaviour {
         firewall.transform.position = (hitBegin.point + hitEnd.point) / 2;
         firewall.transform.LookAt(hitBegin.point);
 
-        SkillHandler.Instance.cooldownPeriod = cooldownPeriod;
+        SkillHandler.Instance.cooldownPeriod = wallCooldown;
     }
+
+
+    internal void CreateFireStorm(Vector2 touchPosition)
+    {
+        rayBegin = Camera.main.ScreenPointToRay(touchPosition);
+        Physics.Raycast(rayBegin, out hitBegin, Mathf.Infinity);
+
+        GameObject firestorm = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Fire/Firestorm"));
+
+        firestorm.transform.position = hitBegin.point;
+
+        SkillHandler.Instance.cooldownPeriod = stormCooldown;
+    }
+
 }

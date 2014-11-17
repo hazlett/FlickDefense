@@ -36,7 +36,7 @@ public class SkillHandler : MonoBehaviour {
         NONE
     }
 
-    internal Skills currentSkill = Skills.FIREBALL;
+    internal Skills currentSkill = Skills.FIRESTORM;
 
     void Awake()
     {
@@ -72,18 +72,18 @@ public class SkillHandler : MonoBehaviour {
 
     private void GetCoordinates()
     {
-        //if (Input.touchCount > 0)
-        //{
-        //    userTouch = Input.GetTouch(0);
-        //
-        //    switch (userTouch.phase)
-        //    {
-        //        case TouchPhase.Began: touchOrigin = userTouch.position;
-        //            break;
-        //        case TouchPhase.Ended: touchEnd = userTouch.position;
-        //            break;
-        //    }
-        //}
+        if (Input.touchCount > 0)
+        {
+            userTouch = Input.GetTouch(0);
+
+            switch (userTouch.phase)
+            {
+                case TouchPhase.Began: touchOrigin = userTouch.position;
+                    break;
+                case TouchPhase.Ended: touchEnd = userTouch.position;
+                    break;
+            }
+        }
         if (Input.GetMouseButtonDown(0))
         {
             touchOrigin = Input.mousePosition;
@@ -101,9 +101,9 @@ public class SkillHandler : MonoBehaviour {
         {
             case Skills.FIREBALL: Fireball();
                 break;
-            case Skills.FIREBLAST:
+            case Skills.FIREBLAST: FireBlast();
                 break;
-            case Skills.FIRESTORM:
+            case Skills.FIRESTORM: FireStorm();
                 break;
             case Skills.FIREWALL: FireWall();
                 break;
@@ -154,14 +154,23 @@ public class SkillHandler : MonoBehaviour {
         }
     }
 
-    private void FireStorm() { }
+    private void FireStorm()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            GroundFireSpawner.Instance.CreateFireStorm(touchOrigin);
+            ResetForNewSkill();
+            currentSkill = Skills.NONE;
+        }
+    }
 
     private void FireWall()
     {
         // Then the user touched the screen somewhere
         if (touchOrigin != Vector2.zero && touchEnd != Vector2.zero)
         {
-            FirewallSpawner.Instance.CreateFirewall(touchOrigin, touchEnd);
+            GroundFireSpawner.Instance.CreateFirewall(touchOrigin, touchEnd);
             ResetForNewSkill();
             currentSkill = Skills.NONE;
         }

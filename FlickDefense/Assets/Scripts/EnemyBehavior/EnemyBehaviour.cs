@@ -101,10 +101,16 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     protected virtual void Die()
     {
+        agent.speed = 0.0f;
         animator.SetTrigger("Kill");
-        //StartCoroutine("DeathAnimation");
+        Invoke("DestroyEnemy", 1.0f);
+    }
+
+    protected virtual void DestroyEnemy()
+    {
         GameObject.Destroy(this.gameObject);
     }
+
     protected virtual IEnumerator DeathAnimation()
     {
         yield return new WaitForSeconds(animator.animation.clip.length);

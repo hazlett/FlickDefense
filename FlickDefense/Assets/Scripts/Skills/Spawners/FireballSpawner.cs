@@ -27,7 +27,6 @@ public class FireballSpawner : MonoBehaviour {
     internal void LaunchFireball(Vector2 touchPosition, bool level1)
     {
         ray = Camera.main.ScreenPointToRay(touchPosition);
-
         Physics.Raycast(ray, out hit, Mathf.Infinity);
 
         GameObject fireball = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Fire/Fireball"));
@@ -38,7 +37,7 @@ public class FireballSpawner : MonoBehaviour {
 
         if (!level1)
         {
-            fireball.transform.localScale *= 2;
+            fireball.transform.GetChild(0).GetComponent<ParticleSystem>().startSize *= 3.0f;
         }
 
         SkillHandler.Instance.cooldownPeriod = cooldownPeriod;

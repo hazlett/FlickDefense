@@ -13,17 +13,18 @@ public class GruntBehaviour : EnemyBehaviour {
         atLocation = false;
         agent.SetDestination(moveLocation);
         slashAttack = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSwing"));
+        slashAttack.transform.position = this.transform.position + new Vector3(-0.5f, 1, 0);
         slashAttack.transform.parent = this.gameObject.transform;
         slashAttack.SetActive(false);
         
     }
 
-    protected override void Die()
+    protected override void DestroyEnemy()
     {
-        base.Die();
-
         GameObject splatter = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSplat"));
         splatter.transform.position = this.transform.position;
+
+        base.DestroyEnemy();
     }
 
     protected override void Attack()

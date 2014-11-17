@@ -108,12 +108,13 @@
      <Compile Include="Assets\Scripts\RockBehaviour\CatapultDeath.cs" />
      <Compile Include="Assets\Scripts\RockBehaviour\RockBehaviour.cs" />
      <Compile Include="Assets\Scripts\RockBehaviour\ThrowRock.cs" />
+     <Compile Include="Assets\Scripts\Skills\Behaviors\DamageEnemyOverTime.cs" />
      <Compile Include="Assets\Scripts\Skills\Behaviors\FireballBehavior.cs" />
-     <Compile Include="Assets\Scripts\Skills\Behaviors\FirewallBehavior.cs" />
+     <Compile Include="Assets\Scripts\Skills\Behaviors\GroundFireBehavior.cs" />
      <Compile Include="Assets\Scripts\Skills\Behaviors\RainOfFireBehavior.cs" />
      <Compile Include="Assets\Scripts\Skills\SkillHandler.cs" />
      <Compile Include="Assets\Scripts\Skills\Spawners\FireballSpawner.cs" />
-     <Compile Include="Assets\Scripts\Skills\Spawners\FirewallSpawner.cs" />
+     <Compile Include="Assets\Scripts\Skills\Spawners\GroundFireSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\ArcherSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\BomberSpawner.cs" />
      <Compile Include="Assets\Scripts\Spawners\BossSpawner.cs" />
