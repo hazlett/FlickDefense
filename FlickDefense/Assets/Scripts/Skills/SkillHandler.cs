@@ -14,7 +14,7 @@ public class SkillHandler : MonoBehaviour {
     private int level;
     private float timer = 0.0f, pastSkillSpawn = 0.0f;
     private bool usingSkill, clicked = false;
-    private Vector2 touchOrigin, touchEnd;
+    private Vector2 touchOrigin = Vector2.zero, touchEnd = Vector2.zero;
 
     internal enum Skills
     {
@@ -29,7 +29,7 @@ public class SkillHandler : MonoBehaviour {
         ICEWALL,
         BLIZZARD,
         LIGHTNINGSTRIKE,
-        CHAINLIGHTNING,
+        MULTISTRIKE,
         LIGHTNINGSTORM,
         LIGHTNINGWALL,
         THUNDERSTORM,
@@ -90,6 +90,7 @@ public class SkillHandler : MonoBehaviour {
             clicked = true;
         }
         else { clicked = false; }
+
         if (Input.GetMouseButtonDown(0))
         {
             touchOrigin = Input.mousePosition;
@@ -126,9 +127,9 @@ public class SkillHandler : MonoBehaviour {
                 break;
             case Skills.BLIZZARD:
                 break;
-            case Skills.LIGHTNINGSTRIKE:
+            case Skills.LIGHTNINGSTRIKE: LightningStrike();
                 break;
-            case Skills.CHAINLIGHTNING:
+            case Skills.MULTISTRIKE: MultiStrike();
                 break;
             case Skills.LIGHTNINGSTORM:
                 break;
@@ -146,7 +147,6 @@ public class SkillHandler : MonoBehaviour {
         {
             FireballSpawner.Instance.LaunchFireball(touchOrigin, true);
             ResetForNewSkill();
-            currentSkill = Skills.NONE;
         }
     }
 
@@ -157,7 +157,6 @@ public class SkillHandler : MonoBehaviour {
         {
             FireballSpawner.Instance.LaunchFireball(touchOrigin, false);
             ResetForNewSkill();
-            currentSkill = Skills.NONE;
         }
     }
 
@@ -168,7 +167,6 @@ public class SkillHandler : MonoBehaviour {
         {
             GroundFireSpawner.Instance.CreateFireStorm(touchOrigin);
             ResetForNewSkill();
-            currentSkill = Skills.NONE;
         }
     }
 
@@ -188,6 +186,30 @@ public class SkillHandler : MonoBehaviour {
         GameObject rainOfFire = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Fire/RainOfFireBox"));
         ResetForNewSkill();
         cooldownPeriod = 60.0f;
+    }
+
+    private void LightningStrike()
+    { 
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            if (LightningStrikeSpawner.Instance.SpawnCloud(touchOrigin, true))
+            {
+                ResetForNewSkill();
+            }
+        }
+    }
+
+    private void MultiStrike()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            if (LightningStrikeSpawner.Instance.SpawnCloud(touchOrigin, false))
+            {
+                ResetForNewSkill();
+            }
+        }
     }
 
     private void ResetForNewSkill()

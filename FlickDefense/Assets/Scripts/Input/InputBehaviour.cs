@@ -25,111 +25,94 @@ public class InputBehaviour : MonoBehaviour
         if (hit)
         {
             deltaTime += Time.deltaTime;
-        } 
+        }
 
-        if(SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE){
-            if (Input.touchCount > 0)
+        if (SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE)
+        {
+
+            GetCoordinates();
+
+        }
+    }
+
+    private void GetCoordinates()
+    {
+        if (Input.touchCount > 0)
+        {
+            userTouch = Input.GetTouch(0);
+
+            switch (userTouch.phase)
             {
-                userTouch = Input.GetTouch(0);
+                case TouchPhase.Began:
+                    {
+                        startPos = userTouch.position;
+                        ray = Camera.main.ScreenPointToRay(startPos);
+                        hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
+                        if (hit)
+                        {
+                            switch (raycastHit.collider.tag)
+                            {
+                                case "Archer":
+                                case "Bomber":
+                                case "Grunt":
+                                    {
 
-                switch (userTouch.phase)
-                {
-                    case TouchPhase.Began:
-                        {
-                            startPos = userTouch.position;
-                            ray = Camera.main.ScreenPointToRay(startPos);
-                            hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
-                            if (hit)
-                            {
-                                switch (raycastHit.collider.tag)
-                                {
-                                    case "Archer":
-                                    case "Bomber":
-                                    case "Grunt":
-                                        {
-
-                                        }
-                                        break;
-                                    case "RockCast":
-                                        {
-                                            hit = false;
-                                            raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
-                                        }
-                                        break;
-                                    case "Flyer":
-                                        {
-                                            raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
-                                            hit = false;
-                                        }
-                                        break;
-                                    case "Ground":
-                                    case "Catapult":
-                                    case "Boss":
-                                    default:
-                                        {
-                                            hit = false;
-                                        }
-                                        break;
-                                }
+                                    }
+                                    break;
+                                case "RockCast":
+                                    {
+                                        hit = false;
+                                        raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
+                                    }
+                                    break;
+                                case "Flyer":
+                                    {
+                                        raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
+                                        hit = false;
+                                    }
+                                    break;
+                                case "Ground":
+                                case "Catapult":
+                                case "Boss":
+                                default:
+                                    {
+                                        hit = false;
+                                    }
+                                    break;
                             }
                         }
-                        break;
-                    default:
-                    case TouchPhase.Moved:
+                    }
+                    break;
+                default:
+                case TouchPhase.Moved:
+                    {
+                        if (hit)
                         {
-                            if (hit)
+                            try
                             {
-                                try
-                                {
-                                    raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
-                                }
-                                catch (Exception e)
-                                {
-                                    Debug.LogError("ERROR in TouchPhase.Moved: " + e.Message);
-                                }
+                                raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
+                            }
+                            catch (Exception e)
+                            {
+                                Debug.LogError("ERROR in TouchPhase.Moved: " + e.Message);
                             }
                         }
-                        break;
-                    case TouchPhase.Ended:
+                    }
+                    break;
+                case TouchPhase.Ended:
+                    {
+                        if (hit)
                         {
-                            if (hit)
-                            {
-                                endPos = userTouch.position;
-                                velocity.x = userTouch.deltaPosition.x / deltaTime;
-                                velocity.y = userTouch.deltaPosition.y / deltaTime;
-                                raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
-                            }
-                            deltaTime = 0.0000001f;
-                            hit = false;
+                            endPos = userTouch.position;
+                            velocity.x = userTouch.deltaPosition.x / deltaTime;
+                            velocity.y = userTouch.deltaPosition.y / deltaTime;
+                            raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
                         }
-                        break;
-                }
+                        deltaTime = 0.0000001f;
+                        hit = false;
+                    }
+                    break;
             }
-
-
-            //if (userTouch.phase == TouchPhase.Began)
-            //{
-            //    Debug.Log("BEGAN");
-            //    startPos = userTouch.position;
-            //    Ray ray = Camera.main.ScreenPointToRay(startPos);
-            //    RaycastHit raycastHit = new RaycastHit();
-            //    hit = Physics.Raycast(ray, out raycastHit, 100.0f);
-            //    if (hit)
-            //    {
-            //        Debug.Log("RAYCAST HIT: " + raycastHit.collider.name);
-            //    }
-            //}
-            //if (userTouch.phase == TouchPhase.Moved)
-            //{
-            //    movePos = userTouch.position;
-            //}
-            //if (userTouch.phase == TouchPhase.Ended)
-            //{
-            //    endPos = userTouch.position;
-            //    velocity.x = userTouch.deltaPosition.x / userTouch.deltaTime;
-            //    velocity.y = userTouch.deltaPosition.y / userTouch.deltaTime;
-            //}
-
         }
     }
 
