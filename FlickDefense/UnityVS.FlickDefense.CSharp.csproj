@@ -59,6 +59,12 @@
     <Compile Include="Assets\GUI\Scripts\SkillGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\UpgradeGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\WaveGUI.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX2_AutoRotate.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoDestructShuriken.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutoRotate.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_AutodestructWhenNoChildren.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_LightIntensityFade.cs" />
+    <Compile Include="Assets\JMO Assets\Cartoon FX\Scripts\CFX_ShurikenThreadFix.cs" />
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AbstractTargetFollower.cs" />
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\AutoCam.cs" />
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cameras\Scripts\FreeLookCam.cs" />
@@ -97,6 +103,7 @@
     <Compile Include="Assets\Scripts\Input\TapRock.cs" />
     <Compile Include="Assets\Scripts\RockBehaviour\CatapultDeath.cs" />
     <Compile Include="Assets\Scripts\RockBehaviour\RockBehaviour.cs" />
+    <Compile Include="Assets\Scripts\RockBehaviour\ScreenRock.cs" />
     <Compile Include="Assets\Scripts\RockBehaviour\ThrowRock.cs" />
     <Compile Include="Assets\Scripts\Skills\Behaviors\DamageEnemyOverTime.cs" />
     <Compile Include="Assets\Scripts\Skills\Behaviors\FireballBehavior.cs" />

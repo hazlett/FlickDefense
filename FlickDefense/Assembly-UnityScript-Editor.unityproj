@@ -71,12 +71,6 @@
  <Reference Include="UnityEditor.UI">
  <HintPath>C:/Program Files (x86)/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/4.6.0/Editor/UnityEditor.UI.dll</HintPath>
  </Reference>
-<<<<<<< HEAD
-=======
- <Reference Include="JMOAssets">
- <HintPath>C:/Users/hazle_000/Documents/GitHub/FlickDefense/FlickDefense/FlickDefense/Assets/JMO Assets/Editor/JMOAssets.dll</HintPath>
- </Reference>
->>>>>>> fac58e472bcac6269b5da6a0fa6026e553439543
  <Reference Include="SyntaxTree.VisualStudio.Unity.Bridge">
  <HintPath>C:/Users/hazle_000/Documents/GitHub/FlickDefense/FlickDefense/FlickDefense/Assets/UnityVS/Editor/SyntaxTree.VisualStudio.Unity.Bridge.dll</HintPath>
  </Reference>

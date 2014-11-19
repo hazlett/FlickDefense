@@ -30,7 +30,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public virtual void SetLevel(int level)
     {
         this.level = level;
-        SetStats(speed * (1 + (level / 10)), health * (1 + level), damageHeight * (1 + (level / 10)), attackAmount * (1 + (level / 5)));
+        SetStats(speed * (1 + (level / 10)), health * (1 + level), damageHeight * (1 + (level / 10)), attackAmount * Mathf.FloorToInt(1 + (level / 5.0f)));
     }
     void OnEnable()
     {

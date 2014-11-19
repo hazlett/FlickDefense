@@ -56,6 +56,12 @@ public class InputBehaviour : MonoBehaviour
                                             raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
                                         }
                                         break;
+                                    case "ScreenRockCast":
+                                        {
+                                            raycastHit.collider.gameObject.GetComponentInParent<ScreenRock>().Tapped();
+                                            hit = false;
+                                        }
+                                        break;
                                     case "Flyer":
                                         {
                                             raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
