@@ -20,6 +20,11 @@ public class GameControl : MonoBehaviour
                 waveGUI.enabled = true;
                 break;
             case GameStateManager.GameState.PLAYING: gameplayGUI.enabled = true;
+                if (UserStatus.Instance.CastleHealth <= 0)
+                {
+                    GameStateManager.Instance.IsGameOver();
+                    Application.LoadLevel("GameOver");
+                }
                 if (GameStateManager.Instance.enemyCount == 0)
                 {
                     gameplayGUI.enabled = false;

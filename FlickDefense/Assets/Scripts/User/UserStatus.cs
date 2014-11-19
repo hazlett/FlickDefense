@@ -16,7 +16,10 @@ public class UserStatus : MonoBehaviour {
         castleLevel = 1;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
-
+    internal void SetCastleHealth(int castleHealth)
+    {
+        this.castleHealth = castleHealth;
+    }
     private int gold;
     public int Gold { get { return gold; } }
 
@@ -82,7 +85,6 @@ public class UserStatus : MonoBehaviour {
         archeryRange = archeryRangeUpgrade;
         alchemyLab = alchemyLabUpgrade;
     }
-
     public void UpdateUserDataValues()
     {
         currentUser.UpdateUserData(gold, castleHealth, maxCastleHealth, gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled, lightningLevel, fireLevel, iceLevel, castleLevel, barracks, archeryRange, alchemyLab);
