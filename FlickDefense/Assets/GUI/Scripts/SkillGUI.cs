@@ -6,7 +6,7 @@ using System;
 public class SkillGUI : MonoBehaviour
 {
     public GUISkin postgameSkin;
-    public Texture2D[] fireTexture = new Texture2D[15], lightningTexture = new Texture2D[15], iceTexture = new Texture2D[15];
+    public Texture2D[] fireTexture = new Texture2D[10], lightningTexture = new Texture2D[10], iceTexture = new Texture2D[10];
     public Texture2D background;
 
     private Texture2D[] fire = new Texture2D[5], lightning = new Texture2D[5], ice = new Texture2D[5];

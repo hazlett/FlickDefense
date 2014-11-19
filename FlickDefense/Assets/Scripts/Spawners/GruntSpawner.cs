@@ -40,11 +40,11 @@ public class GruntSpawner : MonoBehaviour {
         {
             int xStart = Random.Range(20, 30);
             int zStart = Random.Range(15, 30);
-            GameObject newGrunt;
 
-            newGrunt = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Grunt"));
+            GameObject newGrunt = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Grunt"));
             newGrunt.transform.position = new Vector3(xStart, 0, zStart);
             newGrunt.GetComponent<EnemyBehaviour>().enabled = true;
+            newGrunt.GetComponent<EnemyBehaviour>().SetLevel(WaveSystem.Instance.waveNumber);
             gruntsSpawned++;
             frequency = Random.Range(2.5f, 3.5f);
         }
