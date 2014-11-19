@@ -3,7 +3,6 @@ using System.Collections;
 
 public class WallManager : MonoBehaviour {
 
-    private int health;
     private GameObject gruntLocationManager;
     void Awake()
     {
@@ -11,13 +10,10 @@ public class WallManager : MonoBehaviour {
         gruntLocationManager.transform.position = transform.position;
     }
 	void Start () {
-        health = 5;
+        UserStatus.Instance.SetCastleHealth(5);
 	}
-	
-	void Update () {
-	
-	}
-
-    
-
+	void OnGUI()
+    {
+        GUILayout.Label("HEALTH: " + UserStatus.Instance.CastleHealth);
+    }
 }
