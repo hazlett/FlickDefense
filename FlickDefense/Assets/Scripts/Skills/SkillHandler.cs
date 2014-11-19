@@ -8,12 +8,12 @@ public class SkillHandler : MonoBehaviour {
     private static SkillHandler instance;
     public static SkillHandler Instance { get { return instance; } set { instance = value; } }
 
-    internal float cooldownPeriod = 0.0f;
+    internal float cooldownPeriod = 0.01f, cooldownScale;
 
     private Touch userTouch;
     private int level;
     private float timer = 0.0f, pastSkillSpawn = 0.0f;
-    private bool usingSkill;
+    private bool usingSkill, clicked = false;
     private Vector2 touchOrigin, touchEnd;
 
     internal enum Skills
@@ -36,7 +36,7 @@ public class SkillHandler : MonoBehaviour {
         NONE
     }
 
-    internal Skills currentSkill = Skills.FIRESTORM;
+    internal Skills currentSkill = Skills.NONE;
 
     void Awake()
     {
@@ -55,19 +55,20 @@ public class SkillHandler : MonoBehaviour {
     {
         timer += Time.deltaTime;
 
-        Debug.Log(currentSkill.ToString());
+        cooldownScale = (timer - pastSkillSpawn) / cooldownPeriod;
 
-        if (timer - pastSkillSpawn > cooldownPeriod)
+        if (timer - pastSkillSpawn > cooldownPeriod && clicked)
         {
             if (!GUIClicked())
             {
                 UseSkill();
             }
+            else
+            {
+                GetCoordinates();
+            }
         }
-        if (currentSkill != Skills.NONE)
-        {
-            GetCoordinates();
-        }
+        GetCoordinates();
     }
 
     private void GetCoordinates()
@@ -80,13 +81,19 @@ public class SkillHandler : MonoBehaviour {
             {
                 case TouchPhase.Began: touchOrigin = userTouch.position;
                     break;
+                case TouchPhase.Moved:
+                    break;
                 case TouchPhase.Ended: touchEnd = userTouch.position;
                     break;
             }
+
+            clicked = true;
         }
+        else { clicked = false; }
         if (Input.GetMouseButtonDown(0))
         {
             touchOrigin = Input.mousePosition;
+            clicked = true;
         }
     }
 
@@ -107,7 +114,7 @@ public class SkillHandler : MonoBehaviour {
                 break;
             case Skills.FIREWALL: FireWall();
                 break;
-            case Skills.RAINOFFIRE:
+            case Skills.RAINOFFIRE: RainOfFire();
                 break;
             case Skills.ICEBALL:
                 break;
@@ -187,6 +194,7 @@ public class SkillHandler : MonoBehaviour {
     {
         pastSkillSpawn = timer;
         touchOrigin = touchEnd = Vector2.zero;
+        clicked = false;
         currentSkill = Skills.NONE;
     }
 }

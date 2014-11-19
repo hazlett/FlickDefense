@@ -34,10 +34,11 @@ public class RainOfFireBehavior : MonoBehaviour {
 
         fireball.transform.position = new Vector3(randomX, randomY, randomZ);
 
-        randomX = Random.Range(-0.05f, 0.05f);
-        randomY = Random.Range(-0.4f, -0.6f);
-        randomZ = Random.Range(-0.05f, 0.05f);
+        randomX = Random.Range(-0.005f, 0.005f);
+        randomY = Random.Range(-1.5f, -1.0f);
+        randomZ = Random.Range(-0.005f, 0.005f);
 
-        fireball.GetComponent<FireballBehavior>().direction = new Vector3(randomX, randomY, randomZ);
+        fireball.GetComponent<FireballBehavior>().direction = new Vector3(0, randomY, 0);
+        fireball.GetComponent<FireballBehavior>().rainOfFire = true;
     }
 }

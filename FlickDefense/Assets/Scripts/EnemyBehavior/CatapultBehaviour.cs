@@ -5,6 +5,9 @@ using System;
 public class CatapultBehaviour : EnemyBehaviour {
     public BoxCollider deathCollider;
     public GameObject rightHand, leftHand;
+
+    private GameObject currentRock;
+
     void Start()
     {
         float z = UnityEngine.Random.Range(-5.0f, 5.0f);
@@ -69,6 +72,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         animator.SetTrigger("Attack");
         //animator.applyRootMotion = true;
         GameObject rock = GameObject.Instantiate(Resources.Load("Prefabs/Rocks/Rock")) as GameObject;
+        currentRock = rock;
         rock.GetComponent<RockBehaviour>().Set(deathCollider, rightHand, leftHand, attackAmount);
         rock.transform.position = new Vector3(transform.position.x - 1.0f, transform.position.y - 0.25f, transform.position.z - 0.5f);
 

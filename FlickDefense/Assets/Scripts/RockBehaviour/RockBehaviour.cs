@@ -35,7 +35,14 @@ public class RockBehaviour : MonoBehaviour {
             }
             else if (grabbed)
             {
-                transform.position = (rightHand.transform.position + leftHand.transform.position) / 2;
+                if (rightHand != null && leftHand != null)
+                {
+                    transform.position = (rightHand.transform.position + leftHand.transform.position) / 2;
+                }
+                else
+                {
+                    Destroy(this.gameObject);
+                }
             }
         }
     }

@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class FireballSpawner : MonoBehaviour {
+public class LightningStrikeSpawner : MonoBehaviour {
 
-    private static FireballSpawner instance;
-    public static FireballSpawner Instance { get { return instance; } set { instance = value; } }
+    private static LightningStrikeSpawner instance;
+    public static LightningStrikeSpawner Instance { get { return instance; } set { instance = value; } }
 
     public float cooldownPeriod;
 
@@ -29,15 +29,11 @@ public class FireballSpawner : MonoBehaviour {
         ray = Camera.main.ScreenPointToRay(touchPosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity);
 
-        GameObject fireball = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Fire/Fireball"));
-
-        Vector3 direction = (fireball.transform.position - hit.point).normalized;
-        fireball.GetComponent<FireballBehavior>().direction = -direction;
-        fireball.GetComponent<FireballBehavior>().level1 = level1;
-
+        GameObject lightningBolt = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Lightning/LightningBolt"));
+        
         if (!level1)
         {
-            fireball.transform.GetChild(0).GetComponent<ParticleSystem>().startSize *= 3.0f;
+            lightningBolt.transform.GetChild(0).GetComponent<ParticleSystem>().startSize *= 3.0f;
             SkillHandler.Instance.cooldownPeriod = cooldownPeriod + 10;
         }
         else
