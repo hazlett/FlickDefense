@@ -16,7 +16,7 @@ public class GameplayGUI : MonoBehaviour
     private SkillHandler.Skills currentSkill = SkillHandler.Skills.NONE;
     private Rect skillActivate;
     private Rect skillButton;
-    private float screenHeight, screenWidth, updateGUI, cooldownTransparency;
+    private float screenHeight, screenWidth, updateGUI, cooldownTransparency, crackTime = 10.0f, crackTimer, crackedTransparency;
     private Vector2 labelSize = new Vector2(500, 200), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100);
 
     void OnEnable()
@@ -36,6 +36,15 @@ public class GameplayGUI : MonoBehaviour
     void Update()
     {
         CooldownBehavior();
+        if (cracked)
+        {
+            crackTimer += Time.deltaTime;
+            crackedTransparency = (crackTime - crackTimer) / crackTime;
+            if (crackTimer > crackTime)
+            {
+                TurnOffCrack();
+            }
+        }
     }
 
     void OnGUI()
@@ -82,7 +91,9 @@ public class GameplayGUI : MonoBehaviour
 
         if (cracked)
         {
+            GUI.color = new Color(1, 1, 1, crackedTransparency);
             GUI.DrawTexture(new Rect(0, 0, screenWidth, screenHeight), crackedScreen);
+            GUI.color = new Color(1, 1, 1, 1);
         }
     }
 
@@ -212,7 +223,7 @@ public class GameplayGUI : MonoBehaviour
                 goto case 2;
             case 2: if (GUI.Button(new Rect(screenWidth * 5.5f / 15 - screenWidth / 20, screenHeight * 4.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), lightningTexture[1]))
                 {
-                    currentSkill = SkillHandler.Skills.CHAINLIGHTNING;
+                    currentSkill = SkillHandler.Skills.MULTISTRIKE;
                     currentSkillTexture = lightningTexture[1];
                     skillPopup = false;
                 } goto case 1;
@@ -252,7 +263,17 @@ public class GameplayGUI : MonoBehaviour
             cooldownTransparency = 1.0f;
         }
     }
-
+    public void CrackScreen()
+    {
+        cracked = true;
+        crackTimer = 0.0f;
+        crackedTransparency = 1.0f;
+    }
+    internal void TurnOffCrack()
+    {
+        cracked = false;
+        crackTimer = 0.0f;
+    }
     private void TimedScreenResize()
     {
         screenWidth = screenHeight / Screen.height * Screen.width;

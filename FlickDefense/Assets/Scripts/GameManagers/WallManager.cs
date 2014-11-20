@@ -10,7 +10,6 @@ public class WallManager : MonoBehaviour {
         gruntLocationManager.transform.position = transform.position;
     }
 	void Start () {
-        UserStatus.Instance.SetCastleHealth(5);
 	}
 	void OnGUI()
     {

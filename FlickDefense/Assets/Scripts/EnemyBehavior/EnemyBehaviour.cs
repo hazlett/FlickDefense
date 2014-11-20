@@ -13,6 +13,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject weapon;
     public NavMeshAgent agent;
     public Animator animator;
+    internal int damageCount;
     protected int health = 1;
     protected int level = 0;
     protected int attackAmount = 1;
@@ -30,7 +31,7 @@ public class EnemyBehaviour : MonoBehaviour {
     public virtual void SetLevel(int level)
     {
         this.level = level;
-        SetStats(speed * (1 + (level / 10)), health * (1 + level), damageHeight * (1 + (level / 10)), attackAmount * (1 + (level / 5)));
+        SetStats(speed * (1 + (level / 10)), health * (1 + level), damageHeight * (1 + (level / 10)), attackAmount * Mathf.FloorToInt(1 + (level / 5.0f)));
     }
     void OnEnable()
     {
@@ -89,6 +90,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     public virtual void Damage()
     {
+        damageCount++;
         Damage(1);
     }
     public virtual void Damage(int damage)

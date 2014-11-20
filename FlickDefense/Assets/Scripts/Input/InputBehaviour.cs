@@ -56,13 +56,18 @@ public class InputBehaviour : MonoBehaviour
                                 case "Bomber":
                                 case "Grunt":
                                     {
-
                                     }
                                     break;
                                 case "RockCast":
                                     {
                                         hit = false;
                                         raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
+                                    }
+                                    break;
+                                case "ScreenRockCast":
+                                    {
+                                        raycastHit.collider.gameObject.GetComponentInParent<ScreenRock>().Tapped();
+                                        hit = false;
                                     }
                                     break;
                                 case "Flyer":
@@ -80,7 +85,9 @@ public class InputBehaviour : MonoBehaviour
                                     }
                                     break;
                             }
+
                         }
+
                     }
                     break;
                 default:

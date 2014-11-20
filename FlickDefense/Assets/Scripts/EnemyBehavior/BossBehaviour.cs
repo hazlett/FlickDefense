@@ -14,10 +14,15 @@ public class BossBehaviour : EnemyBehaviour {
         agent.speed = speed;
     }
 
+    private void ThrowAtScreen()
+    {
+
+    }
+
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        UserStatus.Instance.DamageCastle(5);
+        UserStatus.Instance.DamageCastle();
         timer = 0;
     }
 }

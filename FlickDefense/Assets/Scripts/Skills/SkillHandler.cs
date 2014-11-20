@@ -68,7 +68,10 @@ public class SkillHandler : MonoBehaviour {
                 GetCoordinates();
             }
         }
-        GetCoordinates();
+        if (currentSkill != Skills.NONE)
+        {
+            GetCoordinates();
+        }
     }
 
     private void GetCoordinates()
@@ -79,11 +82,19 @@ public class SkillHandler : MonoBehaviour {
 
             switch (userTouch.phase)
             {
-                case TouchPhase.Began: touchOrigin = userTouch.position;
+                case TouchPhase.Began: if (!gameplayGUI.Clicked(userTouch.position))
+                    {
+                        Debug.Log("TouchBegan");
+                        touchOrigin = userTouch.position;
+                    }
                     break;
                 case TouchPhase.Moved:
                     break;
-                case TouchPhase.Ended: touchEnd = userTouch.position;
+                case TouchPhase.Ended: if (!gameplayGUI.Clicked(userTouch.position))
+                    {
+                        Debug.Log("TouchEnded");
+                        touchEnd = userTouch.position;
+                    }
                     break;
             }
 
@@ -95,6 +106,10 @@ public class SkillHandler : MonoBehaviour {
         {
             touchOrigin = Input.mousePosition;
             clicked = true;
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            touchEnd = Input.mousePosition;
         }
     }
 
@@ -131,11 +146,11 @@ public class SkillHandler : MonoBehaviour {
                 break;
             case Skills.MULTISTRIKE: MultiStrike();
                 break;
-            case Skills.LIGHTNINGSTORM:
+            case Skills.LIGHTNINGSTORM: LightningStorm();
                 break;
-            case Skills.LIGHTNINGWALL:
+            case Skills.LIGHTNINGWALL: LightningWall();
                 break;
-            case Skills.THUNDERSTORM:
+            case Skills.THUNDERSTORM: ThunderStorm();
                 break;
         }
     }
@@ -209,6 +224,37 @@ public class SkillHandler : MonoBehaviour {
             {
                 ResetForNewSkill();
             }
+        }
+    }
+
+    private void LightningStorm()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            GroundLightningSpawner.Instance.CreateLightningStorm(touchOrigin);
+            ResetForNewSkill();
+        }
+    }
+
+    private void LightningWall()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero && touchEnd != Vector2.zero)
+        {
+            GroundLightningSpawner.Instance.CreateLightningwall(touchOrigin, touchEnd);
+            ResetForNewSkill();
+            currentSkill = Skills.NONE;
+        }
+    }
+
+    private void ThunderStorm()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            GroundLightningSpawner.Instance.CreateThunderStorm();
+            ResetForNewSkill();
         }
     }
 

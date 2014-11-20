@@ -1,9 +1,9 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class UserStatus : MonoBehaviour {
+public class UserStatus {
 
-    private static UserStatus instance;
+    private static UserStatus instance = new UserStatus();
     public static UserStatus Instance { get { return instance; } set { instance = value; } }
 
     public UserData currentUser = new UserData();
@@ -53,18 +53,6 @@ public class UserStatus : MonoBehaviour {
     public bool AlchemyLab { get { return alchemyLab; } }
     public int CastleLevel { get { return castleLevel; } }
 
-    void Awake()
-    {
-        if (instance == null)
-        {
-            DontDestroyOnLoad(gameObject);
-            instance = this;
-        }
-        else if (instance != this)
-        {
-            Destroy(gameObject);
-        }
-    }
 
     public void SetStatusValues(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)
     {

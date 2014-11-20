@@ -39,6 +39,11 @@ public class LightningStrikeSpawner : MonoBehaviour {
 
             SkillHandler.Instance.cooldownPeriod = cooldownPeriod;
 
+            if (!level1)
+            {
+                SkillHandler.Instance.cooldownPeriod = cooldownPeriod * 2.0f;
+            }
+
             return true;
         }
         else

@@ -30,8 +30,6 @@ public class CloudBehavior : MonoBehaviour {
             lightning.transform.position = this.transform.position + new Vector3(0, -1.0f, 0);
             lightning.transform.parent = this.transform;
 
-            this.GetComponent<ParticleSystem>().loop = false;
-
             this.transform.parent.GetComponent<EnemyBehaviour>().Damage(damage);
 
             strikeCount++;
