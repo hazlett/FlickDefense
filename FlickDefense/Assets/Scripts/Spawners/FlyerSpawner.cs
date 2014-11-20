@@ -7,6 +7,8 @@ public class FlyerSpawner : MonoBehaviour
     private static FlyerSpawner instance;
     public static FlyerSpawner Instance { get { return instance; } set { instance = value; } }
 
+    public GameObject spawnBox;
+
     internal bool spawning;
     internal int flyerNumber, flyersSpawned;
     private float frequency = 3.0f;
@@ -40,8 +42,8 @@ public class FlyerSpawner : MonoBehaviour
     {
         if (flyersSpawned < flyerNumber)
         {
-            int xStart = Random.Range(20, 30);
-            int zStart = Random.Range(15, 30);
+            float xStart = Random.Range((spawnBox.transform.position.x + spawnBox.transform.localScale.x / 2), (spawnBox.transform.position.x - spawnBox.transform.localScale.x / 2));
+            float zStart = Random.Range((spawnBox.transform.position.z + spawnBox.transform.localScale.z / 2), (spawnBox.transform.position.z - spawnBox.transform.localScale.z / 2));
             GameObject newflyer;
 
             newflyer = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Flyer"));

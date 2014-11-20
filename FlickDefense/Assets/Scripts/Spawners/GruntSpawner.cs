@@ -6,6 +6,8 @@ public class GruntSpawner : MonoBehaviour {
     private static GruntSpawner instance;
     public static GruntSpawner Instance { get { return instance; } set { instance = value; } }
 
+    public GameObject spawnBox;
+
     internal bool spawning;
     internal int gruntNumber, gruntsSpawned;
     private float frequency = 1.0f;
@@ -38,8 +40,8 @@ public class GruntSpawner : MonoBehaviour {
     {
         if (gruntsSpawned < gruntNumber)
         {
-            int xStart = Random.Range(20, 30);
-            int zStart = Random.Range(15, 30);
+            float xStart = Random.Range((spawnBox.transform.position.x + spawnBox.transform.localScale.x / 2), (spawnBox.transform.position.x - spawnBox.transform.localScale.x / 2));
+            float zStart = Random.Range((spawnBox.transform.position.z + spawnBox.transform.localScale.z / 2), (spawnBox.transform.position.z - spawnBox.transform.localScale.z / 2));
 
             GameObject newGrunt = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Grunt"));
             newGrunt.transform.position = new Vector3(xStart, 0, zStart);

@@ -13,7 +13,6 @@ public class EnemyBehaviour : MonoBehaviour {
     public GameObject weapon;
     public NavMeshAgent agent;
     public Animator animator;
-    internal int damageCount;
     protected int health = 1;
     protected int level = 0;
     protected int attackAmount = 1;
@@ -80,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         GameStateManager.Instance.enemyCount--;
     }
+
     public virtual void Landed(float fallHeight)
     {
         if (fallHeight > damageHeight)
@@ -90,7 +90,6 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     public virtual void Damage()
     {
-        damageCount++;
         Damage(1);
     }
     public virtual void Damage(int damage)

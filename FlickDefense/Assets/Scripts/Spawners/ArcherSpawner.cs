@@ -7,6 +7,8 @@ public class ArcherSpawner : MonoBehaviour
     private static ArcherSpawner instance;
     public static ArcherSpawner Instance { get { return instance; } set { instance = value; } }
 
+    public GameObject spawnBox;
+
     internal bool spawning;
     internal int archerNumber, archersSpawned;
     private float frequency = 1.0f;
@@ -40,8 +42,8 @@ public class ArcherSpawner : MonoBehaviour
     {
         if (archersSpawned < archerNumber)
         {
-            int xStart = Random.Range(20, 30);
-            int zStart = Random.Range(15, 30);
+            float xStart = Random.Range((spawnBox.transform.position.x + spawnBox.transform.localScale.x / 2), (spawnBox.transform.position.x - spawnBox.transform.localScale.x / 2));
+            float zStart = Random.Range((spawnBox.transform.position.z + spawnBox.transform.localScale.z / 2), (spawnBox.transform.position.z - spawnBox.transform.localScale.z / 2));
             GameObject newarcher;
 
             newarcher = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Archer"));
