@@ -35,15 +35,29 @@ public class ExplosionBehaviour : MonoBehaviour {
             collider.enabled = false;
         }
     }
+    void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Wall")
+        {
+            UserStatus.Instance.DamageCastle();
+        }
+    }
     void OnTriggerEnter(Collider collider)
     {
-        try
+        if (collider.tag == "Wall")
         {
-            collider.GetComponent<EnemyBehaviour>().Damage(damage);
-            collider.rigidbody.AddExplosionForce(explosionForce, transform.position + new Vector3(0, -1, 0), ((SphereCollider)this.collider).radius);
-            collider.rigidbody.useGravity = true;
+            UserStatus.Instance.DamageCastle();
         }
-        catch (Exception) { }
+        else
+        {
+            try
+            {
+                collider.GetComponent<EnemyBehaviour>().Damage(damage);
+                collider.rigidbody.AddExplosionForce(explosionForce, transform.position + new Vector3(0, -1, 0), ((SphereCollider)this.collider).radius);
+                collider.rigidbody.useGravity = true;
+            }
+            catch (Exception) { }
+        }
     }
 
 }

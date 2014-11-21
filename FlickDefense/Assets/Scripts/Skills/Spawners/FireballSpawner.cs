@@ -38,7 +38,7 @@ public class FireballSpawner : MonoBehaviour {
         if (!level1)
         {
             fireball.transform.GetChild(0).GetComponent<ParticleSystem>().startSize *= 3.0f;
-            SkillHandler.Instance.cooldownPeriod = cooldownPeriod + 10;
+            SkillHandler.Instance.cooldownPeriod = cooldownPeriod * 2.0f;
         }
         else
         {

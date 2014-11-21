@@ -12,7 +12,7 @@ public class FireballBehavior : MonoBehaviour {
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.collider.tag != "Fireball")
         {
             ExplodeFireball();
         }

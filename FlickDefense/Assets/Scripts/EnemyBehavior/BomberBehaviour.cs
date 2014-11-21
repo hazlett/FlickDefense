@@ -21,9 +21,14 @@ public class BomberBehaviour : EnemyBehaviour {
         Explode();
     }
 
+    protected override void DestroyEnemy()
+    {
+        UserStatus.Instance.BomberKilled();
+        base.DestroyEnemy();
+    }
+
     protected override void Attack()
     {
-        UserStatus.Instance.DamageCastle(2);
         GameObject.Destroy(gameObject);
     }
     public override void AtLocation()

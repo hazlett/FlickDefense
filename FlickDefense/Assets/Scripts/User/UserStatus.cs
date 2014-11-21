@@ -16,6 +16,7 @@ public class UserStatus {
         castleLevel = 1;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
+
     internal void SetCastleHealth(int castleHealth)
     {
         this.castleHealth = castleHealth;

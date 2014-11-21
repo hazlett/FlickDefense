@@ -7,6 +7,8 @@ public class CatapultSpawner : MonoBehaviour
     private static CatapultSpawner instance;
     public static CatapultSpawner Instance { get { return instance; } set { instance = value; } }
 
+    public GameObject spawnBox;
+
     internal bool spawning;
     internal int catapultNumber, catapultsSpawned;
     private float frequency = 7.0f;
@@ -40,8 +42,8 @@ public class CatapultSpawner : MonoBehaviour
     {
         if (catapultsSpawned < catapultNumber)
         {
-            int xStart = Random.Range(20, 30);
-            int zStart = Random.Range(15, 30);
+            float xStart = Random.Range((spawnBox.transform.position.x + spawnBox.transform.localScale.x / 2), (spawnBox.transform.position.x - spawnBox.transform.localScale.x / 2));
+            float zStart = Random.Range((spawnBox.transform.position.z + spawnBox.transform.localScale.z / 2), (spawnBox.transform.position.z - spawnBox.transform.localScale.z / 2));
             GameObject newcatapult;
 
             newcatapult = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Enemies/Catapult"));

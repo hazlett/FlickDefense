@@ -32,6 +32,7 @@ public class FlyerBehaviour : EnemyBehaviour {
     void OnDestroy()
     {
         GameStateManager.Instance.enemyCount--;
+        UserStatus.Instance.FlyerKilled();
         if (flyerLocation != null)
         {
             flyerLocation.UnAssign();

@@ -16,8 +16,13 @@ public class ArcherBehaviour : EnemyBehaviour {
         atLocation = false;
         agent.SetDestination(moveLocation);
 	}
-    
 
+    protected override void DestroyEnemy()
+    {
+        UserStatus.Instance.ArcherKilled();
+
+        base.DestroyEnemy();
+    }
 
     protected override void Attack()
     {

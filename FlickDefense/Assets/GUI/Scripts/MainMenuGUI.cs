@@ -25,6 +25,7 @@ public class MainMenuGUI : MonoBehaviour
         GameStateManager.Instance.IsMainMenu();
         LoadSave.Instance.BlankList();
         UserStatus.Instance.currentUser.LoadAllUsers();
+        LoadCastle();
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }
@@ -50,7 +51,7 @@ public class MainMenuGUI : MonoBehaviour
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
             {
                 GameStateManager.Instance.IsPrewave();
-                Application.LoadLevel("MainLevel");
+                this.enabled = false;
             }
 
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))
@@ -132,8 +133,9 @@ public class MainMenuGUI : MonoBehaviour
                 if (GUI.Button(new Rect(scaledResolutionWidth * 7 / 8 - 150, nativeVerticalResolution * 6 / 7 - 75, 300, 100), loadNew))
                 {
                     chooseUserWindow = false;
-                    optionsWindow = true; 
+                    optionsWindow = true;
                     toggle3active = toggle3 = toggle1 = toggle2 = toggle = toggle2active = false;
+                    LoadCastle();
                     if (!newUser)
                     {
                         UserStatus.Instance.currentUser.LoadData(selectedUser);
@@ -211,9 +213,54 @@ public class MainMenuGUI : MonoBehaviour
                 UserStatus.Instance.currentUser.SaveData();
                 overwriteWindow = chooseUserWindow = false;
                 optionsWindow = true;
+                LoadCastle();
             }
 
         }
 
+    }
+
+    private void LoadCastle()
+    {
+        GameObject castle;
+
+        CheckForCastle();
+
+        switch (UserStatus.Instance.CastleLevel)
+        {
+            case 1: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level1"));
+                break;
+            case 2: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level2"));
+                break;
+            case 3: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level3"));
+                break;
+            case 4: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level4"));
+                break;
+            case 5: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level5"));
+                break;
+        }
+    }
+
+    private void CheckForCastle()
+    {
+        if(GameObject.Find("Level1(Clone)") != null){
+            Destroy(GameObject.Find("Level1(Clone)"));
+        }
+        if (GameObject.Find("Level2(Clone)") != null)
+        {
+            Destroy(GameObject.Find("Level2(Clone)"));
+        }
+        if (GameObject.Find("Level3(Clone)") != null)
+        {
+            Destroy(GameObject.Find("Level3(Clone)"));
+        }
+        if (GameObject.Find("Level4(Clone)") != null)
+        {
+            Destroy(GameObject.Find("Level4(Clone)"));
+        }
+        if (GameObject.Find("Level5(Clone)") != null)
+        {
+            Destroy(GameObject.Find("Level5(Clone)"));
+        }
     }
 }

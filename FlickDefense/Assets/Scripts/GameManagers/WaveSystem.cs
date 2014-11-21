@@ -6,8 +6,9 @@ public class WaveSystem {
     internal int waveNumber = 0;
 
     private static WaveSystem instance = new WaveSystem();
-    public static WaveSystem Instance { get { return instance; } set { instance = value; } } 
+    public static WaveSystem Instance { get { return instance; } set { instance = value; } }
 
+    private int gruntsKilled, archersKilled, catapultsKilled, bombersKilled, flyersKilled, bossesKilled;
     private int gruntNumber, archerNumber, catapultNumber, bomberNumber, flyingGruntNumber, bossNumber;
     private int minGrunt, maxGrunt, minArcher, maxArcher, minBomber, maxBomber, minCatapult, maxCatapult, minFly, maxFly;
     internal bool enemyRangeSet, enemyNumberSet, enemiesSpawning;
@@ -77,7 +78,7 @@ public class WaveSystem {
             SpawnBombers();
             SpawnFlyers();
             SpawnCatapults();
-            //SpawnBosses();
+            SpawnBosses();
 
             enemiesSpawning = true;
         }

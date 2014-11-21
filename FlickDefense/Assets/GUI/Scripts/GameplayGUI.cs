@@ -56,7 +56,8 @@ public class GameplayGUI : MonoBehaviour
 
         if (!skillPopup)
         {
-            GUI.Label(new Rect(screenWidth - screenWidth / 4 - 10, 10, screenWidth / 4, screenWidth / 12), "Enemies: " + GameStateManager.Instance.enemyCount + " out of " + WaveSystem.Instance.EnemyCount());
+            GUI.Label(new Rect(screenWidth - screenWidth / 4 - 10, 10, screenWidth / 4, screenWidth / 16), "Enemies: " + GameStateManager.Instance.enemyCount + " out of " + WaveSystem.Instance.EnemyCount());
+            GUI.Label(new Rect(screenWidth / 2 - screenWidth / 8, 10, screenWidth / 4, screenWidth / 16), "Castle Health: " + UserStatus.Instance.CastleHealth);
         }
 
         if (cooldownTransparency < 1.0f)
@@ -223,7 +224,7 @@ public class GameplayGUI : MonoBehaviour
                 goto case 2;
             case 2: if (GUI.Button(new Rect(screenWidth * 5.5f / 15 - screenWidth / 20, screenHeight * 4.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), lightningTexture[1]))
                 {
-                    currentSkill = SkillHandler.Skills.CHAINLIGHTNING;
+                    currentSkill = SkillHandler.Skills.MULTISTRIKE;
                     currentSkillTexture = lightningTexture[1];
                     skillPopup = false;
                 } goto case 1;
@@ -263,17 +264,20 @@ public class GameplayGUI : MonoBehaviour
             cooldownTransparency = 1.0f;
         }
     }
+
     public void CrackScreen()
     {
         cracked = true;
         crackTimer = 0.0f;
         crackedTransparency = 1.0f;
     }
+
     internal void TurnOffCrack()
     {
         cracked = false;
         crackTimer = 0.0f;
     }
+
     private void TimedScreenResize()
     {
         screenWidth = screenHeight / Screen.height * Screen.width;

@@ -84,6 +84,14 @@ public class CatapultBehaviour : EnemyBehaviour {
         animator.SetTrigger("AtLocation");
         InvokeRepeating("Attack", 1, 7);
     }
+
+    protected override void DestroyEnemy()
+    {
+
+        UserStatus.Instance.CatapultKilled();
+
+        base.DestroyEnemy();
+    }
 	
 
 }

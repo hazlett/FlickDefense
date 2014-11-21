@@ -24,21 +24,31 @@ public class LightningStrikeSpawner : MonoBehaviour {
         }
     }
 
-    internal void LaunchFireball(Vector2 touchPosition, bool level1)
+    internal bool SpawnCloud(Vector2 touchPosition, bool level1)
     {
         ray = Camera.main.ScreenPointToRay(touchPosition);
         Physics.Raycast(ray, out hit, Mathf.Infinity);
 
-        GameObject lightningBolt = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Lightning/LightningBolt"));
-        
-        if (!level1)
+        if (hit.collider.tag == "Grunt" || hit.collider.tag == "Archer" || hit.collider.tag == "Bomber" ||
+            hit.collider.tag == "Flyer" || hit.collider.tag == "Catapult" || hit.collider.tag == "Boss")
         {
-            lightningBolt.transform.GetChild(0).GetComponent<ParticleSystem>().startSize *= 3.0f;
-            SkillHandler.Instance.cooldownPeriod = cooldownPeriod + 10;
+            GameObject cloud = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Lightning/Cloud"));
+            cloud.transform.position = hit.collider.transform.position + new Vector3(0.0f, 2.0f, 0.0f);
+            cloud.transform.parent = hit.collider.transform;
+            cloud.GetComponent<CloudBehavior>().level1 = level1;
+
+            SkillHandler.Instance.cooldownPeriod = cooldownPeriod;
+
+            if (!level1)
+            {
+                SkillHandler.Instance.cooldownPeriod = cooldownPeriod * 2.0f;
+            }
+
+            return true;
         }
         else
         {
-            SkillHandler.Instance.cooldownPeriod = cooldownPeriod;
+            return false;
         }
     }
 }

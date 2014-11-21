@@ -79,6 +79,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         GameStateManager.Instance.enemyCount--;
     }
+
     public virtual void Landed(float fallHeight)
     {
         if (fallHeight > damageHeight)
@@ -137,6 +138,7 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         if (collision.collider.tag == "Ground")
         {
+            Debug.Log("Landed");
             Landed(0);
         }
     }
