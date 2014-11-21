@@ -34,9 +34,9 @@ public class PostgameGUI : MonoBehaviour
 
         GUI.DrawTexture(new Rect(0, 0, scaledResolutionWidth, nativeVerticalResolution), background);
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Wave: " + (WaveSystem.Instance.waveNumber - 1).ToString() + " Stats", "Header");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Wave " + (WaveSystem.Instance.waveNumber - 1).ToString() + " Stats", "Header");
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 3, nativeVerticalResolution / 4 - labelSize.y, labelSize.x, labelSize.y), "Wave # (Total)\t\t\t\t", "SmallLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y, labelSize.x, labelSize.y), "Wave # (Total)", "SmallLabel");
         // Left Side Stats
         GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Grunts Slaughtered:\t" + UserStatus.Instance.GruntsPastWave() + " (" + UserStatus.Instance.GruntsKilled + ")");
         GUI.Label(new Rect(scaledResolutionWidth / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Archers Slaughtered:\t" + UserStatus.Instance.ArchersPastWave() + " (" + UserStatus.Instance.ArchersKilled + ")");

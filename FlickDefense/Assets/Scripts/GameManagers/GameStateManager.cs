@@ -28,6 +28,7 @@ public class GameStateManager  {
     {
         currentState = GameState.PREWAVE;
         LoadCastle();
+        UserStatus.Instance.SetPastKilled();
         WaveSystem.Instance.currentState = WaveSystem.WaveState.PREWAVE;
     }
 
