@@ -8,6 +8,7 @@ public class BossBehaviour : EnemyBehaviour {
     private Vector3 castleDoorLocation;
     void Start()
     {
+        health = 5;
         castleDoorLocation = GameObject.Find("CastleDoor").transform.position;
         moveLocation = castleDoorLocation + new Vector3(1.0f, 0, 0);
         GameObject location = GameObject.Instantiate(Resources.Load("Prefabs/Locations/PersonalLocation")) as GameObject;
@@ -75,16 +76,31 @@ public class BossBehaviour : EnemyBehaviour {
             }
             if (Input.GetKeyUp(KeyCode.F))
             {
-                animator.SetFloat("Speed", 0.0f);
-                StartCoroutine("ThrowAtWall");
+                if (hasRock)
+                {
+                    animator.SetFloat("Speed", 0.0f);
+                    StartCoroutine("ThrowAtWall");
+                }
             }
         }
 
+    }
+    void OnGUI()
+    {
+        GUILayout.Label("Boss Health: " + health);
+    }
+    public void AbortThrow()
+    {
+        rotatingBack = true;
+        throwing = false;
+        hasRock = false;
+        CancelInvoke("ThrowAtScreen");
     }
     private void LookAtScreen()
     {
         if (hasRock)
         {
+            rock.EnableExplode(this);
             CancelInvoke("Attack");
             agent.enabled = false;
             rotating = true;
@@ -102,8 +118,11 @@ public class BossBehaviour : EnemyBehaviour {
         hasRock = false;
         throwing = true;
         agent.enabled = false;
-        throwRock.SetActive(true);
-        rock.EnableExplode();
+        if (throwRock != null)
+        {
+            throwRock.SetActive(true);
+        }
+        rock.EnableExplode(this);
         animator.SetTrigger("ThrowRock");
         yield return new WaitForSeconds(1.2f);
         agent.enabled = true;
@@ -114,8 +133,10 @@ public class BossBehaviour : EnemyBehaviour {
         hasRock = false;
         throwing = true;
         agent.enabled = false;
-        throwRock.SetActive(true);
-        rock.EnableExplode();
+        if (throwRock != null)
+        {
+            throwRock.SetActive(true);
+        }
         animator.SetTrigger("ThrowRock");
         yield return new WaitForSeconds(1.2f);
         rotatingBack = true;
@@ -124,8 +145,13 @@ public class BossBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        UserStatus.Instance.DamageCastle();
+        StartCoroutine("DamageWall");       
         timer = 0;
+    }
+    private IEnumerator DamageWall()
+    {
+        yield return new WaitForSeconds(0.5f);
+        UserStatus.Instance.DamageCastle();
     }
     public override void AtLocation()
     {

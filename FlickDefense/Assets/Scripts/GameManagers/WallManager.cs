@@ -11,8 +11,4 @@ public class WallManager : MonoBehaviour {
     }
 	void Start () {
 	}
-	void OnGUI()
-    {
-        GUILayout.Label("HEALTH: " + UserStatus.Instance.CastleHealth);
-    }
 }

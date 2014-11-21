@@ -11,6 +11,7 @@ public class ScreenRock : MonoBehaviour {
     public bool explode, thrown;
     public GameObject input;
     public GameObject throwRock;
+    private BossBehaviour boss;
     private bool atScreen, onScreen;
 	void Start () {
         clipping = Camera.main.nearClipPlane;
@@ -58,8 +59,10 @@ public class ScreenRock : MonoBehaviour {
         atScreen = false;
         this.endLocation = endLocation;
     }
-    public void EnableExplode()
+    public void EnableExplode(BossBehaviour boss)
     {
+        this.boss = boss;
+        input.SetActive(true);
         gameObject.AddComponent<Rigidbody>();
         rigidbody.useGravity = false;
         rigidbody.drag = 0.0f;
@@ -68,6 +71,7 @@ public class ScreenRock : MonoBehaviour {
     }
     public void Tapped()
     {
+        boss.AbortThrow();
         Destroy(gameObject);
     }
     void OnTriggerExit(Collider collider)

@@ -29,9 +29,7 @@ public class InputBehaviour : MonoBehaviour
 
         if (SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE)
         {
-
             GetCoordinates();
-
         }
     }
 
@@ -47,7 +45,7 @@ public class InputBehaviour : MonoBehaviour
                     {
                         startPos = userTouch.position;
                         ray = Camera.main.ScreenPointToRay(startPos);
-                        hit = Physics.SphereCast(ray, 1.0f, out raycastHit);
+                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit);
                         if (hit)
                         {
                             switch (raycastHit.collider.tag)
@@ -76,9 +74,14 @@ public class InputBehaviour : MonoBehaviour
                                         hit = false;
                                     }
                                     break;
+                                case "Boss":
+                                    {
+                                        raycastHit.collider.gameObject.GetComponent<BossBehaviour>().Tap();
+                                        hit = false;
+                                    }
+                                    break;
                                 case "Ground":
                                 case "Catapult":
-                                case "Boss":
                                 default:
                                     {
                                         hit = false;
