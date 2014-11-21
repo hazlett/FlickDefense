@@ -11,8 +11,8 @@ public class UserStatus {
     private UserStatus()
     {
         gold = 5000;
-        castleHealth = 5;
-        maxCastleHealth = 10;
+        castleHealth = 500;
+        maxCastleHealth = 500;
         castleLevel = 1;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }

@@ -17,7 +17,6 @@ public class BomberBehaviour : EnemyBehaviour {
     protected override void Die()
     {
         base.Die();
-
         Explode();
     }
 

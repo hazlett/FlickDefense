@@ -9,19 +9,21 @@ public class ExplosionBehaviour : MonoBehaviour {
     private float timer;
     private float explosionForce = 500f;
     private int damage = 1;
-
+    private bool damageWall = true;
 
     public void SetExplosion(float explosionForce = 1000.0f, int damage = 1, float radius = 1.0f)
     {
         this.explosionForce = explosionForce;
         this.damage = damage;
         explosionCollider.radius = radius;
+        damageWall = false;
     }
     public void SetExplosionMultiplier(float explosionForceMultiplier = 1.0f, int damageMultiplier = 1, float radiusMulitiplier = 1.0f)
     {
         explosionForce *= explosionForceMultiplier;
         damage *= damageMultiplier;
         explosionCollider.radius *= radiusMulitiplier;
+        damageWall = false;
     }
     void Update()
     {
@@ -44,7 +46,7 @@ public class ExplosionBehaviour : MonoBehaviour {
     }
     void OnTriggerEnter(Collider collider)
     {
-        if (collider.tag == "Wall")
+        if ((collider.tag == "Wall") && damageWall)
         {
             UserStatus.Instance.DamageCastle();
         }
