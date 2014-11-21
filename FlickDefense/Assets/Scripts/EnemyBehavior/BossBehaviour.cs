@@ -83,7 +83,6 @@ public class BossBehaviour : EnemyBehaviour {
                 }
             }
         }
-
     }
     void OnGUI()
     {
@@ -94,7 +93,6 @@ public class BossBehaviour : EnemyBehaviour {
         rotatingBack = true;
         throwing = false;
         hasRock = false;
-        CancelInvoke("ThrowAtScreen");
     }
     private void LookAtScreen()
     {
