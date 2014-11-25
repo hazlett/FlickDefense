@@ -46,24 +46,35 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
+     <Compile Include="Assets\Quantum Theory\Polyworld\Editor\QT_CombineMeshes.cs" />
+     <Compile Include="Assets\Quantum Theory\Polyworld\Editor\QT_ConvertMesh.cs" />
+     <Compile Include="Assets\Quantum Theory\Polyworld\Editor\QT_ExportTerrain.cs" />
+     <Compile Include="Assets\Quantum Theory\Polyworld\Editor\QT_ModelProcessor.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\ButterflyInspector.cs" />
      <Compile Include="Assets\Toon_Level_Kit\TLK-Medias\Scripts\Editor\MaxAtlasSize.cs" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLDiffuse.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-BasicOutline.shader" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLDiffuseTex.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Toony-Basic.shader" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\VertexLitVertexColors.shader" />
      <None Include="Assets\Low Poly Archer\Read Me.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim.shader" />
      <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Vegetation-Lightmap.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexLitIBL.cginc" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
      <None Include="Assets\FX Mega Pack\FX Mega Pack - Readme.txt" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline basic.shader" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLEmissive.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Leave.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLReflective.shader" />
      <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Rim2.shader" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Animations\LittleHeroes_Animation_frames.txt" />
+     <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\QT_Cubemaps.cginc" />
      <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\Outline Diffuse.shader" />
  <Reference Include="Assembly-UnityScript">
  <HintPath>C:/Users/hazle_000/Documents/GitHub/FlickDefense/FlickDefense/FlickDefense/Library/ScriptAssemblies/Assembly-UnityScript.dll</HintPath>

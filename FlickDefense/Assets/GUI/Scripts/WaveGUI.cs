@@ -9,7 +9,7 @@ public class WaveGUI : MonoBehaviour
 
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI, timer;
     private float xIn, xOut;
-    private Vector2 labelSize = new Vector2(750, 100);
+    private Vector2 labelSize = new Vector2(750, 500);
 
     void OnEnable()
     {
@@ -49,7 +49,7 @@ public class WaveGUI : MonoBehaviour
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
-        GUI.Label(new Rect(((scaledResolutionWidth / 2 - labelSize.x / 2) - scaledResolutionWidth * xIn) * xOut, labelSize.y * 0.25f, labelSize.x, labelSize.y), "Wave " + WaveSystem.Instance.waveNumber.ToString());
+        GUI.Label(new Rect(((scaledResolutionWidth / 2 - labelSize.x / 2) - scaledResolutionWidth * xIn) * xOut, nativeVerticalResolution / 2 - labelSize.y / 2, labelSize.x, labelSize.y), "Wave " + WaveSystem.Instance.waveNumber.ToString());
     }
 
     private void TimedScreenResize()

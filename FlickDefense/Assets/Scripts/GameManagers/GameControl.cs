@@ -18,8 +18,9 @@ public class GameControl : MonoBehaviour
         {
             case GameStateManager.GameState.PREWAVE: UpdateAndSave();
                 waveGUI.enabled = true;
+                gameplayGUI.enabled = true;
                 break;
-            case GameStateManager.GameState.PLAYING: gameplayGUI.enabled = true;
+            case GameStateManager.GameState.PLAYING:
                 if (UserStatus.Instance.CastleHealth <= 0)
                 {
                     GameStateManager.Instance.IsGameOver();

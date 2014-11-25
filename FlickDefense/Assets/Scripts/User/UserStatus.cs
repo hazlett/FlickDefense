@@ -83,7 +83,18 @@ public class UserStatus {
 
     public void DamageCastle() { castleHealth--; }
 
-    public void DamageCastle(int damage) { castleHealth -= damage; }
+    public void DamageCastle(int damage)
+    {
+        castleHealth -= damage;
+        if (castleHealth < 0)
+        {
+            castleHealth = 0;
+        }
+        if (castleHealth > maxCastleHealth)
+        {
+            castleHealth = maxCastleHealth;
+        }
+    }
 
     public void GruntKilled() { gruntsKilled++; }
 
@@ -152,7 +163,7 @@ public class UserStatus {
         if (castleLevel < 5)
         {
             castleLevel++;
-            castleHealth += 50 * castleLevel;
+            castleHealth = maxCastleHealth = 50 * castleLevel;
         }
     }
 

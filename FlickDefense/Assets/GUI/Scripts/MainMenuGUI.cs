@@ -8,17 +8,18 @@ public class MainMenuGUI : MonoBehaviour
     public GUISkin mainMenuSkin;
     public Texture2D gameLogo;
 
-    private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
+    private float nativeVerticalResolution, scaledResolutionWidth, updateGUI, fadeTransparency, speed;
     private Vector2 buttonSize = new Vector2(500, 100);
     private string userSlot1, userSlot2, userSlot3, loadNew;
     private int selectedUser;
 
-    private bool chooseUserWindow, overwriteWindow, optionsWindow, slotSelected, newUser, toggle, toggle2active, toggle3active;
+    private bool fading, chooseUserWindow, overwriteWindow, optionsWindow, slotSelected, newUser, toggle, toggle2active, toggle3active;
 
     void Start()
     {
-        toggle2active = toggle3active = toggle = slotSelected = chooseUserWindow = overwriteWindow = false;
+        toggle2active = toggle3active = toggle = slotSelected = chooseUserWindow = overwriteWindow = fading = false;
         optionsWindow = true;
+        speed = fadeTransparency = 1.0f;
         updateGUI = 0.5f;
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
@@ -28,6 +29,11 @@ public class MainMenuGUI : MonoBehaviour
         LoadCastle();
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
+    }
+
+    void Update()
+    {
+        FadeOut();
     }
 
     void OnGUI()
@@ -44,6 +50,11 @@ public class MainMenuGUI : MonoBehaviour
         // Scale the GUI to any resolution based on 1920 x 1080 base resolution
         GUI.matrix = Matrix4x4.TRS(new Vector3(0, 0, 0), Quaternion.identity, new Vector3(Screen.height / nativeVerticalResolution, Screen.height / nativeVerticalResolution, 1));
 
+        if (fading)
+        {
+            GUI.color = new Color(1, 1, 1, fadeTransparency);
+        }
+
         GUI.DrawTexture(new Rect(scaledResolutionWidth / 4 - gameLogo.width / 2, nativeVerticalResolution / 2 - gameLogo.height / 2, gameLogo.width, gameLogo.height), gameLogo);
 
         if (optionsWindow)
@@ -51,7 +62,8 @@ public class MainMenuGUI : MonoBehaviour
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
             {
                 GameStateManager.Instance.IsPrewave();
-                this.enabled = false;
+                fading = true;
+                speed = 0.0f;
             }
 
             if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))
@@ -228,15 +240,15 @@ public class MainMenuGUI : MonoBehaviour
 
         switch (UserStatus.Instance.CastleLevel)
         {
-            case 1: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level1"));
+            case 1: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level1"));
                 break;
-            case 2: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level2"));
+            case 2: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level2"));
                 break;
-            case 3: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level3"));
+            case 3: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level3"));
                 break;
-            case 4: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level4"));
+            case 4: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level4"));
                 break;
-            case 5: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level5"));
+            case 5: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level5"));
                 break;
         }
     }
@@ -261,6 +273,26 @@ public class MainMenuGUI : MonoBehaviour
         if (GameObject.Find("Level5(Clone)") != null)
         {
             Destroy(GameObject.Find("Level5(Clone)"));
+        }
+    }
+
+    private void FadeOut()
+    {
+        if (fading)
+        {
+            if (fadeTransparency != 0.0f)
+            {
+                fadeTransparency = Mathf.Lerp(fadeTransparency, 0.0f, speed);
+            }
+            else
+            {
+                this.enabled = false;
+            }
+
+        }
+        if (speed < 1.0f)
+        {
+            speed += Time.deltaTime / 5.0f;
         }
     }
 }

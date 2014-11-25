@@ -59,15 +59,15 @@ public class GameStateManager  {
 
         switch (UserStatus.Instance.CastleLevel)
         {
-            case 1:  castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level1"));
+            case 1:  castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level1"));
                 break;
-            case 2: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level2"));
+            case 2: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level2"));
                 break;
-            case 3: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level3"));
+            case 3: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level3"));
                 break;
-            case 4: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level4"));
+            case 4: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level4"));
                 break;
-            case 5: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Level5"));
+            case 5: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level5"));
                 break;
         }
     }

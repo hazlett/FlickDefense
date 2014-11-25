@@ -77,6 +77,11 @@
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\CrossPlatformInput.cs" />
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\PlatformSpecific\StandaloneInput.cs" />
     <Compile Include="Assets\Little HEROES &amp; VILLAINS\Free Look Camera\Cross Platform Input\Scripts\VirtualInput.cs" />
+    <Compile Include="Assets\Quantum Theory\Polyworld\Scripts\QT_InteractContainer.cs" />
+    <Compile Include="Assets\Quantum Theory\Polyworld\Scripts\QT_LightFlicker.cs" />
+    <Compile Include="Assets\Quantum Theory\Polyworld\Scripts\QT_RenderBaseMap.cs" />
+    <Compile Include="Assets\Quantum Theory\Polyworld\Scripts\QT_SurfaceNoise.cs" />
+    <Compile Include="Assets\Quantum Theory\Polyworld\Scripts\Utility Scripts\MeshCombineUtility.cs" />
     <Compile Include="Assets\Scripts\EndParticle.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\ArcherBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyBehavior\BomberBehaviour.cs" />
@@ -147,6 +152,13 @@
     <None Include="Assets\Little HEROES &amp; VILLAINS\Shaders\UnlitShadows.shader" />
     <None Include="Assets\Little HEROES &amp; VILLAINS\ThirdParty\MotionController\ReadMe.txt" />
     <None Include="Assets\Low Poly Archer\Read Me.txt" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\QT_Cubemaps.cginc" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLDiffuse.shader" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLDiffuseTex.shader" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLEmissive.shader" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexColorsIBLReflective.shader" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\IBL\VertexLitIBL.cginc" />
+    <None Include="Assets\Quantum Theory\Polyworld\Shaders\VertexColors\VertexLitVertexColors.shader" />
     <None Include="Assets\Toon_Level_Kit\Documentation\Readme.txt" />
     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Materials\GlassTypeA.shader" />
     <None Include="Assets\Toon_Level_Kit\TLK-Medias\Shaders\Glass.shader" />

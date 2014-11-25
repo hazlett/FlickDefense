@@ -6,10 +6,10 @@ using System;
 public class UpgradeGUI : MonoBehaviour
 {
     public GUISkin postgameSkin;
-    public Texture2D castleUpgradeTexture, background;
+    public Texture2D castleUpgrade, castleFix, cooldown, background;
 
     private float nativeVerticalResolution, scaledResolutionWidth, updateGUI;
-    private Vector2 labelSize = new Vector2(700, 150), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100);
+    private Vector2 labelSize = new Vector2(700, 150), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100), upgradeSize = new Vector2(300, 300);
     private bool skillWindow;
     private string skillName, skillDescription, skillType;
     private int skillPrice;
@@ -45,14 +45,14 @@ public class UpgradeGUI : MonoBehaviour
 
         DrawSkillWindow();
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 5.5f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserStatus.Instance.Gold.ToString(), "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserStatus.Instance.Gold.ToString(), "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Castle Health: " + UserStatus.Instance.CastleHealth + " out of " + UserStatus.Instance.MaxCastleHealth, "CenterLabel");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {
             GameStateManager.Instance.IsMainMenu();
             this.enabled = false;
         }
-
         if (GUI.Button(new Rect(scaledResolutionWidth / 2 - buttonSize.x / 2, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Skill Upgrades"))
         {
             GameStateManager.Instance.IsSkills();
@@ -78,8 +78,8 @@ public class UpgradeGUI : MonoBehaviour
 
     private void DrawCastleUpgrade()
     {
-        if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - castleUpgradeTexture.width / 2, nativeVerticalResolution * 2 / 7 - castleUpgradeTexture.height / 2,
-                castleUpgradeTexture.width, castleUpgradeTexture.height), castleUpgradeTexture))
+        if (GUI.Button(new Rect(scaledResolutionWidth / 2 - upgradeSize.x / 2, nativeVerticalResolution / 2 - upgradeSize.y / 2,
+                upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
             switch (UserStatus.Instance.CastleLevel)
             {
@@ -103,8 +103,8 @@ public class UpgradeGUI : MonoBehaviour
 
     private void DrawBarracksUpgrade()
     {
-        if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - castleUpgradeTexture.width / 2, nativeVerticalResolution * 1.5f / 7 - castleUpgradeTexture.height / 2,
-                castleUpgradeTexture.width, castleUpgradeTexture.height), castleUpgradeTexture))
+        if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 2 / 7 - upgradeSize.y / 2,
+                upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
             if (!UserStatus.Instance.Barracks)
             {
@@ -116,8 +116,8 @@ public class UpgradeGUI : MonoBehaviour
 
     private void DrawArcheryUpgrade()
     {
-        if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - castleUpgradeTexture.width / 2, nativeVerticalResolution * 3 / 7 - castleUpgradeTexture.height / 2,
-                castleUpgradeTexture.width, castleUpgradeTexture.height), castleUpgradeTexture))
+        if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 2 / 7 - upgradeSize.y / 2,
+                upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
             if (!UserStatus.Instance.ArcheryRange)
             {
@@ -129,8 +129,8 @@ public class UpgradeGUI : MonoBehaviour
 
     private void DrawAlchemyUpgrade()
     {
-        if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - castleUpgradeTexture.width / 2, nativeVerticalResolution * 4.5f / 7 - castleUpgradeTexture.height / 2,
-                castleUpgradeTexture.width, castleUpgradeTexture.height), castleUpgradeTexture))
+        if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 4.5f / 7 - upgradeSize.y / 2,
+                upgradeSize.x, upgradeSize.y), cooldown, "BlankButton"))
         {
             if (!UserStatus.Instance.AlchemyLab)
             {
@@ -142,8 +142,8 @@ public class UpgradeGUI : MonoBehaviour
 
     private void DrawCastleFix()
     {
-        if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - castleUpgradeTexture.width / 2, nativeVerticalResolution * 4 / 7 - castleUpgradeTexture.height / 2,
-                castleUpgradeTexture.width, castleUpgradeTexture.height), castleUpgradeTexture))
+        if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 4.5f / 7 - upgradeSize.y / 2,
+                upgradeSize.x, upgradeSize.y), castleFix, "BlankButton"))
         {
             if (UserStatus.Instance.CastleHealth < UserStatus.Instance.MaxCastleHealth)
             {
@@ -198,7 +198,7 @@ public class UpgradeGUI : MonoBehaviour
         if (UserStatus.Instance.Gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
-            UserStatus.Instance.DamageCastle(-5);
+            UserStatus.Instance.DamageCastle(-15);
             skillWindow = false;
         }
     }
@@ -222,7 +222,7 @@ public class UpgradeGUI : MonoBehaviour
                         break;
                     case "Archery": CheckArcheryAvailable(skillPrice);
                         break;
-                    case "Alchemy": CheckAlchemyAvailable(skillPrice);
+                    case "Cooldown": CheckAlchemyAvailable(skillPrice);
                         break;
                     case "Fix": CheckCastleFixAvailable(skillPrice);
                         break;
