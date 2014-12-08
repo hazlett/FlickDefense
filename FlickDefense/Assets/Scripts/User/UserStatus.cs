@@ -11,8 +11,8 @@ public class UserStatus {
     private UserStatus()
     {
         gold = 5000;
-        castleHealth = 500;
-        maxCastleHealth = 500;
+        castleHealth = 100;
+        maxCastleHealth = 100;
         castleLevel = 1;
         iceLevel = lightningLevel = fireLevel = gruntsKilled = archersKilled = bombersKilled = flyersKilled = catapultsKilled = bossesKilled = 0;
     }
@@ -163,7 +163,8 @@ public class UserStatus {
         if (castleLevel < 5)
         {
             castleLevel++;
-            castleHealth = maxCastleHealth = 50 * castleLevel;
+            maxCastleHealth += 100 * castleLevel;
+            castleHealth = maxCastleHealth;
         }
     }
 

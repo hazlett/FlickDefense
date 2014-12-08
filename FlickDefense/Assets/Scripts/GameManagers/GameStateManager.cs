@@ -8,6 +8,7 @@ public class GameStateManager  {
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
     internal int enemyCount = 0;
+    internal bool flicking = true;
 
     internal enum GameState
     {

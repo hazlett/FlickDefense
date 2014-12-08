@@ -4,7 +4,7 @@ using System;
 
 public class EnemyBehaviour : MonoBehaviour {
     protected Vector3 moveLocation;
-    protected float speed = 3.5f, timer;
+    protected float speed = 3.5f, timer, baseSpeed;
     protected bool atLocation;
     protected float damageHeight = 5.0f;
     protected Vector3 lookAt = Vector3.forward;
@@ -146,5 +146,19 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
         explosion.transform.position = this.transform.position + new Vector3(0.0f, 1.0f, 0.0f);
+    }
+
+    public virtual void Freeze(float amount)
+    {
+        speed /= amount;
+        agent.speed = speed;
+        animator.speed /= amount;
+    }
+
+    public virtual void UnFreeze(float amount)
+    {
+        speed *= amount;
+        agent.speed = speed;
+        animator.speed *= amount;
     }
 }

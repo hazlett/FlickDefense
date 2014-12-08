@@ -70,7 +70,10 @@ public class SkillHandler : MonoBehaviour {
         }
         if (currentSkill != Skills.NONE)
         {
-            GetCoordinates();
+            if (!GameStateManager.Instance.flicking)
+            {
+                GetCoordinates();
+            }
         }
     }
 
@@ -132,15 +135,15 @@ public class SkillHandler : MonoBehaviour {
                 break;
             case Skills.RAINOFFIRE: RainOfFire();
                 break;
-            case Skills.ICEBALL:
+            case Skills.ICEBALL: SnowCloud();
                 break;
-            case Skills.ICEBLAST:
+            case Skills.ICEBLAST: FreezeCloud();
                 break;
-            case Skills.ICESTORM:
+            case Skills.ICESTORM: SnowStorm();
                 break;
-            case Skills.ICEWALL:
+            case Skills.ICEWALL: IceWall();
                 break;
-            case Skills.BLIZZARD:
+            case Skills.BLIZZARD: Blizzard();
                 break;
             case Skills.LIGHTNINGSTRIKE: LightningStrike();
                 break;
@@ -192,7 +195,6 @@ public class SkillHandler : MonoBehaviour {
         {
             GroundFireSpawner.Instance.CreateFirewall(touchOrigin, touchEnd);
             ResetForNewSkill();
-            currentSkill = Skills.NONE;
         }
     }
 
@@ -244,7 +246,6 @@ public class SkillHandler : MonoBehaviour {
         {
             GroundLightningSpawner.Instance.CreateLightningwall(touchOrigin, touchEnd);
             ResetForNewSkill();
-            currentSkill = Skills.NONE;
         }
     }
 
@@ -258,11 +259,71 @@ public class SkillHandler : MonoBehaviour {
         }
     }
 
-    private void ResetForNewSkill()
+    private void SnowCloud()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            if (SnowCloudSpawner.Instance.SpawnCloud(touchOrigin, true))
+            {
+                ResetForNewSkill();
+            }
+        }
+    }
+
+    private void FreezeCloud()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            if (SnowCloudSpawner.Instance.SpawnCloud(touchOrigin, false))
+            {
+                ResetForNewSkill();
+            }
+        }
+    }
+
+    private void SnowStorm()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            GroundIceSpawner.Instance.CreateSnowStorm(touchOrigin);
+            ResetForNewSkill();
+        }
+    }
+
+    private void IceWall()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero && touchEnd != Vector2.zero)
+        {
+            GroundIceSpawner.Instance.CreateIceWall(touchOrigin, touchEnd);
+            ResetForNewSkill();
+        }
+    }
+
+    private void Blizzard()
+    {
+        // Then the user touched the screen somewhere
+        if (touchOrigin != Vector2.zero)
+        {
+            GroundIceSpawner.Instance.CreateBlizzard();
+            ResetForNewSkill();
+        }
+    }
+
+    internal void ResetForNewSkill()
     {
         pastSkillSpawn = timer;
+        ChangeSkill();
+    }
+
+    internal void ChangeSkill()
+    {
         touchOrigin = touchEnd = Vector2.zero;
         clicked = false;
         currentSkill = Skills.NONE;
     }
+
 }

@@ -66,9 +66,10 @@ public class GameplayGUI : MonoBehaviour
         }
         else
         {
-            if (GUI.Button(skillActivate, backdropCurrent))
+            if (GUI.Button(skillActivate, backdropCurrent) && currentSkill != SkillHandler.Skills.NONE)
             {
                 SkillHandler.Instance.currentSkill = currentSkill;
+                GameStateManager.Instance.flicking = false;
                 backdropCurrent = backdropActive;
             }
         }
@@ -83,7 +84,7 @@ public class GameplayGUI : MonoBehaviour
             else
             {
                 backdropCurrent = backdropInactive;
-                SkillHandler.Instance.currentSkill = SkillHandler.Skills.NONE;
+                SkillHandler.Instance.ChangeSkill();
                 skillPopup = true;
             }
         }

@@ -29,7 +29,10 @@ public class InputBehaviour : MonoBehaviour
 
         if (SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE)
         {
-            GetCoordinates();
+            if (GameStateManager.Instance.flicking)
+            {
+                GetCoordinates();
+            }
         }
     }
 

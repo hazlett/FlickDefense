@@ -26,10 +26,10 @@ public class FireballBehavior : MonoBehaviour {
     private void ExplodeFireball()
     {
         GameObject explosion = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/BomberExplosion"));
-            explosion.GetComponent<ExplosionBehaviour>().SetExplosionMultiplier(1.0f, 3, 2.0f);
+            explosion.GetComponent<ExplosionBehaviour>().SetExplosionMultiplier(1.0f, 3, 1.0f);
         if (!level1)
         {
-            explosion.GetComponent<ExplosionBehaviour>().SetExplosionMultiplier(1.0f, 3, 2.0f);
+            explosion.GetComponent<ExplosionBehaviour>().SetExplosionMultiplier(1.0f, 3, 1.5f);
         }
         if (rainOfFire)
         {

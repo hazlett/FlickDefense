@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class LightningStrikeSpawner : MonoBehaviour {
+public class SnowCloudSpawner : MonoBehaviour {
 
-    private static LightningStrikeSpawner instance;
-    public static LightningStrikeSpawner Instance { get { return instance; } set { instance = value; } }
+    private static SnowCloudSpawner instance;
+    public static SnowCloudSpawner Instance { get { return instance; } set { instance = value; } }
 
     public float cooldownPeriod;
 
@@ -32,10 +32,10 @@ public class LightningStrikeSpawner : MonoBehaviour {
         if (hit.collider.tag == "Grunt" || hit.collider.tag == "Archer" || hit.collider.tag == "Bomber" ||
             hit.collider.tag == "Flyer" || hit.collider.tag == "Catapult" || hit.collider.tag == "Boss")
         {
-            GameObject cloud = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Lightning/LightningCloud"));
-            cloud.transform.position = hit.collider.transform.position + new Vector3(0.0f, 2.0f, 0.0f);
+            GameObject cloud = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Skills/Ice/SnowCloud"));
+            cloud.transform.position = hit.collider.transform.position + new Vector3(0.0f, 3.0f, 0.0f);
             cloud.transform.parent = hit.collider.transform;
-            cloud.GetComponent<LightningCloudBehavior>().level1 = level1;
+            cloud.GetComponent<SnowCloudBehavior>().level1 = level1;
 
             SkillHandler.Instance.cooldownPeriod = cooldownPeriod;
 

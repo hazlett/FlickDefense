@@ -1,7 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 
-public class CloudBehavior : MonoBehaviour {
+public class LightningCloudBehavior : MonoBehaviour {
 
     internal int damage = 5;
     internal bool level1 = true;
