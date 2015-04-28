@@ -64,9 +64,9 @@ public class ScreenRock : MonoBehaviour {
         this.boss = boss;
         input.SetActive(true);
         gameObject.AddComponent<Rigidbody>();
-        rigidbody.useGravity = false;
-        rigidbody.drag = 0.0f;
-        rigidbody.angularDrag = 0.0f;
+        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Rigidbody>().drag = 0.0f;
+        GetComponent<Rigidbody>().angularDrag = 0.0f;
         explode = true;
     }
     public void Tapped()

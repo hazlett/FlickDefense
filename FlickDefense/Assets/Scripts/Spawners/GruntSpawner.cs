@@ -48,7 +48,7 @@ public class GruntSpawner : MonoBehaviour {
             newGrunt.GetComponent<EnemyBehaviour>().enabled = true;
             newGrunt.GetComponent<EnemyBehaviour>().SetLevel(WaveSystem.Instance.waveNumber);
             gruntsSpawned++;
-            frequency = Random.Range(2.5f, 3.5f);
+            frequency = Random.Range(0.5f, 2.5f);
         }
         else if(gruntsSpawned == gruntNumber)
         {

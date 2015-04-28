@@ -18,7 +18,7 @@ public class QT_LightFlicker : MonoBehaviour
     {
         while(true)
         {       
-          light.intensity = Random.Range(minLightIntensity, maxLightIntensity);
+          GetComponent<Light>().intensity = Random.Range(minLightIntensity, maxLightIntensity);
 
           yield return new WaitForSeconds(Random.Range(minFlickerSpeed, maxFlickerSpeed));
 

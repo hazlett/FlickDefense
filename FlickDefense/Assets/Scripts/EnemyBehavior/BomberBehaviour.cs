@@ -18,6 +18,7 @@ public class BomberBehaviour : EnemyBehaviour {
     {
         base.Die();
         Explode();
+        Destroy(gameObject);
     }
 
     protected override void DestroyEnemy()
@@ -33,6 +34,7 @@ public class BomberBehaviour : EnemyBehaviour {
     public override void AtLocation()
     {
         atLocation = true;
+        UserStatus.Instance.DamageCastle(5);
         Attack();
         Explode();
     }

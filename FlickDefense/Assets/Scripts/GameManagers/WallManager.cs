@@ -7,7 +7,7 @@ public class WallManager : MonoBehaviour {
     void Awake()
     {
         gruntLocationManager = GameObject.Instantiate(Resources.Load("Prefabs/Locations/GruntLocation")) as GameObject;
-        gruntLocationManager.transform.position = transform.position;
+        gruntLocationManager.transform.position = transform.position + new Vector3(0.5f, 0, 0);
     }
 	void Start () {
 	}

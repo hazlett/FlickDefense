@@ -28,13 +28,13 @@ public class ExplosionBehaviour : MonoBehaviour {
     void Update()
     {
         timer += Time.deltaTime;
-        if (!particleSystem.IsAlive())
+        if (!GetComponent<ParticleSystem>().IsAlive())
         {
             Destroy(gameObject);
         }
-        if (timer > particleSystem.duration * 0.25f)
+        if (timer > GetComponent<ParticleSystem>().duration * 0.25f)
         {
-            collider.enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
     }
     void OnCollisionEnter(Collision collision)
@@ -55,8 +55,8 @@ public class ExplosionBehaviour : MonoBehaviour {
             try
             {
                 collider.GetComponent<EnemyBehaviour>().Damage(damage);
-                collider.rigidbody.AddExplosionForce(explosionForce, transform.position + new Vector3(0, -1, 0), ((SphereCollider)this.collider).radius);
-                collider.rigidbody.useGravity = true;
+                collider.GetComponent<Rigidbody>().AddExplosionForce(explosionForce, transform.position + new Vector3(0, -1, 0), ((SphereCollider)this.GetComponent<Collider>()).radius);
+                collider.GetComponent<Rigidbody>().useGravity = true;
             }
             catch (Exception) { }
         }

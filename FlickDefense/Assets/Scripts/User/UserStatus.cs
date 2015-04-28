@@ -10,7 +10,7 @@ public class UserStatus {
         
     private UserStatus()
     {
-        gold = 5000;
+        waveGold = gold = 0;
         castleHealth = 100;
         maxCastleHealth = 100;
         castleLevel = 1;
@@ -21,6 +21,9 @@ public class UserStatus {
     {
         this.castleHealth = castleHealth;
     }
+    private int waveGold;
+    public int WaveGold { get { return waveGold; } }
+
     private int gold;
     public int Gold { get { return gold; } }
 
@@ -79,7 +82,11 @@ public class UserStatus {
         currentUser.UpdateUserData(gold, castleHealth, maxCastleHealth, gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled, lightningLevel, fireLevel, iceLevel, castleLevel, barracks, archeryRange, alchemyLab);
     }
 
-    public void GoldExchange(int amount) { gold += amount; }
+    public void GoldExchange(int amount)
+    {
+        gold += amount;
+        waveGold += amount;
+    }
 
     public void DamageCastle() { castleHealth--; }
 
@@ -96,17 +103,52 @@ public class UserStatus {
         }
     }
 
-    public void GruntKilled() { gruntsKilled++; }
+    public void GruntKilled()
+    {
+        gruntsKilled++;
 
-    public void ArcherKilled() { archersKilled++; }
+        GoldExchange(1 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
 
-    public void BomberKilled() { bombersKilled++; }
+    public void ArcherKilled()
+    {
+        archersKilled++;
 
-    public void FlyerKilled() { flyersKilled++; }
+        GoldExchange(3 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
 
-    public void CatapultKilled() { catapultsKilled++; }
+    public void BomberKilled()
+    {
+        bombersKilled++;
 
-    public void BossKilled() { bossesKilled++; }
+        GoldExchange(7 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
+
+    public void FlyerKilled()
+    {
+        flyersKilled++;
+
+        GoldExchange(5 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
+
+    public void CatapultKilled()
+    {
+        catapultsKilled++;
+
+        GoldExchange(10 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
+
+    public void BossKilled()
+    {
+        bossesKilled++;
+
+        GoldExchange(50 * (1 + WaveSystem.Instance.waveNumber / 5));
+    }
+
+    public void ResetWaveGold()
+    {
+        waveGold = 0;
+    }
 
     public void SetPastKilled()
     {

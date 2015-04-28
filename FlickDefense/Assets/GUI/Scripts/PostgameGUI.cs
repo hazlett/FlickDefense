@@ -49,7 +49,7 @@ public class PostgameGUI : MonoBehaviour
         GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + labelSize.y / 2, labelSize.x, labelSize.y), "Bombers Defused:\t" + UserStatus.Instance.BombersPastWave() + " (" + UserStatus.Instance.BombersKilled + ")");
         GUI.Label(new Rect(scaledResolutionWidth * 3 / 4 - labelSize.x / 2, nativeVerticalResolution / 4 + 3 * labelSize.y / 2, labelSize.x, labelSize.y), "Bosses Slain:\t\t" + UserStatus.Instance.BossesPastWave() + " (" + UserStatus.Instance.BossesKilled + ")");
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 3 / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold Earned: " + "gold" + "\t\tTotal Gold: " + UserStatus.Instance.Gold, "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 3 / 4 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold Earned: " + UserStatus.Instance.WaveGold + "\t\tTotal Gold: " + UserStatus.Instance.Gold, "CenterLabel");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {

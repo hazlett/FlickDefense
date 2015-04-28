@@ -216,9 +216,9 @@ class QT_ExportTerrain : EditorWindow
                         EditorGUI.HelpBox(new Rect(10, 295, 280, 40), "Regenerate the terrain to use different Chunk sizes.", MessageType.None);
                     if (mf!=null)
                     {
-                        if (meshHidden == false && mf[0].renderer.enabled != true)
+                        if (meshHidden == false && mf[0].GetComponent<Renderer>().enabled != true)
                             ShowTerrainMesh(mf);
-                        else if (meshHidden == true && mf[0].renderer.enabled != false)
+                        else if (meshHidden == true && mf[0].GetComponent<Renderer>().enabled != false)
                         {
                             HideTerrainMesh(mf);
                             if (terrainHidden)
@@ -268,13 +268,13 @@ class QT_ExportTerrain : EditorWindow
     private void HideTerrainMesh(MeshFilter[] mf)
     {
         foreach (MeshFilter m in mf)
-            m.renderer.enabled = false;
+            m.GetComponent<Renderer>().enabled = false;
     }
 
     private void ShowTerrainMesh(MeshFilter[] mf)
     {
         foreach (MeshFilter m in mf)
-            m.renderer.enabled = true;
+            m.GetComponent<Renderer>().enabled = true;
     }
 
     //starts rendering vertex colors
@@ -283,8 +283,8 @@ class QT_ExportTerrain : EditorWindow
         terrainObject.gameObject.SetActive(true);
         GameObject RT = new GameObject();
         RT.name = "TopDown Renderer - EraseMe!";
-        RT.AddComponent("Camera");
-        QT_RenderBaseMap RBM = (QT_RenderBaseMap)RT.AddComponent("QT_RenderBaseMap");
+        RT.AddComponent<Camera>();
+        QT_RenderBaseMap RBM = (QT_RenderBaseMap)RT.AddComponent<QT_RenderBaseMap>();
         RBM.RenderMap(terrainObject, terrainObject.terrainData, go, smoothVertColor);
    
     }
@@ -517,7 +517,7 @@ class QT_ExportTerrain : EditorWindow
             nm.normals = mf[x].sharedMesh.normals;
             nm.tangents = mf[x].sharedMesh.tangents;
             nm.uv = mf[x].sharedMesh.uv;
-            nm.uv1 = mf[x].sharedMesh.uv1;
+            nm.uv2 = mf[x].sharedMesh.uv2;
             nm.uv2 = mf[x].sharedMesh.uv2;
             nm.name = mf[x].sharedMesh.name;
             Color32[] vcWhite = new Color32[mf[x].sharedMesh.vertexCount];
@@ -910,7 +910,7 @@ class QT_ExportTerrain : EditorWindow
                 meshGOs[q].name = rootName + "-Chunk" + q;
                 MeshFilter mf = meshGOs[q].AddComponent<MeshFilter>();
                 MeshRenderer mr = meshGOs[q].AddComponent<MeshRenderer>();
-                mr.renderer.material = OldMRs[0].renderer.sharedMaterial;
+                mr.GetComponent<Renderer>().material = OldMRs[0].GetComponent<Renderer>().sharedMaterial;
                 //apply the mesh
                 mf.mesh = tempMeshes[q];
                 //change the name

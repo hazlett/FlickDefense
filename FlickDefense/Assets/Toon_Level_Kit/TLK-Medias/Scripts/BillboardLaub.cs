@@ -17,10 +17,10 @@ public class BillboardLaub: MonoBehaviour {
 		if (mainCamTransform.InverseTransformPoint( cachedTransform.position).z>=0){
 			Vector3 v = mainCamTransform.position - cachedTransform.position;
 			cachedTransform.LookAt( mainCamTransform.position);
-			renderer.enabled = true;
+			GetComponent<Renderer>().enabled = true;
 		}
 		else{
-			renderer.enabled = false;	
+			GetComponent<Renderer>().enabled = false;	
 		}
 
 	}

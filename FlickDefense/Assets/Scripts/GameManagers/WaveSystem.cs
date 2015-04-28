@@ -88,7 +88,7 @@ public class WaveSystem {
     {
         if (!enemyRangeSet)
         {
-            waveNumber++;
+            IncreaseWave();
             switch (waveNumber)
             {
                 case 1: minGrunt = 8;
@@ -201,5 +201,11 @@ public class WaveSystem {
     internal int EnemyCount()
     {
         return gruntNumber + archerNumber + bomberNumber + flyingGruntNumber + catapultNumber + bossNumber;
+    }
+
+    private void IncreaseWave()
+    {
+        waveNumber++;
+        UserStatus.Instance.ResetWaveGold();
     }
 }

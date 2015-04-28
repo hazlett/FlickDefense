@@ -33,7 +33,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = weaponVisibleRun;
+                weapon.GetComponent<Renderer>().enabled = weaponVisibleRun;
             }
             catch (Exception)
             {
@@ -47,7 +47,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = weaponVisibleAttack;
+                weapon.GetComponent<Renderer>().enabled = weaponVisibleAttack;
             }
             catch (Exception)
             {

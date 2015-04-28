@@ -9,9 +9,11 @@ public class InputBehaviour : MonoBehaviour
 
     private Vector2 startPos, movePos, endPos, velocity;
     private bool hit;
-    private float deltaTime;
+    private float deltaTime, startTime, endTime, elapsedTime;
     private Ray ray;
     private RaycastHit raycastHit;
+
+    private int enemyLayer = (1 << 10)|(1 << 9);
 
     void Start()
     {
@@ -38,6 +40,108 @@ public class InputBehaviour : MonoBehaviour
 
     private void GetCoordinates()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            startPos = Input.mousePosition;
+
+            startTime = Time.time;
+
+            ray = Camera.main.ScreenPointToRay(startPos);
+
+            hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
+            if (hit)
+            {
+                switch (raycastHit.collider.tag)
+                {
+                    case "Archer":
+                    case "Bomber":
+                    case "Grunt":
+                        {
+                        }
+                        break;
+                    case "RockCast":
+                        {
+                            hit = false;
+                            raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
+                        }
+                        break;
+                    case "ScreenRockCast":
+                        {
+                            raycastHit.collider.gameObject.GetComponentInParent<ScreenRock>().Tapped();
+                            hit = false;
+                        }
+                        break;
+                    case "Flyer":
+                        {
+                            raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
+                            hit = false;
+                        }
+                        break;
+                    case "Boss":
+                        {
+                            raycastHit.collider.gameObject.GetComponent<BossBehaviour>().Tap();
+                            hit = false;
+                        }
+                        break;
+                    case "Ground":
+                    case "Catapult":
+                    default:
+                        {
+                            hit = false;
+                        }
+                        break;
+                }
+            }
+        }
+        if (Input.GetMouseButton(0))
+        {
+            movePos = Input.mousePosition;
+
+            ray = Camera.main.ScreenPointToRay(movePos);
+
+            hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
+            if (hit)
+            {
+                Debug.Log(raycastHit.collider.tag);
+                try
+                {
+                    raycastHit.collider.GetComponent<Flick>().SetPosition(Input.mousePosition);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("ERROR in mouse held: " + e.Message);
+                }
+            }
+
+        }
+        if (Input.GetMouseButtonUp(0))
+        {
+            endPos = Input.mousePosition;
+
+            endTime = Time.time;
+
+            elapsedTime = endTime - startTime;
+            elapsedTime *= 75;
+
+            velocity.x = (endPos.x - startPos.x) / elapsedTime;
+            velocity.y = (endPos.y - startPos.y) / elapsedTime;
+
+            ray = Camera.main.ScreenPointToRay(endPos);
+
+            hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
+            if (hit)
+            {
+                try
+                {
+                    raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
+                }
+                catch (Exception e)
+                {
+                    Debug.LogError("ERROR in Mouse up: " + e.Message);
+                }
+            }
+
+        }
         if (Input.touchCount > 0)
         {
             userTouch = Input.GetTouch(0);

@@ -9,7 +9,7 @@ public class GruntBehaviour : EnemyBehaviour {
     void Start()
     {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
-        moveLocation.z += Random.Range(-4, 4);
+        moveLocation.z += Random.Range(-4.0f, 4.0f);
         atLocation = false;
         agent.SetDestination(moveLocation);
         slashAttack = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSwing"));

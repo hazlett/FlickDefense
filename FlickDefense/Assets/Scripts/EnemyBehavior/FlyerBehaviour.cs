@@ -81,7 +81,7 @@ public class FlyerBehaviour : EnemyBehaviour {
     {
         if (dying)
         {
-            rigidbody.useGravity = true;
+            GetComponent<Rigidbody>().useGravity = true;
         }
         else if ((!atLocation) && (!dying))
         {
@@ -91,13 +91,13 @@ public class FlyerBehaviour : EnemyBehaviour {
         else if ((atLocation) && (!dying))
         {
             transform.LookAt(lookAt);
-            rigidbody.useGravity = true;
-            rigidbody.constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;        
+            //GetComponent<Rigidbody>().useGravity = true;
+            GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionX | RigidbodyConstraints.FreezePositionZ;        
         }
     }
     public override void AtLocation()
     {
-        animator.SetBool("Landing", true);
+        InvokeRepeating("Attack", 1, 5);
         atLocation = true;
     }
     protected override void Attack()

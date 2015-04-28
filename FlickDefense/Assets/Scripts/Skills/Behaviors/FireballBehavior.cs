@@ -20,7 +20,7 @@ public class FireballBehavior : MonoBehaviour {
 
     private void MoveFireball()
     {
-        this.rigidbody.AddForce(direction * 5f);
+        this.GetComponent<Rigidbody>().AddForce(direction * 5f);
     }
 
     private void ExplodeFireball()

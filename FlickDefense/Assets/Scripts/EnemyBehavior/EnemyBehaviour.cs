@@ -48,7 +48,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = weaponVisibleRun;
+                weapon.GetComponent<Renderer>().enabled = weaponVisibleRun;
             }
             catch(Exception)
             {
@@ -62,7 +62,7 @@ public class EnemyBehaviour : MonoBehaviour {
         {
             try
             {
-                weapon.renderer.enabled = weaponVisibleAttack;
+                weapon.GetComponent<Renderer>().enabled = weaponVisibleAttack;
             }
             catch (Exception)
             {
@@ -114,7 +114,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     protected virtual IEnumerator DeathAnimation()
     {
-        yield return new WaitForSeconds(animator.animation.clip.length);
+        yield return new WaitForSeconds(animator.GetComponent<Animation>().clip.length);
     }
     protected virtual void Attack()
     {
@@ -136,9 +136,10 @@ public class EnemyBehaviour : MonoBehaviour {
 
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.collider.tag == "Ground" || collision.collider.tag == "Wall")
         {
             Debug.Log("Landed");
+            animator.Play("Idle");
             Landed(0);
         }
     }

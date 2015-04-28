@@ -10,7 +10,6 @@ public class GameplayGUI : MonoBehaviour
     public Texture2D crackedScreen, popupWindow, currentSkillTexture, backdropActive, backdropInactive;
 
     internal bool cracked, skillPopup;
-    internal int level = 5;
 
     private Texture2D backdropCurrent;
     private SkillHandler.Skills currentSkill = SkillHandler.Skills.NONE;
@@ -112,7 +111,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void FireSkills()
     {
-        switch (level)
+        switch (UserStatus.Instance.FireLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 8f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), fireTexture[4]))
                 {
@@ -156,7 +155,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void IceSkills()
     {
-        switch (level)
+        switch (UserStatus.Instance.IceLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 11.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), iceTexture[4]))
                 {
@@ -200,7 +199,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void LightningSkills()
     {
-        switch (level)
+        switch (UserStatus.Instance.LightningLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 4.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), lightningTexture[4]))
                 {

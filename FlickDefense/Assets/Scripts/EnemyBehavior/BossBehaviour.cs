@@ -165,8 +165,8 @@ public class BossBehaviour : EnemyBehaviour {
     }
     private void ZeroForces()
     {
-        rigidbody.velocity = Vector3.zero;
-        rigidbody.angularVelocity = Vector3.zero;
+        GetComponent<Rigidbody>().velocity = Vector3.zero;
+        GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
     }
     public void Tap()
     {

@@ -61,14 +61,14 @@ public class RockBehaviour : MonoBehaviour {
         }
         grabbed = false;
         tapped = true;
-        rigidbody.useGravity = true;
-        if (transform.position.y > (boxCollider.transform.position.y + ((SphereCollider)collider).radius))
+        GetComponent<Rigidbody>().useGravity = true;
+        if (transform.position.y > (boxCollider.transform.position.y + ((SphereCollider)GetComponent<Collider>()).radius))
         {
-            rigidbody.AddForce(0.0f, 250.0f, 0.0f);
+            GetComponent<Rigidbody>().AddForce(0.0f, 150.0f, 0.0f);
         }
         else
         {
-            collider.enabled = false;
+            GetComponent<Collider>().enabled = false;
         }
         boxCollider.enabled = true;
     }
@@ -76,9 +76,9 @@ public class RockBehaviour : MonoBehaviour {
     {
         grabbed = false;
         thrown = true;
-        rigidbody.angularDrag = 0;
-        rigidbody.useGravity = true;
-        rigidbody.AddForce(-1000.0f, 100.0f, 10.0f);
+        GetComponent<Rigidbody>().angularDrag = 0;
+        GetComponent<Rigidbody>().useGravity = true;
+        GetComponent<Rigidbody>().AddForce(-1000.0f, 100.0f, 10.0f);
     }
     void OnTriggerEnter(Collider collider)
     {
@@ -86,7 +86,10 @@ public class RockBehaviour : MonoBehaviour {
         {
             case "CatapultDeath":
                 {
-                    collider.GetComponent<CatapultDeath>().Catapult.GetComponent<EnemyBehaviour>().Damage();
+                    collider.GetComponent<CatapultDeath>().Catapult.GetComponent<EnemyBehaviour>().Damage(); 
+                    GameObject go = GameObject.Instantiate(Resources.Load("Prefabs/Particles/RockHit")) as GameObject;
+                    go.transform.position = transform.position;
+                    Destroy(gameObject);
                 }
                 break;
             case "Wall":

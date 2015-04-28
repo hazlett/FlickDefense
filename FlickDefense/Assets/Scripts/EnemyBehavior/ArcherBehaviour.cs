@@ -27,7 +27,7 @@ public class ArcherBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        FireProjectile();
+        Invoke("FireProjectile", 0.5f);
     }
     public override void AtLocation()
     {
@@ -38,6 +38,9 @@ public class ArcherBehaviour : EnemyBehaviour {
 
     void FireProjectile()
     {
-        Debug.Log("Firing arrow");
+        GameObject arrow = GameObject.Instantiate<GameObject>(Resources.Load<GameObject>("Prefabs/Enemies/Misc/Arrow"));
+        arrow.transform.position = this.transform.position + new Vector3(0.0f, 0.75f, 0.0f);
+        arrow.transform.forward = -this.transform.forward;
+        arrow.GetComponent<Rigidbody>().velocity = -arrow.transform.forward * 20.0f;
     }
 }

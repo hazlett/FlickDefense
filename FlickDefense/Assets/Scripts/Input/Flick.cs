@@ -9,9 +9,7 @@ public class Flick : MonoBehaviour {
     private Vector3 screen, world;
     private float fallHeight;
     private bool falling;
-    void Start () {
-    
-	}
+
 	
     void OnEnable()
     {
@@ -26,7 +24,7 @@ public class Flick : MonoBehaviour {
         world = Camera.main.ScreenToWorldPoint(screen);
         world.z = Mathf.Clamp(transform.position.z, -5.0f, 25.0f);
         transform.position = world;
-        if ((rigidbody.velocity.y < 0) && (!falling))
+        if ((GetComponent<Rigidbody>().velocity.y < 0) && (!falling))
         {
             falling = true;
             fallHeight = transform.position.y;
@@ -35,13 +33,15 @@ public class Flick : MonoBehaviour {
 
     public void SetPosition(Vector2 position)
     {
+        GetComponent<Rigidbody>().freezeRotation = true;
         behaviour.enabled = false;
-        rigidbody.useGravity = false;
+        GetComponent<Rigidbody>().useGravity = false;
         touchToWorld = position;
-        touchToWorld.z = transform.position.z + Camera.main.nearClipPlane;
+        touchToWorld.z = transform.position.z - Camera.main.transform.position.z;
         screenToWorld = Camera.main.ScreenToWorldPoint(touchToWorld);
         screenToWorld.z = transform.position.z;
         transform.position = screenToWorld;
+
     }
 
     public void SetVelocity(Vector2 velocity)
@@ -49,17 +49,17 @@ public class Flick : MonoBehaviour {
         behaviour.enabled = false;
         this.velocity = velocity;
         this.velocity.z = velocity.magnitude * 0.25f * transform.forward.z;
-        rigidbody.AddForce(this.velocity);
-        rigidbody.useGravity = true;
+        GetComponent<Rigidbody>().velocity = this.velocity;
+        GetComponent<Rigidbody>().useGravity = true;
         this.enabled = true;
     }
     void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.tag == "Ground")
         {
-            rigidbody.useGravity = false;
-            rigidbody.velocity = Vector3.zero;
-            rigidbody.angularVelocity = Vector3.zero;
+            GetComponent<Rigidbody>().useGravity = false;
+            GetComponent<Rigidbody>().velocity = Vector3.zero;
+            GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             behaviour.enabled = true;
             behaviour.Landed(fallHeight);
             this.enabled = false;

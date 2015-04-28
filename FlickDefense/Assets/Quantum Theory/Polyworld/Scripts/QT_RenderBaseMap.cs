@@ -55,7 +55,7 @@ public class QT_RenderBaseMap : MonoBehaviour {
             
             //set everything up
 			float terrainSize = terrain.size.x;///2; //assuming it's square.
-			Camera renderCam = this.camera;
+			Camera renderCam = this.GetComponent<Camera>();
             
 			float terrainOffset = 500; //offset the terrain on the Y axis so no other meshes or objects get rendered into the basemap. Yea, it's simple..
             renderCam.farClipPlane = 500 + terrainOffset + terrain.size.y;
