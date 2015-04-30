@@ -19,6 +19,9 @@ public class ArcherBehaviour : EnemyBehaviour {
 
     protected override void DestroyEnemy()
     {
+        GameObject splatter = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSplat"));
+        splatter.transform.position = this.transform.position;
+
         UserStatus.Instance.ArcherKilled();
 
         base.DestroyEnemy();

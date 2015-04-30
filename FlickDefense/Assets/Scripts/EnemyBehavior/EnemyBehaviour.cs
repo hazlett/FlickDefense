@@ -103,8 +103,7 @@ public class EnemyBehaviour : MonoBehaviour {
     protected virtual void Die()
     {
         agent.speed = 0.0f;
-        animator.SetTrigger("Kill");
-        Invoke("DestroyEnemy", 1.0f);
+        DestroyEnemy();
     }
 
     protected virtual void DestroyEnemy()

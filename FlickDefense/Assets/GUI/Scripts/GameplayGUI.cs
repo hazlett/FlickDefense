@@ -62,6 +62,7 @@ public class GameplayGUI : MonoBehaviour
         if (cooldownTransparency < 1.0f)
         {
             GUI.DrawTexture(skillActivate, backdropCurrent);
+            GameStateManager.Instance.flicking = true;
         }
         else
         {

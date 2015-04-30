@@ -104,7 +104,7 @@ public class BossBehaviour : EnemyBehaviour {
             rotating = true;
         }
     }
-    private bool Approx(Vector3 one, Vector3 two, float compare = 0.1f)
+    private bool Approx(Vector3 one, Vector3 two, float compare = 0.5f)
     {
         if ((one.x <= two.x + compare) && (one.x >= two.x - compare) && (one.y <= two.y + compare) && (one.y >= two.y - compare) && (one.z <= two.z + compare) && (one.z >= two.z - compare))
         { return true; }
@@ -149,7 +149,7 @@ public class BossBehaviour : EnemyBehaviour {
     private IEnumerator DamageWall()
     {
         yield return new WaitForSeconds(0.5f);
-        UserStatus.Instance.DamageCastle();
+        UserStatus.Instance.DamageCastle(10);
     }
     public override void AtLocation()
     {

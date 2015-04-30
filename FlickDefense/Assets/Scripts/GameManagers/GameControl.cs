@@ -24,7 +24,7 @@ public class GameControl : MonoBehaviour
                 if (UserStatus.Instance.CastleHealth <= 0)
                 {
                     GameStateManager.Instance.IsGameOver();
-                    Application.LoadLevel("GameOver");
+                    Application.LoadLevel("NewMainLevel");
                 }
                 if (GameStateManager.Instance.enemyCount == 0)
                 {

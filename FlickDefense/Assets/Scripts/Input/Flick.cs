@@ -35,7 +35,7 @@ public class Flick : MonoBehaviour {
     {
         GetComponent<Rigidbody>().freezeRotation = true;
         behaviour.enabled = false;
-        GetComponent<Rigidbody>().useGravity = false;
+        GetComponent<Rigidbody>().useGravity = true;
         touchToWorld = position;
         touchToWorld.z = transform.position.z - Camera.main.transform.position.z;
         screenToWorld = Camera.main.ScreenToWorldPoint(touchToWorld);

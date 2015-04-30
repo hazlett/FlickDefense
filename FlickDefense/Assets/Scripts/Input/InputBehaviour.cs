@@ -102,14 +102,16 @@ public class InputBehaviour : MonoBehaviour
             hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
             if (hit)
             {
-                Debug.Log(raycastHit.collider.tag);
-                try
+                if (raycastHit.collider.tag == "Grunt" || raycastHit.collider.tag == "Archer" || raycastHit.collider.tag == "Bomber")
                 {
-                    raycastHit.collider.GetComponent<Flick>().SetPosition(Input.mousePosition);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("ERROR in mouse held: " + e.Message);
+                    try
+                    {
+                        raycastHit.collider.GetComponent<Flick>().SetPosition(Input.mousePosition);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError("ERROR in mouse held: " + e.Message);
+                    }
                 }
             }
 
@@ -131,13 +133,17 @@ public class InputBehaviour : MonoBehaviour
             hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
             if (hit)
             {
-                try
+
+                if (raycastHit.collider.tag == "Grunt" || raycastHit.collider.tag == "Archer" || raycastHit.collider.tag == "Bomber")
                 {
-                    raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
-                }
-                catch (Exception e)
-                {
-                    Debug.LogError("ERROR in Mouse up: " + e.Message);
+                    try
+                    {
+                        raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
+                    }
+                    catch (Exception e)
+                    {
+                        Debug.LogError("ERROR in mouse held: " + e.Message);
+                    }
                 }
             }
 
@@ -146,13 +152,16 @@ public class InputBehaviour : MonoBehaviour
         {
             userTouch = Input.GetTouch(0);
 
-            switch (userTouch.phase)
-            {
-                case TouchPhase.Began:
+            if(userTouch.phase == TouchPhase.Began)
                     {
+
                         startPos = userTouch.position;
+
+                        startTime = Time.time;
+
                         ray = Camera.main.ScreenPointToRay(startPos);
-                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit);
+
+                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
                         if (hit)
                         {
                             switch (raycastHit.collider.tag)
@@ -195,41 +204,65 @@ public class InputBehaviour : MonoBehaviour
                                     }
                                     break;
                             }
-
                         }
 
                     }
-                    break;
-                default:
-                case TouchPhase.Moved:
+           
+            if(userTouch.phase == TouchPhase.Moved)
                     {
+                        movePos = userTouch.position;
+
+                        ray = Camera.main.ScreenPointToRay(movePos);
+
+                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
                         if (hit)
                         {
-                            try
+                            if (raycastHit.collider.tag == "Grunt" || raycastHit.collider.tag == "Archer" || raycastHit.collider.tag == "Bomber")
                             {
-                                raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
-                            }
-                            catch (Exception e)
-                            {
-                                Debug.LogError("ERROR in TouchPhase.Moved: " + e.Message);
+                                try
+                                {
+                                    raycastHit.collider.GetComponent<Flick>().SetPosition(userTouch.position);
+                                }
+                                catch (Exception e)
+                                {
+                                    Debug.LogError("ERROR in mouse held: " + e.Message);
+                                }
                             }
                         }
                     }
-                    break;
-                case TouchPhase.Ended:
+            
+            if(userTouch.phase == TouchPhase.Ended)
                     {
+                        endPos = userTouch.position;
+
+                        endTime = Time.time;
+
+                        elapsedTime = endTime - startTime;
+                        elapsedTime *= 75;
+
+                        velocity.x = (endPos.x - startPos.x) / elapsedTime;
+                        velocity.y = (endPos.y - startPos.y) / elapsedTime;
+
+                        ray = Camera.main.ScreenPointToRay(endPos);
+
+                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
                         if (hit)
                         {
-                            endPos = userTouch.position;
-                            velocity.x = userTouch.deltaPosition.x / deltaTime;
-                            velocity.y = userTouch.deltaPosition.y / deltaTime;
-                            raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
+
+                            if (raycastHit.collider.tag == "Grunt" || raycastHit.collider.tag == "Archer" || raycastHit.collider.tag == "Bomber")
+                            {
+                                try
+                                {
+                                    raycastHit.collider.GetComponent<Flick>().SetVelocity(velocity);
+                                }
+                                catch (Exception e)
+                                {
+                                    Debug.LogError("ERROR in mouse held: " + e.Message);
+                                }
+                            }
                         }
-                        deltaTime = 0.0000001f;
-                        hit = false;
                     }
-                    break;
-            }
+            
         }
     }
 
