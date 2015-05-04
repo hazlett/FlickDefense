@@ -72,7 +72,6 @@ public class WaveSystem {
     {
         if (!enemiesSpawning)
         {
-            Debug.Log("Spawning Enemies");
             SpawnGrunts();
             SpawnArchers();
             SpawnBombers();
@@ -146,7 +145,6 @@ public class WaveSystem {
 
     void SpawnGrunts()
     {
-        Debug.Log("GruntNumber: " + gruntNumber);
         GruntSpawner.Instance.spawning = true;
         GruntSpawner.Instance.gruntNumber = gruntNumber;
         GruntSpawner.Instance.gruntsSpawned = 0;
@@ -155,7 +153,6 @@ public class WaveSystem {
 
     void SpawnArchers()
     {
-        Debug.Log("ArcherNumber: " + archerNumber);
         ArcherSpawner.Instance.spawning = true;
         ArcherSpawner.Instance.archerNumber = archerNumber;
         ArcherSpawner.Instance.archersSpawned = 0;
@@ -164,7 +161,6 @@ public class WaveSystem {
 
     void SpawnBombers()
     {
-        Debug.Log("BomberNumber: " + bomberNumber);
         BomberSpawner.Instance.spawning = true;
         BomberSpawner.Instance.bomberNumber = bomberNumber;
         BomberSpawner.Instance.bombersSpawned = 0;
@@ -173,7 +169,6 @@ public class WaveSystem {
 
     void SpawnFlyers()
     {
-        Debug.Log("FlyerNumber: " + flyingGruntNumber);
         FlyerSpawner.Instance.spawning = true;
         FlyerSpawner.Instance.flyerNumber = flyingGruntNumber;
         FlyerSpawner.Instance.flyersSpawned = 0;
@@ -182,7 +177,6 @@ public class WaveSystem {
 
     void SpawnCatapults()
     {
-        Debug.Log("CatapultNumber: " + catapultNumber);
         CatapultSpawner.Instance.spawning = true;
         CatapultSpawner.Instance.catapultNumber = catapultNumber;
         CatapultSpawner.Instance.catapultsSpawned = 0;
@@ -191,7 +185,6 @@ public class WaveSystem {
 
     void SpawnBosses()
     {
-        Debug.Log("BossNumber: " + bossNumber);
         BossSpawner.Instance.spawning = true;
         BossSpawner.Instance.bossNumber = bossNumber;
         BossSpawner.Instance.bossesSpawned = 0;

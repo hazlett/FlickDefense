@@ -41,7 +41,6 @@ public class Flick : MonoBehaviour {
         screenToWorld = Camera.main.ScreenToWorldPoint(touchToWorld);
         screenToWorld.z = transform.position.z;
         transform.position = screenToWorld;
-
     }
 
     public void SetVelocity(Vector2 velocity)
@@ -55,12 +54,14 @@ public class Flick : MonoBehaviour {
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.tag == "Ground")
+        if (collision.collider.tag == "Ground" || collision.collider.tag == "Wall")
         {
             GetComponent<Rigidbody>().useGravity = false;
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             behaviour.enabled = true;
+            behaviour.animator.Play("Idle");
+            behaviour.agent.enabled = true;
             behaviour.Landed(fallHeight);
             this.enabled = false;
         }

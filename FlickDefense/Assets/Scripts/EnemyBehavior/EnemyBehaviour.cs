@@ -97,6 +97,7 @@ public class EnemyBehaviour : MonoBehaviour {
         health -= damage;
         if (health <= 0)
         {
+            Debug.Log("Enemy is dead");
             Die();
         }
     }
@@ -137,9 +138,8 @@ public class EnemyBehaviour : MonoBehaviour {
     {
         if (collision.collider.tag == "Ground" || collision.collider.tag == "Wall")
         {
-            Debug.Log("Landed");
             animator.Play("Idle");
-            Landed(0);
+            agent.enabled = true;
         }
     }
     protected virtual void Explode()
