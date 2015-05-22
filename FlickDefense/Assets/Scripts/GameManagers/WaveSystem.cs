@@ -90,8 +90,8 @@ public class WaveSystem {
             IncreaseWave();
             switch (waveNumber)
             {
-                case 1: minGrunt = 8;
-                    maxGrunt = 14;
+                case 1: minGrunt = 1;
+                    maxGrunt = 1;
                     break;
                 case 2: minGrunt += Random.Range(2, 5);
                     maxGrunt += Random.Range(3, 5);

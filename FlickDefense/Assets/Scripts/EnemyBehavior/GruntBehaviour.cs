@@ -25,7 +25,7 @@ public class GruntBehaviour : EnemyBehaviour {
         splatter.transform.position = this.transform.position;
 
         Debug.Log("Grunt Killed!!!");
-
+        dead = true;
         UserStatus.Instance.GruntKilled();
 
         base.DestroyEnemy();
