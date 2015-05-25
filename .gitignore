@@ -15,3 +15,9 @@
 
 #Unity3D Generated File On Crash Reports
 sysinfo.txt
+*.unityproj
+*.csproj
+*.csproj
+*.sln
+*.DotSettings
+*.suo
