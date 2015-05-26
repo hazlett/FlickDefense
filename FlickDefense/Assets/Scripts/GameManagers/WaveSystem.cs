@@ -79,6 +79,8 @@ public class WaveSystem {
             SpawnCatapults();
             SpawnBosses();
 
+            SoundManager.PlaySoundClip(SoundClip.GameState.StartGame);
+
             enemiesSpawning = true;
         }
     }

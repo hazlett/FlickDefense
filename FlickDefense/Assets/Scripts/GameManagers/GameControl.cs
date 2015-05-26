@@ -30,6 +30,7 @@ public class GameControl : MonoBehaviour
                 {
                     gameplayGUI.enabled = false;
                     GameStateManager.Instance.IsPostWave();
+                    SoundManager.PlaySoundClip(SoundClip.GameState.WinGame);
                 }
                 break;
             case GameStateManager.GameState.POSTWAVE: UpdateAndSave();

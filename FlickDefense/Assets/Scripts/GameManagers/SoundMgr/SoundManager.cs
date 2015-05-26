@@ -24,7 +24,7 @@ public class SoundManager{
     private static string GruntAttack;
     private static string GruntBattleCry;
     private static string GruntThrownAway;
-    private static string GruntDie = "Sounds/splat";
+    private static string GruntDie = "Sounds/Clips/QuietSplat";
 
     private static string ArcherWalk;
     private static string ArcherRun;
@@ -71,12 +71,12 @@ public class SoundManager{
     private static string CastleExplosion;
     private static string ScreenHit;
 
-    private static string StartGame;
-    private static string WinGame;
-    private static string LoseGame;
+    private static string StartGame = "Sounds/Clips/BeginRound";
+    private static string WinGame = "Sounds/Clips/WinRound";
+    private static string LoseGame = "Sounds/Clips/GameLoss";
 
-    private static string MainMenuMusic;
-    private static string InGameMusic = "Sounds/Music";
+    private static string MainMenuMusic = "Sounds/Music";
+    private static string InGameMusic;
     private static string PostGameMusic;
     #endregion
 
