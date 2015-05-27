@@ -27,6 +27,7 @@ public class MainMenuGUI : MonoBehaviour
         LoadSave.Instance.BlankList();
         UserStatus.Instance.currentUser.LoadAllUsers();
         LoadCastle();
+        SoundManager.PlayMusic(Song.MainMenu);
 
         InvokeRepeating("TimedScreenResize", updateGUI, updateGUI);
     }

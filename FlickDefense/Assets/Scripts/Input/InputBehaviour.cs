@@ -9,7 +9,7 @@ public class InputBehaviour : MonoBehaviour
 
     private Vector2 startPos, movePos, endPos, velocity;
     private bool hit;
-    private float deltaTime, startTime, endTime, elapsedTime, stationaryTimer, stationaryThreshold;
+    private float deltaTime, startTime, endTime, elapsedTime;
     private Ray ray;
     private RaycastHit raycastHit;
 
@@ -20,7 +20,6 @@ public class InputBehaviour : MonoBehaviour
         hit = false;
         deltaTime = 0.0000001f;
         raycastHit = new RaycastHit();
-        stationaryThreshold = 0.1f;
     }
 
     void Update()
@@ -152,11 +151,10 @@ public class InputBehaviour : MonoBehaviour
         if (Input.touchCount > 0)
         {
             userTouch = Input.GetTouch(0);
-            TouchPhase phase = userTouch.phase;
-           
+
             if(userTouch.phase == TouchPhase.Began)
                     {
-                        Debug.Log("TOUCH PHASE: BEGAN");
+
                         startPos = userTouch.position;
 
                         startTime = Time.time;
@@ -211,8 +209,7 @@ public class InputBehaviour : MonoBehaviour
                     }
            
             if(userTouch.phase == TouchPhase.Moved)
-            {
-                Debug.Log("TOUCH PHASE: MOVED");
+                    {
                         movePos = userTouch.position;
 
                         ray = Camera.main.ScreenPointToRay(movePos);
@@ -233,23 +230,9 @@ public class InputBehaviour : MonoBehaviour
                             }
                         }
                     }
-            if (userTouch.phase == TouchPhase.Stationary)
-            {
-                Debug.Log("TOUCH PHASE: STATIONARY");
-                stationaryTimer += Time.deltaTime;
-                if (stationaryTimer > stationaryThreshold)
-                {
-                    startPos = userTouch.position;
-                    startTime = Time.time;
-                }
-            }
-            else
-            {
-                stationaryTimer = 0;
-            }
+            
             if(userTouch.phase == TouchPhase.Ended)
-            {
-                Debug.Log("TOUCH PHASE: ENDED");
+                    {
                         endPos = userTouch.position;
 
                         endTime = Time.time;
@@ -285,10 +268,9 @@ public class InputBehaviour : MonoBehaviour
 
     void OnGUI()
     {
-        GUILayout.Box("Start Pos: (" + startPos.x + ", " + startPos.y + ")");
-        GUILayout.Box("Current Pos: (" + movePos.x + ", " + movePos.y + ")");
-        GUILayout.Box("End Pos: (" + endPos.x + ", " + endPos.y + ")");
-        GUILayout.Box("Velocity: (" + velocity.x + ", " + velocity.y + ")");
-        GUILayout.Box("Phase: " + userTouch.phase);
+        //GUILayout.Box("Start Pos: (" + startPos.x + ", " + startPos.y + ")");
+        //GUILayout.Box("Current Pos: (" + movePos.x + ", " + movePos.y + ")");
+        //GUILayout.Box("End Pos: (" + endPos.x + ", " + endPos.y + ")");
+        //GUILayout.Box("Velocity: (" + velocity.x + ", " + velocity.y + ")");
     }
 }
