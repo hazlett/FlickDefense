@@ -23,7 +23,6 @@ public class MainMenuGUI : MonoBehaviour
         updateGUI = 0.5f;
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-        GameStateManager.Instance.IsMainMenu();
         LoadSave.Instance.BlankList();
         UserStatus.Instance.currentUser.LoadAllUsers();
         LoadCastle();

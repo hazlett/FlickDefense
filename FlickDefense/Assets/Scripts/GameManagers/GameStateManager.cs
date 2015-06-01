@@ -2,15 +2,18 @@
 using System.Collections;
 using System.Collections.Generic;
 
-public class GameStateManager  {
+public class GameStateManager : MonoBehaviour {
 
     private static  GameStateManager instance = new GameStateManager();
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
     internal int enemyCount = 0;
     internal bool flicking = true;
+    internal bool InTransition = false;
 
-    internal enum GameState
+    private const float DEFAULT_LOAD_TIME = 2;
+
+    public enum GameState
     {
         MAINMENU,
         PREWAVE,
@@ -21,36 +24,74 @@ public class GameStateManager  {
         GAMEOVER
     }
 
-    internal GameState currentState = GameState.MAINMENU;
+    //Done in order to pass multiple values to corountine
+    public class StateAndWait
+    {
+        public StateAndWait(GameState state, float time) {State = state; Time = time; }
+        public GameState State;
+        public float Time;
+    }
 
-    public void IsMainMenu() { currentState = GameState.MAINMENU; }
+    private GameState currentState = GameState.MAINMENU;
+    internal GameState CurrentState{
+        get { return currentState;}
+        set {
+            currentState = value;
+            InTransition = false;
+            UpdateAndSave();
+        }
+    }
+
+    public void IsMainMenu() {
+        CurrentState = GameState.MAINMENU;
+        Application.LoadLevel("NewMainLevel");
+    }
 
     public void IsPrewave()
     {
-        currentState = GameState.PREWAVE;
+        CurrentState = GameState.PREWAVE;
         LoadCastle();
         UserStatus.Instance.SetPastKilled();
         WaveSystem.Instance.currentState = WaveSystem.WaveState.PREWAVE;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.WaveGUI);
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);
     }
 
     public void IsPlaying()
     {
-        currentState = GameState.PLAYING;
+        CurrentState = GameState.PLAYING;
         enemyCount = WaveSystem.Instance.EnemyCount();
         WaveSystem.Instance.currentState = WaveSystem.WaveState.INWAVE;
+        GameController.Instance.enabled = true;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.WaveGUI);
     }
 
     public void IsPostWave()
     {
-        currentState = GameState.POSTWAVE;
+        CurrentState = GameState.POSTWAVE;
         WaveSystem.Instance.currentState = WaveSystem.WaveState.POSTWAVE;
+        GameController.Instance.enabled = false;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.PostgameGUI);
+        GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.GameplayGUI);
+        GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.WaveGUI);
     }
 
-    public void IsUpgrading() { currentState = GameState.UPGRADE; }
+    public void IsUpgrading() { 
+        CurrentState = GameState.UPGRADE;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.UpgradeGUI);
+    }
 
-    public void IsSkills() { currentState = GameState.SKILLS; }
+    public void IsSkills() {
+        CurrentState = GameState.SKILLS;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.SkillGUI);
+    }
 
-    public void IsGameOver() { currentState = GameState.GAMEOVER; }
+    public void IsGameOver() { 
+        CurrentState = GameState.GAMEOVER;
+        GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameoverGUI);
+        Application.LoadLevel("NewMainLevel");
+    }
 
     private void LoadCastle()
     {
@@ -95,6 +136,54 @@ public class GameStateManager  {
         {
             GameObject.Destroy(GameObject.Find("Level5(Clone)"));
         }
+    }
+
+    public IEnumerator QueueStateTransition(GameState state)
+    {
+        InTransition = true;
+        StateAndWait sw = new StateAndWait(state, DEFAULT_LOAD_TIME);
+        yield return StartCoroutine("QueueStateTransition", sw);
+    }
+
+    public IEnumerator QueueStateTransition(StateAndWait parameters)
+    {
+        InTransition = true;
+        yield return new WaitForSeconds(parameters.Time);
+        ChangeState(parameters.State);
+    }
+
+    private void ChangeState(GameState state)
+    {
+        switch (state)
+        {
+            case GameState.GAMEOVER:
+                IsGameOver();
+                break;
+            case GameState.PLAYING:
+                IsPlaying();
+                break;
+            case GameState.POSTWAVE:
+                IsPostWave();
+                break;
+            case GameState.PREWAVE:
+                IsPrewave();
+                break;
+            case GameState.SKILLS:
+                IsSkills();
+                break;
+            case GameState.UPGRADE:
+                IsUpgrading();
+                break;
+            default:
+                IsMainMenu();
+                break;
+        }
+    }
+
+    public void UpdateAndSave()
+    {
+        UserStatus.Instance.UpdateUserDataValues();
+        // UserStatus.Instance.currentUser.SaveData();
     }
 
 }
