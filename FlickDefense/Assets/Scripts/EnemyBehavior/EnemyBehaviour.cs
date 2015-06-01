@@ -16,6 +16,8 @@ public class EnemyBehaviour : MonoBehaviour {
     protected int health = 1;
     protected int level = 0;
     protected int attackAmount = 1;
+    protected bool dead;
+
 	void Start () {
         moveLocation = GameObject.Find("CastleDoor").transform.position;
         atLocation = false;
@@ -82,6 +84,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public virtual void Landed(float fallHeight)
     {
+        Debug.Log("Landed");
         if (fallHeight > damageHeight)
         {
             Damage((int)(fallHeight/damageHeight));
@@ -94,6 +97,8 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     public virtual void Damage(int damage)
     {
+        if (dead)
+            return;
         health -= damage;
         if (health <= 0)
         {
@@ -114,7 +119,9 @@ public class EnemyBehaviour : MonoBehaviour {
 
     protected virtual IEnumerator DeathAnimation()
     {
-        yield return new WaitForSeconds(animator.GetComponent<Animation>().clip.length);
+        float length = 3.0f;
+        Debug.Log(length);
+        yield return new WaitForSeconds(length);
     }
     protected virtual void Attack()
     {
