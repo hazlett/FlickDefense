@@ -15,6 +15,7 @@ public class SoundManager{
 
     #region SoundDeclarations
     private static string HUDClickButton;
+    private static string OpenWindow;
     private static string BuyCastleUpgrade = "Sounds/Clips/Coins";
     private static string BuySkillUpgrade;
 
@@ -135,6 +136,9 @@ public class SoundManager{
                 break;
             case SoundClip.HUD.BuySkillUpgrade:
                 PlaySoundClip(BuySkillUpgrade);
+                break;
+            case SoundClip.HUD.OpenWindow:
+                PlaySoundClip(OpenWindow);
                 break;
             default:
                 PlaySoundClip(HUDClickButton);
