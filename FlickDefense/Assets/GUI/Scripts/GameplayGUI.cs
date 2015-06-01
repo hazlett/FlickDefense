@@ -75,7 +75,7 @@ public class GameplayGUI : MonoBehaviour
         }
 
         GUI.color = new Color(1.0f, 1.0f, 1.0f, cooldownTransparency);
-        GUI.DrawTexture(new Rect(40, 40, screenWidth / 12.5f, screenWidth / 12.5f), currentSkillTexture);
+        if (currentSkillTexture != null) GUI.DrawTexture(new Rect(40, 40, screenWidth / 12.5f, screenWidth / 12.5f), currentSkillTexture);
         GUI.color = new Color(1.0f, 1.0f, 1.0f, 1.0f);
 
         if (GUI.Button(skillButton, "Skills", "PopupButton"))
