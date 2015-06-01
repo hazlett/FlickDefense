@@ -22,13 +22,3 @@ sysinfo.txt
 *.DotSettings
 *.suo
 *.suo
-/FlickDefense/Assembly-UnityScript-vs.unityproj
-/FlickDefense/Assembly-CSharp.csproj
-/FlickDefense/Assembly-CSharp-Editor.csproj
-/FlickDefense/Assembly-CSharp-Editor-vs.csproj
-/FlickDefense/Assembly-CSharp-vs.csproj
-/FlickDefense/Assembly-UnityScript.unityproj
-/FlickDefense/Assembly-UnityScript-Editor.unityproj
-/FlickDefense/Assembly-UnityScript-Editor-vs.unityproj
-*.unityproj
-*.csproj

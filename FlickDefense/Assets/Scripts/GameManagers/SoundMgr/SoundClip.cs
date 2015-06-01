@@ -3,7 +3,6 @@
 	public enum HUD
     {
         ClickButton,
-        OpenWindow,
         BuyCastleUpgrade,
         BuySkillUpgrade
     }

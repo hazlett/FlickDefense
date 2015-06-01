@@ -72,7 +72,6 @@ public class CatapultBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        //animator.applyRootMotion = true;
         GameObject rock = GameObject.Instantiate(Resources.Load("Prefabs/Rocks/Rock")) as GameObject;
         currentRock = rock;
         rock.GetComponent<RockBehaviour>().Set(deathCollider, rightHand, leftHand, attackAmount);
