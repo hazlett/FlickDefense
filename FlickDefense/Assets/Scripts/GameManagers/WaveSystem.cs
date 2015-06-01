@@ -92,6 +92,8 @@ public class WaveSystem {
             {
                 case 1: minGrunt = 7;
                     maxGrunt = 12;
+                    minCatapult = 2;
+                    maxCatapult = 3;
                     break;
                 case 2: minGrunt += Random.Range(2, 5);
                     maxGrunt += Random.Range(3, 5);

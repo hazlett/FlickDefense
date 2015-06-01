@@ -105,6 +105,11 @@ public class RockBehaviour : MonoBehaviour {
                     Destroy(gameObject);
                 }
                 break;
+            default:
+                {
+                    Debug.Log("Default Trigger RockBehavior: " + collider.tag);
+                }
+                break;
         }
     }
 }
