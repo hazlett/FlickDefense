@@ -84,7 +84,6 @@ public class EnemyBehaviour : MonoBehaviour {
 
     public virtual void Landed(float fallHeight)
     {
-        Debug.Log("Landed");
         if (fallHeight > damageHeight)
         {
             Damage((int)(fallHeight/damageHeight));
@@ -131,6 +130,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     public virtual void AtLocation()
     {
+        if (atLocation) return;
         animator.SetTrigger("AtLocation");
         atLocation = true;
         InvokeRepeating("Attack", 1, 3);
