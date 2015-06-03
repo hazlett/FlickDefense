@@ -28,7 +28,6 @@ public class GruntBehaviour : EnemyBehaviour {
         GameObject splatter = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSplat"));
         splatter.transform.position = this.transform.position;
 
-        Debug.Log("Grunt Killed!!!");
         dead = true;
         UserStatus.Instance.GruntKilled();
 

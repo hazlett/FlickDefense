@@ -101,7 +101,6 @@ public class EnemyBehaviour : MonoBehaviour {
         health -= damage;
         if (health <= 0)
         {
-            Debug.Log("Enemy is dead");
             Die();
         }
     }

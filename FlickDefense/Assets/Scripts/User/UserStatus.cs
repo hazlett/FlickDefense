@@ -107,8 +107,6 @@ public class UserStatus {
     {
         gruntsKilled++;
 
-        Debug.Log("Grunts killed: " + gruntsKilled);
-
         GoldExchange(1 * (1 + WaveSystem.Instance.waveNumber / 5));
     }
 
