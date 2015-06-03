@@ -21,8 +21,9 @@ public class GameController : MonoBehaviour
         if (GameStateManager.Instance.InTransition) return;
         if (UserStatus.Instance.CastleHealth <= 0)
         {
+            SoundManager.PlaySoundClip(SoundClip.GameState.LoseGame);
             StartCoroutine(GameStateManager.Instance.QueueStateTransition(
-                new GameStateManager.StateAndWait(GameStateManager.GameState.GAMEOVER, 3f)));
+                new GameStateManager.StateAndWait(GameStateManager.GameState.GAMEOVER, 6f)));
         }
         if (GameStateManager.Instance.enemyCount == 0)
         {
