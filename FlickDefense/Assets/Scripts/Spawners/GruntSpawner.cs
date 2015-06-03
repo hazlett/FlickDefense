@@ -31,7 +31,7 @@ public class GruntSpawner : MonoBehaviour {
 
         if (spawning)
         {
-            InvokeRepeating("SpawnGrunts", 1, frequency);
+            InvokeRepeating("SpawnGrunts", 0, frequency);
         }
 
 	}

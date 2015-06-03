@@ -21,7 +21,8 @@ public class GameStateManager : MonoBehaviour {
         POSTWAVE,
         UPGRADE,
         SKILLS,
-        GAMEOVER
+        GAMEOVER,
+        PAUSED
     }
 
     //Done in order to pass multiple values to corountine
@@ -46,7 +47,21 @@ public class GameStateManager : MonoBehaviour {
         CurrentState = GameState.MAINMENU;
         Application.LoadLevel("NewMainLevel");
     }
-
+    public void IsPaused()
+    {
+        if (CurrentState == GameState.PAUSED)
+        {
+            CurrentState = GameState.PLAYING;
+            Debug.Log("Unpaused");
+            Time.timeScale = 1.0f;
+        }
+        else if (CurrentState == GameState.PLAYING)
+        {
+            CurrentState = GameState.PAUSED;
+            Debug.Log("Paused");
+            Time.timeScale = 0;
+        }
+    }
     public void IsPrewave()
     {
         CurrentState = GameState.PREWAVE;
@@ -173,6 +188,9 @@ public class GameStateManager : MonoBehaviour {
                 break;
             case GameState.UPGRADE:
                 IsUpgrading();
+                break;
+            case GameState.PAUSED:
+                IsPaused();
                 break;
             default:
                 IsMainMenu();

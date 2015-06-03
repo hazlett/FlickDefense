@@ -27,18 +27,9 @@ public class InputBehaviour : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            paused = !paused;
-            if (paused)
-            {
-                Time.timeScale = 0;
-                return;
-            }
-            else
-            {
-                Time.timeScale = 1.0f;
-            }
+            GameStateManager.Instance.IsPaused();
         }
-        if (paused)
+        if (GameStateManager.Instance.CurrentState == GameStateManager.GameState.PAUSED)
             return;
         if (hit)
         {
@@ -165,6 +156,7 @@ public class InputBehaviour : MonoBehaviour
         }
         if (Input.touchCount > 0)
         {
+            Debug.Log("Touching");
             userTouch = Input.GetTouch(0);
 
             if(userTouch.phase == TouchPhase.Began)
@@ -173,53 +165,9 @@ public class InputBehaviour : MonoBehaviour
                         startPos = userTouch.position;
 
                         startTime = Time.time;
-
-                        ray = Camera.main.ScreenPointToRay(startPos);
-
-                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
-                        if (hit)
-                        {
-                            switch (raycastHit.collider.tag)
-                            {
-                                case "Archer":
-                                case "Bomber":
-                                case "Grunt":
-                                    {
-                                    }
-                                    break;
-                                case "RockCast":
-                                    {
-                                        hit = false;
-                                        raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
-                                    }
-                                    break;
-                                case "ScreenRockCast":
-                                    {
-                                        raycastHit.collider.gameObject.GetComponentInParent<ScreenRock>().Tapped();
-                                        hit = false;
-                                    }
-                                    break;
-                                case "Flyer":
-                                    {
-                                        raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
-                                        hit = false;
-                                    }
-                                    break;
-                                case "Boss":
-                                    {
-                                        raycastHit.collider.gameObject.GetComponent<BossBehaviour>().Tap();
-                                        hit = false;
-                                    }
-                                    break;
-                                case "Ground":
-                                case "Catapult":
-                                default:
-                                    {
-                                        hit = false;
-                                    }
-                                    break;
-                            }
-                        }
+                        Debug.Log("Touch Began");
+                        CastToHit();
+                       
 
                     }
            
@@ -229,7 +177,6 @@ public class InputBehaviour : MonoBehaviour
 
                         ray = Camera.main.ScreenPointToRay(movePos);
 
-                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
                         if (hit)
                         {
                             if (raycastHit.collider.tag == "Grunt" || raycastHit.collider.tag == "Archer" || raycastHit.collider.tag == "Bomber")
@@ -243,6 +190,10 @@ public class InputBehaviour : MonoBehaviour
                                     Debug.LogError("ERROR in mouse held: " + e.Message);
                                 }
                             }
+                        }
+                        else
+                        {
+                            CastToHit();
                         }
                     }
             
@@ -258,9 +209,6 @@ public class InputBehaviour : MonoBehaviour
                         velocity.x = (endPos.x - startPos.x) / elapsedTime;
                         velocity.y = (endPos.y - startPos.y) / elapsedTime;
 
-                        ray = Camera.main.ScreenPointToRay(endPos);
-
-                        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
                         if (hit)
                         {
 
@@ -281,6 +229,56 @@ public class InputBehaviour : MonoBehaviour
         }
     }
 
+    private void CastToHit()
+    {
+        Debug.Log("Casting");
+        ray = Camera.main.ScreenPointToRay(startPos);
+
+        hit = Physics.SphereCast(ray, 2.0f, out raycastHit, Mathf.Infinity, enemyLayer);
+        if (hit)
+        {
+            switch (raycastHit.collider.tag)
+            {
+                case "Archer":
+                case "Bomber":
+                case "Grunt":
+                    {
+                    }
+                    break;
+                case "RockCast":
+                    {
+                        hit = false;
+                        raycastHit.collider.gameObject.GetComponentInParent<RockBehaviour>().Tap();
+                    }
+                    break;
+                case "ScreenRockCast":
+                    {
+                        raycastHit.collider.gameObject.GetComponentInParent<ScreenRock>().Tapped();
+                        hit = false;
+                    }
+                    break;
+                case "Flyer":
+                    {
+                        raycastHit.collider.gameObject.GetComponent<EnemyBehaviour>().Damage();
+                        hit = false;
+                    }
+                    break;
+                case "Boss":
+                    {
+                        raycastHit.collider.gameObject.GetComponent<BossBehaviour>().Tap();
+                        hit = false;
+                    }
+                    break;
+                case "Ground":
+                case "Catapult":
+                default:
+                    {
+                        hit = false;
+                    }
+                    break;
+            }
+        }
+    }
     void OnGUI()
     {
         //GUILayout.Box("Start Pos: (" + startPos.x + ", " + startPos.y + ")");
