@@ -12,6 +12,7 @@ public class InputBehaviour : MonoBehaviour
     private float deltaTime, startTime, endTime, elapsedTime;
     private Ray ray;
     private RaycastHit raycastHit;
+    private bool paused;
 
     private int enemyLayer = (1 << 10)|(1 << 9);
 
@@ -24,11 +25,25 @@ public class InputBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            paused = !paused;
+            if (paused)
+            {
+                Time.timeScale = 0;
+                return;
+            }
+            else
+            {
+                Time.timeScale = 1.0f;
+            }
+        }
+        if (paused)
+            return;
         if (hit)
         {
             deltaTime += Time.deltaTime;
         }
-
         if (SkillHandler.Instance.currentSkill == SkillHandler.Skills.NONE)
         {
             if (GameStateManager.Instance.flicking)

@@ -28,6 +28,8 @@ public class CatapultBehaviour : EnemyBehaviour {
 
     void Update()
     {
+        if (dead)
+            return;
         transform.LookAt(lookAt);
         if (!atLocation)
         {
@@ -70,7 +72,6 @@ public class CatapultBehaviour : EnemyBehaviour {
     protected override void Attack()
     {
         animator.SetTrigger("Attack");
-        //animator.applyRootMotion = true;
         GameObject rock = GameObject.Instantiate(Resources.Load("Prefabs/Rocks/Rock")) as GameObject;
         currentRock = rock;
         rock.GetComponent<RockBehaviour>().Set(deathCollider, rightHand, leftHand, attackAmount);
@@ -84,7 +85,23 @@ public class CatapultBehaviour : EnemyBehaviour {
         animator.SetTrigger("AtLocation");
         InvokeRepeating("Attack", 1, 7);
     }
+    protected override void Die()
+    {
+        Debug.Log("Ogre Die");
+        agent.speed = 0;
+        animator.SetTrigger("Kill");
+        dead = true;
+        CancelInvoke("Attack");
+        StartCoroutine(DeathAnimation());
 
+    }
+    protected override IEnumerator DeathAnimation()
+    {
+        float length = 3.0f;
+        Debug.Log(length);
+        yield return new WaitForSeconds(length);
+        DestroyEnemy();
+    }
     protected override void DestroyEnemy()
     {
 

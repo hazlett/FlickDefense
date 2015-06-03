@@ -8,8 +8,12 @@ public class GruntBehaviour : EnemyBehaviour {
 
     void Start()
     {
-        moveLocation = GameObject.Find("CastleDoor").transform.position;
-        moveLocation.z += Random.Range(-4.0f, 4.0f);
+        GameObject castle = GameObject.Find("GruntLocation");
+        moveLocation = castle.transform.position;
+        float rangeX = castle.GetComponent<Collider>().bounds.extents.z;
+        float rangeZ = GetComponent<CapsuleCollider>().bounds.extents.x;
+        moveLocation.z += Random.Range(-1f * rangeX, rangeX);
+        moveLocation.x += Random.Range(-1f * rangeZ, rangeZ);
         atLocation = false;
         agent.SetDestination(moveLocation);
         slashAttack = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSwing"));
@@ -23,10 +27,9 @@ public class GruntBehaviour : EnemyBehaviour {
     {
         GameObject splatter = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSplat"));
         splatter.transform.position = this.transform.position;
-        SoundManager.PlaySoundClip(this.gameObject, SoundClip.Enemy.Die);
 
         Debug.Log("Grunt Killed!!!");
-
+        dead = true;
         UserStatus.Instance.GruntKilled();
 
         base.DestroyEnemy();

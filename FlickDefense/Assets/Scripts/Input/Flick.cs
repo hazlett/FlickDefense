@@ -60,7 +60,6 @@ public class Flick : MonoBehaviour {
             GetComponent<Rigidbody>().velocity = Vector3.zero;
             GetComponent<Rigidbody>().angularVelocity = Vector3.zero;
             behaviour.enabled = true;
-            behaviour.animator.Play("Idle");
             behaviour.agent.enabled = true;
             behaviour.Landed(fallHeight);
             this.enabled = false;
