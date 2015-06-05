@@ -79,7 +79,7 @@ public class EnemyBehaviour : MonoBehaviour {
     }
     void OnDestroy()
     {
-        GameStateManager.Instance.enemyCount--;
+        
     }
 
     public virtual void Landed(float fallHeight)
@@ -112,6 +112,7 @@ public class EnemyBehaviour : MonoBehaviour {
 
     protected virtual void DestroyEnemy()
     {
+        WaveSystem.KillEnemy(gameObject);
         GameObject.Destroy(this.gameObject);
     }
 

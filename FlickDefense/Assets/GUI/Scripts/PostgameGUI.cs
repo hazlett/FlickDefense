@@ -34,7 +34,7 @@ public class PostgameGUI : MonoBehaviour
 
         GUI.DrawTexture(new Rect(0, 0, scaledResolutionWidth, nativeVerticalResolution), background);
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Wave " + (WaveSystem.Instance.waveNumber - 1).ToString() + " Stats", "Header");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - headerSize.x / 2, headerSize.y * 0.25f, headerSize.x, headerSize.y), "Wave " + (WaveSystem.Instance.WaveNumber).ToString() + " Stats", "Header");
 
         GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution / 4 - labelSize.y, labelSize.x, labelSize.y), "Wave # (Total)", "SmallLabel");
         // Left Side Stats

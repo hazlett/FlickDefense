@@ -7,7 +7,7 @@ public class GameStateManager : MonoBehaviour {
     private static  GameStateManager instance = new GameStateManager();
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
-    internal int enemyCount = 0;
+    internal int enemyCount { get { return WaveSystem.Instance.EnemyCount; } private set { } }
     internal bool flicking = true;
     internal bool InTransition = false;
 
@@ -67,7 +67,7 @@ public class GameStateManager : MonoBehaviour {
         CurrentState = GameState.PREWAVE;
         LoadCastle();
         UserStatus.Instance.SetPastKilled();
-        WaveSystem.Instance.currentState = WaveSystem.WaveState.PREWAVE;
+        WaveSystem.NextWave();
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.WaveGUI);
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);
     }
@@ -75,8 +75,8 @@ public class GameStateManager : MonoBehaviour {
     public void IsPlaying()
     {
         CurrentState = GameState.PLAYING;
-        enemyCount = WaveSystem.Instance.EnemyCount();
-        WaveSystem.Instance.currentState = WaveSystem.WaveState.INWAVE;
+        WaveSystem.NewSession();
+        WaveSystem.SpawnEnemies();
         GameController.Instance.enabled = true;
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.WaveGUI);
@@ -85,7 +85,6 @@ public class GameStateManager : MonoBehaviour {
     public void IsPostWave()
     {
         CurrentState = GameState.POSTWAVE;
-        WaveSystem.Instance.currentState = WaveSystem.WaveState.POSTWAVE;
         GameController.Instance.enabled = false;
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.PostgameGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.GameplayGUI);

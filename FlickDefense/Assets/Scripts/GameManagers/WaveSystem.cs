@@ -1,204 +1,104 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 
-public class WaveSystem {
+public class WaveSystem : MonoBehaviour {
 
-    internal int waveNumber = 0;
-
-    private static WaveSystem instance = new WaveSystem();
-    public static WaveSystem Instance { get { return instance; } set { instance = value; } }
-
-    private int gruntsKilled, archersKilled, catapultsKilled, bombersKilled, flyersKilled, bossesKilled;
-    private int gruntNumber, archerNumber, catapultNumber, bomberNumber, flyingGruntNumber, bossNumber;
-    private int minGrunt, maxGrunt, minArcher, maxArcher, minBomber, maxBomber, minCatapult, maxCatapult, minFly, maxFly;
-    internal bool enemyRangeSet, enemyNumberSet, enemiesSpawning;
-
-    internal enum WaveState
-    {
-        PREWAVE,
-        INWAVE,
-        POSTWAVE
+    public int EnemyCount { 
+        get {
+            int num1 = ListOfEnemies.Count;
+            foreach(EnemySpawner.SpawnParameters enemy in EnemySpawner.Instance.EnemySpawns)
+            {
+                num1 += enemy.Number;
+            }
+            return num1;
+        } 
+        private set { } 
     }
+    public int WaveNumber { get; private set; }
+    private List<GameObject> ListOfEnemies;
+    private static WaveSystem instance;
+    public static WaveSystem Instance { get { return instance; } private set { } }
+    public bool ArchersTogglePause, BombersTogglePause, BossesTogglePause, CatapultsTogglePause, DragonsTogglePause, GruntsTogglePause;
+    public List<EnemySpawner.SpawnParameters> EnemySpawns;
+    public int num;
 
-    internal WaveState currentState;
+    void Awake()
+    {
+        instance = this;
+        ListOfEnemies = new List<GameObject>();
+        Instance.ListOfEnemies = ListOfEnemies;
+        if(Instance.EnemySpawns == null) Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
+    }
 
     void Start ()
     {
-        enemiesSpawning = enemyNumberSet = enemyRangeSet = false;
-        gruntNumber = archerNumber = catapultNumber = bomberNumber = flyingGruntNumber = 0;
-        minGrunt = maxGrunt = minArcher = maxArcher = minBomber = maxBomber = minCatapult = maxCatapult = minFly = maxFly = 0;
-        SetEnemyRange();
+        ResetWaveSystem();
     }
 
-    internal void SetWaveEnemies()
+    void Update()
     {
-        switch (waveNumber)
+        CheckPausedSpawns();
+        num = Instance.ListOfEnemies.Count;
+        //Clear out list of null enemies
+        if (Instance.EnemyCount == 1) KillEnemy(null);
+    }
+
+    private void CheckPausedSpawns()
+    {
+        if (ArchersTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Archer);
+        if (BombersTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Bomber);
+        if (BossesTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Boss);
+        if (CatapultsTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Catapult);
+        if (DragonsTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Dragon);
+        if (GruntsTogglePause) EnemySpawner.Instance.TogglePauseSpawn(Enemies.Grunt);
+        ArchersTogglePause = BombersTogglePause = BossesTogglePause = CatapultsTogglePause = DragonsTogglePause = GruntsTogglePause = false;
+    }
+
+    internal static void SpawnEnemies()
+    {
+        foreach (EnemySpawner.SpawnParameters enemy in Instance.EnemySpawns)
         {
-            case 1: SetEnemyNumber();
-                break;
-            case 2: SetEnemyNumber();
-                break;
-            case 3: SetEnemyNumber();
-                break;
-            case 4: SetEnemyNumber();
-                break;
-            case 5: SetEnemyNumber();
-                break;
-            default: SetEnemyNumber();
-                break;
+            EnemySpawner.Instance.SetSpawnParams(enemy);
+        }
+        EnemySpawner.Instance.InitSpawns();
+    }
+
+    public static void ResetWaveSystem()
+    {
+        Instance.WaveNumber = 0;
+        NewSession();
+    }
+
+    public static void NewSession()
+    {
+        Instance.ListOfEnemies = new List<GameObject>();
+        Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
+    }
+
+    public static void NextWave()
+    {
+        Instance.WaveNumber++;
+    }
+
+    public static void KillEnemy(GameObject enemy)
+    {
+        enemy.transform.SetParent(null);
+        Instance.ListOfEnemies.Remove(enemy);
+        for (int i = 0; i < Instance.ListOfEnemies.Count; i++)
+        {
+            if (Instance.ListOfEnemies[i] == null) Instance.ListOfEnemies.RemoveAt(i);
         }
     }
 
-    void SetEnemyNumber()
+    public static void AddEnemyToSystem(GameObject enemy, Enemies type)
     {
-        if (!enemyNumberSet)
-        {
-            gruntNumber = Random.Range(minGrunt, maxGrunt);
-            archerNumber = Random.Range(minArcher, maxArcher);
-            bomberNumber = Random.Range(minBomber, maxBomber);
-            catapultNumber = Random.Range(minCatapult, maxCatapult);
-            flyingGruntNumber = Random.Range(minFly, maxFly);
-
-            if (waveNumber % 7 == 0)
-            {
-                bossNumber = waveNumber / 7;
-            }
-
-            enemyNumberSet = true;
-        }
+        Instance.ListOfEnemies.Add(enemy);
+        enemy.transform.SetParent(Instance.gameObject.transform);
     }
 
-    internal void SpawnEnemies()
+    private static void LoadWaveData()
     {
-        if (!enemiesSpawning)
-        {
-            SpawnGrunts();
-            SpawnArchers();
-            SpawnBombers();
-            SpawnFlyers();
-            SpawnCatapults();
-            SpawnBosses();
 
-            enemiesSpawning = true;
-        }
-    }
-
-    internal void SetEnemyRange()
-    {
-        if (!enemyRangeSet)
-        {
-            IncreaseWave();
-            switch (waveNumber)
-            {
-                case 1: minGrunt = 7;
-                    maxGrunt = 12;
-                    break;
-                case 2: minGrunt += Random.Range(2, 5);
-                    maxGrunt += Random.Range(3, 5);
-                    minArcher = 3;
-                    maxArcher = 7;
-                    break;
-                case 3: minGrunt += Random.Range(2, 5);
-                    maxGrunt += Random.Range(3, 5);
-                    minArcher += Random.Range(2, 3);
-                    maxArcher += Random.Range(2, 3);
-                    minBomber = maxBomber = 1;
-                    break;
-                case 4: minGrunt += Random.Range(2, 5);
-                    maxGrunt += Random.Range(3, 5);
-                    minArcher += Random.Range(2, 3);
-                    maxArcher += Random.Range(2, 3);
-                    minFly = maxFly = 1;
-                    break;
-                case 5: minGrunt += Random.Range(2, 5);
-                    maxGrunt += Random.Range(3, 5);
-                    minArcher += Random.Range(2, 3);
-                    maxArcher += Random.Range(2, 3);
-                    minBomber += Random.Range(0, 2);
-                    maxBomber += Random.Range(0, 3);
-                    minCatapult = maxCatapult = 1;
-                    break;
-                default: IncrementEnemies();
-                    break;
-            }
-            enemyRangeSet = true;
-        }
-    }
-
-    void IncrementEnemies()
-    {
-        minGrunt += Random.Range(2, 5);
-        maxGrunt += Random.Range(3, 5);
-        minArcher += Random.Range(2, 3);
-        maxArcher += Random.Range(2, 3);
-        minBomber += Random.Range(0, 2);
-        maxBomber += Random.Range(0, 3);
-        minFly += Random.Range(1, 3);
-        maxFly += Random.Range(2, 4);
-
-        if (waveNumber % 3 == 0)
-        {
-            minCatapult += Random.Range(1, 4);
-            maxCatapult += Random.Range(2, 4);
-        }
-    }
-
-    void SpawnGrunts()
-    {
-        GruntSpawner.Instance.spawning = true;
-        GruntSpawner.Instance.gruntNumber = gruntNumber;
-        GruntSpawner.Instance.gruntsSpawned = 0;
-        GruntSpawner.Instance.StartSpawn();
-    }
-
-    void SpawnArchers()
-    {
-        ArcherSpawner.Instance.spawning = true;
-        ArcherSpawner.Instance.archerNumber = archerNumber;
-        ArcherSpawner.Instance.archersSpawned = 0;
-        ArcherSpawner.Instance.StartSpawn();
-    }
-
-    void SpawnBombers()
-    {
-        BomberSpawner.Instance.spawning = true;
-        BomberSpawner.Instance.bomberNumber = bomberNumber;
-        BomberSpawner.Instance.bombersSpawned = 0;
-        BomberSpawner.Instance.StartSpawn();
-    }
-
-    void SpawnFlyers()
-    {
-        FlyerSpawner.Instance.spawning = true;
-        FlyerSpawner.Instance.flyerNumber = flyingGruntNumber;
-        FlyerSpawner.Instance.flyersSpawned = 0;
-        FlyerSpawner.Instance.StartSpawn();
-    }
-
-    void SpawnCatapults()
-    {
-        CatapultSpawner.Instance.spawning = true;
-        CatapultSpawner.Instance.catapultNumber = catapultNumber;
-        CatapultSpawner.Instance.catapultsSpawned = 0;
-        CatapultSpawner.Instance.StartSpawn();
-    }
-
-    void SpawnBosses()
-    {
-        BossSpawner.Instance.spawning = true;
-        BossSpawner.Instance.bossNumber = bossNumber;
-        BossSpawner.Instance.bossesSpawned = 0;
-        BossSpawner.Instance.StartSpawn();
-    }
-
-    internal int EnemyCount()
-    {
-        return gruntNumber + archerNumber + bomberNumber + flyingGruntNumber + catapultNumber + bossNumber;
-    }
-
-    private void IncreaseWave()
-    {
-        waveNumber++;
-        UserStatus.Instance.ResetWaveGold();
     }
 }

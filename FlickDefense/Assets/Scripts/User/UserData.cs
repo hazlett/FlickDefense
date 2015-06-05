@@ -81,7 +81,7 @@ public class UserData
 
     public void UpdateUserData(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)
     {
-        waveLevel = WaveSystem.Instance.waveNumber;
+        waveLevel = WaveSystem.Instance.WaveNumber;
         gold = goldAmount;
         castleHealth = currentCastleHeath;
         maxCastleHealth = maximumCastleHealth;

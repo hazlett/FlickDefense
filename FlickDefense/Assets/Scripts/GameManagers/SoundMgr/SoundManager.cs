@@ -3,16 +3,6 @@ using System.Collections;
 
 public class SoundManager{
 
-    private enum EnemyType
-    {
-        Grunt,
-        Archer,
-        Knight,
-        Catapult,
-        BabyDragon,
-        Boss
-    }
-
     #region SoundDeclarations
     private static string HUDClickButton;
     private static string BuyCastleUpgrade = "Sounds/Clips/Coins";
@@ -34,13 +24,13 @@ public class SoundManager{
     private static string ArcherThrownAway;
     private static string ArcherDie;
 
-    private static string KnightWalk;
-    private static string KnightRun;
-    private static string KnightExplode;
-    private static string KnightPickedUp;
+    private static string BomberWalk;
+    private static string BomberRun;
+    private static string BomberExplode;
+    private static string BomberPickedUp;
     private static string ThrowRock;
-    private static string KnightBattleCry;
-    private static string KnightThrownAway;
+    private static string BomberBattleCry;
+    private static string BomberThrownAway;
 
     private static string MiniDragonFly;
     private static string MiniDragonExplode;
@@ -87,22 +77,22 @@ public class SoundManager{
 
     public static void PlaySoundClip(GameObject source, SoundClip.Enemy sound)
     {
-        EnemyType type = GetEnemyType(source);
+        Enemies type = GetEnemies(source);
         switch(type)
         {
-            case EnemyType.BabyDragon:
+            case Enemies.Dragon:
                 PlayDragonSoundClip(sound);
                 break;
-            case EnemyType.Boss:
+            case Enemies.Boss:
                 PlayBossSoundClip(sound);
                 break;
-            case EnemyType.Catapult:
+            case Enemies.Catapult:
                 PlayCatapultSoundClip(sound);
                 break;
-            case EnemyType.Knight:
-                PlayKnightSoundClip(sound);
+            case Enemies.Bomber:
+                PlayBomberSoundClip(sound);
                 break;
-            case EnemyType.Archer:
+            case Enemies.Archer:
                 PlayArcherSoundClip(sound);
                 break;
             default:
@@ -271,27 +261,27 @@ public class SoundManager{
         }
     }
 
-    private static void PlayKnightSoundClip(SoundClip.Enemy sound)
+    private static void PlayBomberSoundClip(SoundClip.Enemy sound)
     {
         switch (sound)
         {
             case SoundClip.Enemy.Explode:
-                PlaySoundClip(KnightExplode);
+                PlaySoundClip(BomberExplode);
                 break;
             case SoundClip.Enemy.PickedUp:
-                PlaySoundClip(KnightPickedUp);
+                PlaySoundClip(BomberPickedUp);
                 break;
             case SoundClip.Enemy.Run:
-                PlaySoundClip(KnightRun);
+                PlaySoundClip(BomberRun);
                 break;
             case SoundClip.Enemy.ThrownAway:
-                PlaySoundClip(KnightThrownAway);
+                PlaySoundClip(BomberThrownAway);
                 break;
             case SoundClip.Enemy.Walk:
-                PlaySoundClip(KnightWalk);
+                PlaySoundClip(BomberWalk);
                 break;
             default:
-                PlaySoundClip(KnightBattleCry);
+                PlaySoundClip(BomberBattleCry);
                 break;
         }
     }
@@ -377,7 +367,7 @@ public class SoundManager{
         AudioSource.PlayClipAtPoint(clip, Camera.main.transform.position);
     }
 
-    private static EnemyType GetEnemyType(GameObject enemy)
+    private static Enemies GetEnemies(GameObject enemy)
     {
         bool found = ContainsEnemyScript(enemy);
         GameObject checkingObj = enemy;
@@ -394,13 +384,13 @@ public class SoundManager{
             found = ContainsEnemyScript(checkingObj);
         }
         //default
-        if (!found) return EnemyType.Grunt;
+        if (!found) return Enemies.Grunt;
         //else
-        if (checkingObj.GetComponent<ArcherBehaviour>() != null) return EnemyType.Archer;
-        if (checkingObj.GetComponent<BomberBehaviour>() != null) return EnemyType.Knight;
-        if (checkingObj.GetComponent<CatapultBehaviour>() != null) return EnemyType.Catapult;
-        if (checkingObj.GetComponent<FlyerBehaviour>() != null) return EnemyType.BabyDragon;
-        return EnemyType.Grunt;
+        if (checkingObj.GetComponent<ArcherBehaviour>() != null) return Enemies.Archer;
+        if (checkingObj.GetComponent<BomberBehaviour>() != null) return Enemies.Bomber;
+        if (checkingObj.GetComponent<CatapultBehaviour>() != null) return Enemies.Catapult;
+        if (checkingObj.GetComponent<FlyerBehaviour>() != null) return Enemies.Dragon;
+        return Enemies.Grunt;
     }
 
     private static bool ContainsEnemyScript(GameObject checkingObj)
