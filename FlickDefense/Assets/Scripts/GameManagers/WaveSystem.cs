@@ -99,6 +99,6 @@ public class WaveSystem : MonoBehaviour {
 
     private static void LoadWaveData()
     {
-
+        Waves.Instance.GetWaveData(Instance.WaveNumber);
     }
 }
