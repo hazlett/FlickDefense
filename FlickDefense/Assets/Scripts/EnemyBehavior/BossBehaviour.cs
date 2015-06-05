@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System;
 
 public class BossBehaviour : EnemyBehaviour {
     public ScreenRock rock;
     public GameObject throwRock;
     private bool throwing, rotating, rotatingBack, hasRock;
     private Vector3 castleDoorLocation;
+    private NavMeshObstacle obstacle;
     void Start()
     {
         health = 5;
@@ -20,6 +22,7 @@ public class BossBehaviour : EnemyBehaviour {
         rotating = false;
         rotatingBack = false;
         hasRock = true;
+        obstacle = GetComponent<NavMeshObstacle>();
     }
     void Update()
     {
@@ -58,30 +61,34 @@ public class BossBehaviour : EnemyBehaviour {
         }
         else if (!throwing)
         {
-            if (!atLocation)
+            try
             {
-                agent.SetDestination(moveLocation);
-                animator.SetFloat("Speed", agent.velocity.magnitude);
-            }
-            else
-            {
-                agent.SetDestination(transform.position);
-                agent.Stop();
-                ZeroForces();
-                animator.SetFloat("Speed", 0);
-            }
-            if (Input.GetKeyUp(KeyCode.D))
-            {
-                LookAtScreen();
-            }
-            if (Input.GetKeyUp(KeyCode.F))
-            {
-                if (hasRock)
+                if (!atLocation)
                 {
-                    animator.SetFloat("Speed", 0.0f);
-                    StartCoroutine("ThrowAtWall");
+                    agent.SetDestination(moveLocation);
+                    animator.SetFloat("Speed", agent.velocity.magnitude);
+                }
+                else
+                {
+                    agent.SetDestination(transform.position);
+                    agent.Stop();
+                    ZeroForces();
+                    animator.SetFloat("Speed", 0);
+                }
+                if (Input.GetKeyUp(KeyCode.D))
+                {
+                    LookAtScreen();
+                }
+                if (Input.GetKeyUp(KeyCode.F))
+                {
+                    if (hasRock)
+                    {
+                        animator.SetFloat("Speed", 0.0f);
+                        StartCoroutine("ThrowAtWall");
+                    }
                 }
             }
+            catch (Exception) { }
         }
     }
     void OnGUI()
@@ -153,6 +160,9 @@ public class BossBehaviour : EnemyBehaviour {
     }
     public override void AtLocation()
     {
+        agent.enabled = false;
+        obstacle.enabled = true;
+        obstacle.carving = true;
         ZeroForces();
         animator.SetTrigger("AtLocation");
         atLocation = true;
@@ -160,6 +170,8 @@ public class BossBehaviour : EnemyBehaviour {
     }
     public override void OffLocation()
     {
+        obstacle.enabled = false;
+        agent.enabled = true;
         atLocation = false;
         CancelInvoke("Attack");
     }

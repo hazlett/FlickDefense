@@ -35,7 +35,7 @@ public class Flick : MonoBehaviour {
     {
         GetComponent<Rigidbody>().freezeRotation = true;
         behaviour.enabled = false;
-        //gameObject.layer = LayerMask.NameToLayer("AirborneEnemy");
+        gameObject.layer = LayerMask.NameToLayer("AirborneEnemy");
         GetComponent<Rigidbody>().useGravity = true;
         touchToWorld = position;
         touchToWorld.z = transform.position.z - Camera.main.transform.position.z;
@@ -63,7 +63,7 @@ public class Flick : MonoBehaviour {
             behaviour.enabled = true;
             behaviour.agent.enabled = true;
             behaviour.Landed(fallHeight);
-            //gameObject.layer = LayerMask.NameToLayer("Enemy");
+            gameObject.layer = LayerMask.NameToLayer("Enemy");
             this.enabled = false;
         }
     }

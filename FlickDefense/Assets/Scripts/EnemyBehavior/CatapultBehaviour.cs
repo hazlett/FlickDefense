@@ -7,6 +7,7 @@ public class CatapultBehaviour : EnemyBehaviour {
     public GameObject rightHand, leftHand;
 
     private GameObject currentRock;
+    private NavMeshObstacle obstacle;
 
     void Start()
     {
@@ -24,6 +25,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         atLocation = false;
         agent.SetDestination(moveLocation);
         attackAmount = 3;
+        obstacle = GetComponent<NavMeshObstacle>();
 	}
 
     void Update()
@@ -41,9 +43,13 @@ public class CatapultBehaviour : EnemyBehaviour {
             {
 
             }
-            agent.updateRotation = true;
-            agent.SetDestination(moveLocation);
-            animator.SetFloat("Speed", agent.velocity.magnitude);
+            try
+            {
+                agent.updateRotation = true;
+                agent.SetDestination(moveLocation);
+                animator.SetFloat("Speed", agent.velocity.magnitude);
+            }
+            catch(Exception){}
         }
         else
         {
@@ -84,6 +90,17 @@ public class CatapultBehaviour : EnemyBehaviour {
         atLocation = true;
         animator.SetTrigger("AtLocation");
         InvokeRepeating("Attack", 1, 7);
+        agent.enabled = false;
+        obstacle.enabled = true;
+        obstacle.carving = true;
+
+    }
+    public override void OffLocation()
+    {
+        obstacle.enabled = false;
+        agent.enabled = true;
+        atLocation = false;
+        CancelInvoke("Attack");
     }
     protected override void Die()
     {
