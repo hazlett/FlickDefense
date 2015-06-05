@@ -2,6 +2,7 @@
 using System.Collections;
 using System;
 using System.Collections.Generic;
+using System.Xml.Serialization;
 
 public class EnemySpawner : MonoBehaviour {
 
@@ -9,11 +10,17 @@ public class EnemySpawner : MonoBehaviour {
     public class SpawnParameters
     {
         public SpawnParameters(Enemies type, int num, float freq, float delay) { EnemyType = type; Number = num; Freqeuncy = freq; InitDelay = delay; }
+        [XmlAttribute]
         public Enemies EnemyType;
+        [XmlAttribute]
         public int Number = 0;
+        [XmlAttribute]
         public float Freqeuncy = 0;
         //Set to -1 to pause
+        [XmlAttribute]
         public float InitDelay = 0;
+
+        public SpawnParameters() { }
     }
 
     public List<SpawnParameters> EnemySpawns { get; private set; }

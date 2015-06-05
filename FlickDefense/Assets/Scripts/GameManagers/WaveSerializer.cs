@@ -13,8 +13,6 @@ public class WaveSerializer {
 
     private WaveSerializer()
     {
-        if (instance == null)
-        instance = this;
         LoadWaveSettings();
     }
 
@@ -29,10 +27,6 @@ public class WaveSerializer {
             {
                 waveSettings = serializer.Deserialize(stream) as Waves;
             }
-            Debug.Log("Waves: " + waveSettings.WaveSettings.ToString());
-            Debug.Log("Spawners[1]: " + waveSettings.WaveSettings[1].Spawners.Count);
-            Debug.Log(waveSettings.WaveSettings[0].Spawners.ToString());
-            Debug.Log("Spawner: " + waveSettings.WaveSettings[0].Spawners[0].type);
         }
     }
 
