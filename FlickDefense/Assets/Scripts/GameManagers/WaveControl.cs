@@ -5,6 +5,7 @@ public class WaveControl : MonoBehaviour {
 
     void Start()
     {
+        WaveSerializer.Instance.LoadWaveSettings();
         WaveSystem.Instance.SetEnemyRange();
     }
 	

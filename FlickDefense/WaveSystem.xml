@@ -1,0 +1,14 @@
+<Waves>
+<WaveSettings>
+<Spawners type="Grunt" />
+</WaveSettings>
+<WaveSettings>
+<Spawners type="Grunt" />
+<Spawners type="Archer" />	
+</WaveSettings>
+<WaveSettings>
+<Spawners type="Grunt" />
+<Spawners type="Archer" />
+<Spawners type="Catapult" />
+</WaveSettings>
+</Waves>

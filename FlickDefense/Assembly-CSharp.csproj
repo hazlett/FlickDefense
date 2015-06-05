@@ -99,11 +99,15 @@
      <Compile Include="Assets\Scripts\GameManagers\SoundMgr\Song.cs" />
      <Compile Include="Assets\Scripts\GameManagers\SoundMgr\SoundClip.cs" />
      <Compile Include="Assets\Scripts\GameManagers\SoundMgr\SoundManager.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\Spawner.cs" />
      <Compile Include="Assets\Scripts\GameManagers\UpgradeSystem.cs" />
      <Compile Include="Assets\Scripts\GameManagers\WallHitManager.cs" />
      <Compile Include="Assets\Scripts\GameManagers\WallManager.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\Wave.cs" />
      <Compile Include="Assets\Scripts\GameManagers\WaveControl.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\WaveSerializer.cs" />
      <Compile Include="Assets\Scripts\GameManagers\WaveSystem.cs" />
+     <Compile Include="Assets\Scripts\GameManagers\Waves.cs" />
      <Compile Include="Assets\Scripts\Input\Flick.cs" />
      <Compile Include="Assets\Scripts\Input\InputBehaviour.cs" />
      <Compile Include="Assets\Scripts\Input\TapRock.cs" />
