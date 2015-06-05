@@ -107,44 +107,42 @@ public class UserStatus {
     {
         gruntsKilled++;
 
-        Debug.Log("Grunts killed: " + gruntsKilled);
-
-        GoldExchange(1 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(1 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void ArcherKilled()
     {
         archersKilled++;
 
-        GoldExchange(3 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(3 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void BomberKilled()
     {
         bombersKilled++;
 
-        GoldExchange(7 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(7 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void FlyerKilled()
     {
         flyersKilled++;
 
-        GoldExchange(5 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(5 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void CatapultKilled()
     {
         catapultsKilled++;
 
-        GoldExchange(10 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(10 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void BossKilled()
     {
         bossesKilled++;
 
-        GoldExchange(50 * (1 + WaveSystem.Instance.waveNumber / 5));
+        GoldExchange(50 * (1 + WaveSystem.Instance.WaveNumber / 5));
     }
 
     public void ResetWaveGold()

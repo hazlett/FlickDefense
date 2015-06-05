@@ -55,7 +55,7 @@ public class GameplayGUI : MonoBehaviour
 
         if (!skillPopup)
         {
-            GUI.Label(new Rect(screenWidth - screenWidth / 4 - 10, 10, screenWidth / 4, screenWidth / 16), "Enemies: " + GameStateManager.Instance.enemyCount + " out of " + WaveSystem.Instance.EnemyCount());
+            GUI.Label(new Rect(screenWidth - screenWidth / 4 - 10, 10, screenWidth / 4, screenWidth / 16), "Enemies Remaining: " + WaveSystem.Instance.EnemyCount);
             GUI.Label(new Rect(screenWidth / 2 - screenWidth / 8, 10, screenWidth / 4, screenWidth / 16), "Castle Health: " + UserStatus.Instance.CastleHealth);
         }
 
