@@ -61,10 +61,7 @@ public class UserData
     [XmlAttribute("UserID")]
     public int userID;
 
-<<<<<<< HEAD
-    private static UserData instance;
-    public static UserData Instance { get { if (instance == null) instance = new UserData(); return instance; } }
-=======
+
     private static UserData instance { get; set; }
     public static UserData Instance
     {
@@ -77,11 +74,9 @@ public class UserData
             instance = value;
         }
     }
->>>>>>> origin/master
 
     public UserData()
     {
-        SetDefaultValues();
     }
 
     public void SetDefaultValues()
@@ -117,8 +112,8 @@ public class UserData
 
     public void SaveData()
     {
+        instance.waveLevel = WaveSystem.Instance.WaveNumber;
         string path = Path.Combine(Application.persistentDataPath, "userData.xml");
-        Debug.Log("Saving to " + path);
         XmlSerializer serializer = new XmlSerializer(typeof(UserData));
         using (FileStream stream = new FileStream(path, FileMode.Create))
         {
@@ -128,7 +123,6 @@ public class UserData
     public void LoadData()
     {
         string path = Path.Combine(Application.persistentDataPath, "userData.xml");
-        Debug.Log("Loading: " + path);
         XmlSerializer serializer = new XmlSerializer(typeof(UserData));
         if (File.Exists(path))
         {
@@ -137,6 +131,11 @@ public class UserData
                 instance = serializer.Deserialize(stream) as UserData;
             }
         }
+        else
+        {
+            SetDefaultValues();
+        }
+        WaveSystem.Instance.WaveNumber = instance.waveLevel;
     }
 
     public void LoadAllUsers()

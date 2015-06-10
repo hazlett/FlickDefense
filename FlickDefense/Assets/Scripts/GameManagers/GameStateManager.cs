@@ -44,7 +44,7 @@ public class GameStateManager : MonoBehaviour {
         set {
             currentState = value;
             InTransition = false;
-            UpdateAndSave();
+            //UpdateAndSave();
         }
     }
 
@@ -93,15 +93,13 @@ public class GameStateManager : MonoBehaviour {
     {
         CurrentState = GameState.POSTWAVE;
         GameController.Instance.enabled = false;
-<<<<<<< HEAD
-        UserData.Instance.SaveData();
-=======
+
         UserStatus.Instance.SetPastKilled();
->>>>>>> origin/master
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.PostgameGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.GameplayGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.WaveGUI);
         WaveSystem.NextWave();
+        UserData.Instance.SaveData();
     }
 
     public void IsUpgrading() { 

@@ -23,8 +23,8 @@ public class MainMenuGUI : MonoBehaviour
         updateGUI = 0.5f;
         nativeVerticalResolution = 1080.0f;
         scaledResolutionWidth = nativeVerticalResolution / Screen.height * Screen.width;
-        LoadSave.Instance.BlankList();
-        UserStatus.Instance.currentUser.LoadAllUsers();
+       // LoadSave.Instance.BlankList();
+       // UserStatus.Instance.currentUser.LoadAllUsers();
         LoadCastle();
         SoundManager.PlayMusic(Song.MainMenu);
 

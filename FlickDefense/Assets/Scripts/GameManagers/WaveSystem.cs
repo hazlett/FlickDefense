@@ -15,7 +15,7 @@ public class WaveSystem : MonoBehaviour {
         } 
         private set { } 
     }
-    public int WaveNumber { get; private set; }
+    public int WaveNumber { get; set; }
     private List<GameObject> ListOfEnemies;
     private static WaveSystem instance;
     public static WaveSystem Instance { get { return instance; } private set { } }
@@ -25,17 +25,21 @@ public class WaveSystem : MonoBehaviour {
 
     void Awake()
     {
-        instance = this;
+        DontDestroyOnLoad(gameObject);
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else
+        {
+            Destroy(this);
+        }
         ListOfEnemies = new List<GameObject>();
         Instance.ListOfEnemies = ListOfEnemies;
         if(Instance.EnemySpawns == null) Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
         Instance.WaveNumber = UserData.Instance.waveLevel;
     }
 
-    void Start ()
-    {
-        
-    }
 
     void Update()
     {
