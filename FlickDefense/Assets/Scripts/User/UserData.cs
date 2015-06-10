@@ -61,8 +61,23 @@ public class UserData
     [XmlAttribute("UserID")]
     public int userID;
 
+<<<<<<< HEAD
     private static UserData instance;
     public static UserData Instance { get { if (instance == null) instance = new UserData(); return instance; } }
+=======
+    private static UserData instance { get; set; }
+    public static UserData Instance
+    {
+        get
+        {
+            if (instance == null) instance = new UserData();
+            return instance;
+        }
+        set {
+            instance = value;
+        }
+    }
+>>>>>>> origin/master
 
     public UserData()
     {
@@ -71,16 +86,12 @@ public class UserData
 
     public void SetDefaultValues()
     {
-        waveLevel = gold = gruntsKilled = archersKilled = bombersKilled = catapultsKilled = flyersKilled = bossesKilled = iceLevel = fireLevel = lightningLevel = 0;
+        waveLevel = 1;
+        gold = gruntsKilled = archersKilled = bombersKilled = catapultsKilled = flyersKilled = bossesKilled = iceLevel = fireLevel = lightningLevel = 0;
         castleHealth = maxCastleHealth = 50;
         castleLevel = 1;
         barracks = archeryRange = alchemyLab = false;
         userID = -1;
-    }
-
-    public void SetUserStatus()
-    {
-        UserStatus.Instance.SetStatusValues(gold, castleHealth, maxCastleHealth, gruntsKilled, archersKilled, bombersKilled, flyersKilled, catapultsKilled, bossesKilled, lightningLevel, fireLevel, iceLevel, castleLevel, barracks, archeryRange, alchemyLab);
     }
 
     public void UpdateUserData(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)

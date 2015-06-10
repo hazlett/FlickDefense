@@ -19,7 +19,7 @@ public class GameController : MonoBehaviour
     void Update()
     {
         if (GameStateManager.Instance.InTransition) return;
-        if (UserStatus.Instance.CastleHealth <= 0)
+        if (UserData.Instance.castleHealth <= 0)
         {
             SoundManager.PlaySoundClip(SoundClip.GameState.LoseGame);
             StartCoroutine(GameStateManager.Instance.QueueStateTransition(

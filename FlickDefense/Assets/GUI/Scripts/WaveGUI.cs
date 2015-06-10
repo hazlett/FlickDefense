@@ -36,7 +36,6 @@ public class WaveGUI : MonoBehaviour
         }
         else if (timer > 7.0f)
         {
-            GameStateManager.Instance.IsPlaying();
             this.enabled = false;
         }
 
