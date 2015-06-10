@@ -25,7 +25,7 @@ public class WaveSystem : MonoBehaviour {
 
     void Awake()
     {
-        DontDestroyOnLoad(gameObject);
+       // DontDestroyOnLoad(gameObject);
         if (instance == null)
         {
             instance = this;
@@ -34,6 +34,7 @@ public class WaveSystem : MonoBehaviour {
         {
             Destroy(this);
         }
+        Waves.Instance.LoadWaves();
         ListOfEnemies = new List<GameObject>();
         Instance.ListOfEnemies = ListOfEnemies;
         if(Instance.EnemySpawns == null) Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
@@ -90,12 +91,15 @@ public class WaveSystem : MonoBehaviour {
 
     public static void KillEnemy(GameObject enemy)
     {
-        enemy.transform.SetParent(null);
-        Instance.ListOfEnemies.Remove(enemy);
-        for (int i = 0; i < Instance.ListOfEnemies.Count; i++)
+        if (enemy != null)
         {
-            if (Instance.ListOfEnemies[i] == null) Instance.ListOfEnemies.RemoveAt(i);
+            enemy.transform.SetParent(null);
         }
+            Instance.ListOfEnemies.Remove(enemy);
+            for (int i = 0; i < Instance.ListOfEnemies.Count; i++)
+            {
+                if (Instance.ListOfEnemies[i] == null) Instance.ListOfEnemies.RemoveAt(i);
+            }
     }
 
     public static void AddEnemyToSystem(GameObject enemy, Enemies type)

@@ -119,7 +119,7 @@ public class CatapultBehaviour : EnemyBehaviour {
         yield return new WaitForSeconds(length);
         DestroyEnemy();
     }
-    protected override void DestroyEnemy()
+    internal override void DestroyEnemy()
     {
 
         UserStatus.Instance.CatapultKilled();

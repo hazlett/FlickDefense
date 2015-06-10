@@ -23,7 +23,7 @@ public class GruntBehaviour : EnemyBehaviour {
         
     }
 
-    protected override void DestroyEnemy()
+    internal override void DestroyEnemy()
     {
         GameObject splatter = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Particles/GruntSplat"));
         splatter.transform.position = this.transform.position;

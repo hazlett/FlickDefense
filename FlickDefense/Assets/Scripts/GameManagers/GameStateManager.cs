@@ -83,6 +83,7 @@ public class GameStateManager : MonoBehaviour {
     {
         CurrentState = GameState.PLAYING;
         WaveSystem.NewSession();
+        WaveSystem.LoadWaveData();
         WaveSystem.SpawnEnemies();
         GameController.Instance.enabled = true;
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);

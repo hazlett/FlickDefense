@@ -110,7 +110,7 @@ public class EnemyBehaviour : MonoBehaviour {
         DestroyEnemy();
     }
 
-    protected virtual void DestroyEnemy()
+    internal virtual void DestroyEnemy()
     {
         WaveSystem.KillEnemy(gameObject);
         GameObject.Destroy(this.gameObject);

@@ -32,11 +32,11 @@ public class Waves  {
 
     internal void LoadWaves()
     {
+        Debug.Log("LoadWaves");
         string path = "WaveSettings.xml";
         XmlSerializer serializer = new XmlSerializer(typeof(Waves));
         if (File.Exists(path))
         {
-            Debug.Log(path);
             using (FileStream stream = new FileStream(path, FileMode.Open))
             {
                 instance = serializer.Deserialize(stream) as Waves;

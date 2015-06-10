@@ -87,6 +87,7 @@ public class UserData
         castleLevel = 1;
         barracks = archeryRange = alchemyLab = false;
         userID = -1;
+        SaveData();
     }
 
     public void UpdateUserData(int goldAmount, int currentCastleHeath, int maximumCastleHealth, int gruntNumber, int archerNumber, int bomberNumber, int flyerNumber, int catapultNumber, int bossNumber, int lightningSkill, int fireSkill, int iceSkill, int userCastleLevel, bool barracksUpgrade, bool archeryRangeUpgrade, bool alchemyLabUpgrade)

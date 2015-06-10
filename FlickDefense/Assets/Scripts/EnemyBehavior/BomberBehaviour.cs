@@ -21,7 +21,7 @@ public class BomberBehaviour : EnemyBehaviour {
         Destroy(gameObject);
     }
 
-    protected override void DestroyEnemy()
+    internal override void DestroyEnemy()
     {
         UserStatus.Instance.BomberKilled();
         base.DestroyEnemy();
