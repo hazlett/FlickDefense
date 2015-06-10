@@ -4,6 +4,7 @@ using System.Xml;
 using System.Xml.Serialization;
 using System.IO;
 
+[XmlRoot]
 public class UserData 
 {
     [XmlAttribute("WaveNumber")]
@@ -60,6 +61,9 @@ public class UserData
     [XmlAttribute("UserID")]
     public int userID;
 
+    private static UserData instance;
+    public static UserData Instance { get { if (instance == null) instance = new UserData(); return instance; } }
+
     public UserData()
     {
         SetDefaultValues();
@@ -102,13 +106,31 @@ public class UserData
 
     public void SaveData()
     {
-        LoadSave.Instance.Users[userID] = this;
-        LoadSave.Instance.Save(Path.Combine(Application.persistentDataPath, "users.xml"));
+        string path = Path.Combine(Application.persistentDataPath, "userData.xml");
+        Debug.Log("Saving to " + path);
+        XmlSerializer serializer = new XmlSerializer(typeof(UserData));
+        using (FileStream stream = new FileStream(path, FileMode.Create))
+        {
+            serializer.Serialize(stream, this);
+        }
+    }
+    public void LoadData()
+    {
+        string path = Path.Combine(Application.persistentDataPath, "userData.xml");
+        Debug.Log("Loading: " + path);
+        XmlSerializer serializer = new XmlSerializer(typeof(UserData));
+        if (File.Exists(path))
+        {
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                instance = serializer.Deserialize(stream) as UserData;
+            }
+        }
     }
 
     public void LoadAllUsers()
     {
-        LoadSave.Instance.Load(Path.Combine(Application.persistentDataPath, "users.xml"));
+        //LoadSave.Instance.Load(Path.Combine(Application.persistentDataPath, "users.xml"));
     }
 
     public void LoadData(int userNumber)

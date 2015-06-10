@@ -24,7 +24,7 @@ public class LoadSave
 
     public void Save(string path)
     {
-        Debug.Log("Saving to " + path);
+        Debug.Log("LoadSave. Saving to " + path);
         XmlSerializer serializer = new XmlSerializer(typeof(LoadSave));
         using (FileStream stream = new FileStream(path, FileMode.Create))
         {
@@ -34,10 +34,10 @@ public class LoadSave
 
     public void Load(string path)
     {
+        Debug.Log("LoadSave. Loading: " + path);
         XmlSerializer serializer = new XmlSerializer(typeof(LoadSave));
         if (File.Exists(path))
         {
-            Debug.Log(path);
             using (FileStream stream = new FileStream(path, FileMode.Open))
             {
                 instance = serializer.Deserialize(stream) as LoadSave;

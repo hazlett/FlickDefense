@@ -148,6 +148,7 @@ public class MainMenuGUI : MonoBehaviour
                     optionsWindow = true;
                     toggle3active = toggle3 = toggle1 = toggle2 = toggle = toggle2active = false;
                     LoadCastle();
+                    Debug.Log("Load/Save: " + newUser);
                     if (!newUser)
                     {
                         UserStatus.Instance.currentUser.LoadData(selectedUser);

@@ -64,6 +64,7 @@ public class GameStateManager : MonoBehaviour {
     }
     public void IsPrewave()
     {
+        UserData.Instance.LoadData();
         CurrentState = GameState.PREWAVE;
         LoadCastle();
         UserStatus.Instance.SetPastKilled();
@@ -86,6 +87,7 @@ public class GameStateManager : MonoBehaviour {
     {
         CurrentState = GameState.POSTWAVE;
         GameController.Instance.enabled = false;
+        UserData.Instance.SaveData();
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.PostgameGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.GameplayGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.WaveGUI);
