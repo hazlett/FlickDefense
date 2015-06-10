@@ -29,11 +29,12 @@ public class WaveSystem : MonoBehaviour {
         ListOfEnemies = new List<GameObject>();
         Instance.ListOfEnemies = ListOfEnemies;
         if(Instance.EnemySpawns == null) Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
+        Instance.WaveNumber = UserData.Instance.waveLevel;
     }
 
     void Start ()
     {
-        ResetWaveSystem();
+        
     }
 
     void Update()
@@ -66,12 +67,14 @@ public class WaveSystem : MonoBehaviour {
 
     public static void ResetWaveSystem()
     {
-        Instance.WaveNumber = 0;
+        Instance.WaveNumber = 1;
+        UserData.Instance.waveLevel = Instance.WaveNumber;
         NewSession();
     }
 
     public static void NewSession()
     {
+        EnemySpawner.NewWave();
         Instance.ListOfEnemies = new List<GameObject>();
         Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
     }
@@ -97,8 +100,8 @@ public class WaveSystem : MonoBehaviour {
         enemy.transform.SetParent(Instance.gameObject.transform);
     }
 
-    private static void LoadWaveData()
+    public static void LoadWaveData()
     {
-        Waves.Instance.GetWaveData(Instance.WaveNumber);
+        Instance.EnemySpawns = Waves.Instance.GetWaveData(Instance.WaveNumber);
     }
 }

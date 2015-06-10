@@ -45,8 +45,8 @@ public class UpgradeGUI : MonoBehaviour
 
         DrawSkillWindow();
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserStatus.Instance.Gold.ToString(), "CenterLabel");
-        GUI.Label(new Rect(scaledResolutionWidth / 2, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Castle Health: " + UserStatus.Instance.CastleHealth + " out of " + UserStatus.Instance.MaxCastleHealth, "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserData.Instance.gold.ToString(), "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2, nativeVerticalResolution * 5.7f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Castle Health: " + UserData.Instance.castleHealth + " out of " + UserData.Instance.maxCastleHealth, "CenterLabel");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {
@@ -81,7 +81,7 @@ public class UpgradeGUI : MonoBehaviour
         if (GUI.Button(new Rect(scaledResolutionWidth / 2 - upgradeSize.x / 2, nativeVerticalResolution / 2 - upgradeSize.y / 2,
                 upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
-            switch (UserStatus.Instance.CastleLevel)
+            switch (UserData.Instance.castleLevel)
             {
                 case 1: SetSkillInfo(200, "Castle Up", "Level 2 Castle", "Castle");
                     skillWindow = true;
@@ -106,7 +106,7 @@ public class UpgradeGUI : MonoBehaviour
         if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 2 / 7 - upgradeSize.y / 2,
                 upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
-            if (!UserStatus.Instance.Barracks)
+            if (!UserData.Instance.barracks)
             {
                 skillWindow = true;
                 SetSkillInfo(250, "Barracks Description", "Barracks Upgrade", "Barracks");
@@ -119,7 +119,7 @@ public class UpgradeGUI : MonoBehaviour
         if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 2 / 7 - upgradeSize.y / 2,
                 upgradeSize.x, upgradeSize.y), castleUpgrade, "BlankButton"))
         {
-            if (!UserStatus.Instance.ArcheryRange)
+            if (!UserData.Instance.archeryRange)
             {
                 skillWindow = true;
                 SetSkillInfo(250, "Archery Description", "Archery Range", "Archery");
@@ -132,7 +132,7 @@ public class UpgradeGUI : MonoBehaviour
         if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 4.5f / 7 - upgradeSize.y / 2,
                 upgradeSize.x, upgradeSize.y), cooldown, "BlankButton"))
         {
-            if (!UserStatus.Instance.AlchemyLab)
+            if (!UserData.Instance.alchemyLab)
             {
                 skillWindow = true;
                 SetSkillInfo(250, "Alchemy Description", "Alchemy Lab", "Alchemy");
@@ -145,7 +145,7 @@ public class UpgradeGUI : MonoBehaviour
         if (GUI.Button(new Rect(scaledResolutionWidth * 12 / 16 - upgradeSize.x / 2, nativeVerticalResolution * 4.5f / 7 - upgradeSize.y / 2,
                 upgradeSize.x, upgradeSize.y), castleFix, "BlankButton"))
         {
-            if (UserStatus.Instance.CastleHealth < UserStatus.Instance.MaxCastleHealth)
+            if (UserData.Instance.castleHealth < UserData.Instance.maxCastleHealth)
             {
                 skillWindow = true;
                 SetSkillInfo(250, "Fix Castle", "Fix Castle", "Fix");
@@ -155,7 +155,7 @@ public class UpgradeGUI : MonoBehaviour
 
     private void CheckCastleAvailable(int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
             UserStatus.Instance.IncreaseCastle();
@@ -165,7 +165,7 @@ public class UpgradeGUI : MonoBehaviour
 
     private void CheckBarracksAvailable(int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
             UserStatus.Instance.SetBarracks();
@@ -175,7 +175,7 @@ public class UpgradeGUI : MonoBehaviour
 
     private void CheckArcheryAvailable(int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
             UserStatus.Instance.SetArcheryRange();
@@ -185,7 +185,7 @@ public class UpgradeGUI : MonoBehaviour
 
     private void CheckAlchemyAvailable(int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
             UserStatus.Instance.SetAlchemyLab();
@@ -195,7 +195,7 @@ public class UpgradeGUI : MonoBehaviour
 
     private void CheckCastleFixAvailable(int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             UserStatus.Instance.GoldExchange(-price);
             UserStatus.Instance.DamageCastle(-15);

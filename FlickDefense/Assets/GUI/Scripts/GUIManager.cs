@@ -58,6 +58,7 @@ public class GUIManager : MonoBehaviour {
             case GUISystem.UpgradeGUI:
                 break;
             case GUISystem.WaveGUI:
+                MinimizeGUI(GUISystem.MainMenuGUI);
                 break;
             case GUISystem.MainMenuGUI:
                 break;

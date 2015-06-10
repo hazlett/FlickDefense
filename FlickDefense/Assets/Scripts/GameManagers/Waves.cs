@@ -6,7 +6,7 @@ using System.Collections.Generic;
 [XmlRoot]
 public class Waves  {
     [XmlElement]
-    public Dictionary<int, EnemySpawner.SpawnParameters> WaveSettings;
+    public Dictionary<int, List<EnemySpawner.SpawnParameters>> WaveSettings;
     private static Waves instance;
     public static Waves Instance
     {
@@ -20,7 +20,7 @@ public class Waves  {
 
     public Waves() { }
 
-    public EnemySpawner.SpawnParameters GetWaveData(int waveNum)
+    public List<EnemySpawner.SpawnParameters> GetWaveData(int waveNum)
     {
         if (WaveSettings.ContainsKey(waveNum)) return WaveSettings[waveNum];
         //else

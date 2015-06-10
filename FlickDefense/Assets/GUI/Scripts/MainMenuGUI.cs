@@ -59,30 +59,31 @@ public class MainMenuGUI : MonoBehaviour
 
         if (optionsWindow)
         {
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
+            //if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 2 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Start"))
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 1 / 9, buttonSize.x, buttonSize.y), "Start"))
             {
                 GameStateManager.Instance.IsPrewave();
                 fading = true;
                 speed = 0.0f;
             }
 
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))
+            //if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Choose User"))
+            //{
+            //    chooseUserWindow = true;
+            //    optionsWindow = false;
+            //}
+
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 3 / 7, buttonSize.x, buttonSize.y), "Settings"))
             {
-                chooseUserWindow = true;
-                optionsWindow = false;
             }
 
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 4 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Settings"))
-            {
-            }
-
-            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 5 / 7 - buttonSize.y / 2, buttonSize.x, buttonSize.y), "Quit"))
+            if (GUI.Button(new Rect(scaledResolutionWidth * 3 / 4 - buttonSize.x / 2, nativeVerticalResolution * 5 / 7, buttonSize.x, buttonSize.y), "Quit"))
             {
             }
         }
 
-        DrawChooseUser();
-        DrawOverwriteWindow();
+        //DrawChooseUser();
+        //DrawOverwriteWindow();
     }
 
     private void TimedScreenResize()
@@ -151,11 +152,13 @@ public class MainMenuGUI : MonoBehaviour
                     if (!newUser)
                     {
                         UserStatus.Instance.currentUser.LoadData(selectedUser);
+                        UserData.Instance = UserStatus.Instance.currentUser;
                     }
                     else
                     {
                         UserStatus.Instance.currentUser.SetDefaultValues();
                         UserStatus.Instance.currentUser.userID = selectedUser;
+                        UserData.Instance = UserStatus.Instance.currentUser;
                         UserStatus.Instance.currentUser.SaveData();
                     }
 
@@ -238,7 +241,7 @@ public class MainMenuGUI : MonoBehaviour
 
         CheckForCastle();
 
-        switch (UserStatus.Instance.CastleLevel)
+        switch (UserData.Instance.castleLevel)
         {
             case 1: castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level1"));
                 break;

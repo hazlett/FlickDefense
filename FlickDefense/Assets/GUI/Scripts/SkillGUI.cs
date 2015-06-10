@@ -55,7 +55,7 @@ public class SkillGUI : MonoBehaviour
 
         DrawSkillWindow();
 
-        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 5.5f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserStatus.Instance.Gold.ToString(), "CenterLabel");
+        GUI.Label(new Rect(scaledResolutionWidth / 2 - labelSize.x / 2, nativeVerticalResolution * 5.5f / 7 - labelSize.y / 2, labelSize.x, labelSize.y), "Gold: " + UserData.Instance.gold.ToString(), "CenterLabel");
 
         if (GUI.Button(new Rect(scaledResolutionWidth / 4 - buttonSize.x * 3 / 4, nativeVerticalResolution - buttonSize.y - 50, buttonSize.x, buttonSize.y), "Main Menu"))
         {
@@ -95,7 +95,7 @@ public class SkillGUI : MonoBehaviour
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[3]);
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), lightning[4]);
 
-        switch (UserStatus.Instance.LightningLevel)
+        switch (UserData.Instance.lightningLevel)
         {
             case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 1.5f / 7 - skillBlock.y / 2, 
                 skillBlock.x, skillBlock.y), lightningTexture[0], "BlankButton"))
@@ -146,7 +146,7 @@ public class SkillGUI : MonoBehaviour
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[3]);
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fire[4]);
 
-        switch (UserStatus.Instance.FireLevel)
+        switch (UserData.Instance.fireLevel)
         {
             case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 3 / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), fireTexture[0], "BlankButton"))
                 {
@@ -197,7 +197,7 @@ public class SkillGUI : MonoBehaviour
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 10 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[3]);
         GUI.DrawTexture(new Rect(scaledResolutionWidth * 12 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), ice[4]);
 
-        switch (UserStatus.Instance.IceLevel)
+        switch (UserData.Instance.iceLevel)
         {
             case 0: if (GUI.Button(new Rect(scaledResolutionWidth * 4 / 16 - skillBlock.x / 2, nativeVerticalResolution * 4.5f / 7 - skillBlock.y / 2, skillBlock.x, skillBlock.y), iceTexture[0], "BlankButton"))
                 {
@@ -241,7 +241,7 @@ public class SkillGUI : MonoBehaviour
 
     private void CheckLightningAvailable(int level, int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             lightning[level] = lightningTexture[level];
             UserStatus.Instance.GoldExchange(-price);
@@ -252,7 +252,7 @@ public class SkillGUI : MonoBehaviour
 
     private void CheckFireAvailable(int level, int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             fire[level] = fireTexture[level];
             UserStatus.Instance.GoldExchange(-price);
@@ -263,7 +263,7 @@ public class SkillGUI : MonoBehaviour
 
     private void CheckIceAvailable(int level, int price)
     {
-        if (UserStatus.Instance.Gold > price)
+        if (UserData.Instance.gold > price)
         {
             ice[level] = iceTexture[level];
             UserStatus.Instance.GoldExchange(-price);
@@ -285,11 +285,11 @@ public class SkillGUI : MonoBehaviour
             {
                 switch (skillType)
                 {
-                    case "Lightning": CheckLightningAvailable(UserStatus.Instance.LightningLevel, skillPrice);
+                    case "Lightning": CheckLightningAvailable(UserData.Instance.lightningLevel, skillPrice);
                         break;
-                    case "Fire": CheckFireAvailable(UserStatus.Instance.FireLevel, skillPrice);
+                    case "Fire": CheckFireAvailable(UserData.Instance.fireLevel, skillPrice);
                         break;
-                    case "Ice": CheckIceAvailable(UserStatus.Instance.IceLevel, skillPrice);
+                    case "Ice": CheckIceAvailable(UserData.Instance.iceLevel, skillPrice);
                         break;
                 }
             }

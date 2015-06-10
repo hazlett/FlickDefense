@@ -4,7 +4,7 @@ using System.Collections.Generic;
 
 public class GameStateManager : MonoBehaviour {
 
-    private static  GameStateManager instance = new GameStateManager();
+    private static  GameStateManager instance;
     public static GameStateManager Instance { get { return instance; } set { instance = value; } }
 
     internal int enemyCount { get { return WaveSystem.Instance.EnemyCount; } private set { } }
@@ -12,6 +12,11 @@ public class GameStateManager : MonoBehaviour {
     internal bool InTransition = false;
 
     private const float DEFAULT_LOAD_TIME = 2;
+
+    void Awake()
+    {
+        instance = this;
+    }
 
     public enum GameState
     {
@@ -66,10 +71,11 @@ public class GameStateManager : MonoBehaviour {
     {
         CurrentState = GameState.PREWAVE;
         LoadCastle();
-        UserStatus.Instance.SetPastKilled();
-        WaveSystem.NextWave();
+        UserStatus.Instance.NewWave();
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.WaveGUI);
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameplayGUI);
+        StartCoroutine(GameStateManager.Instance.QueueStateTransition(
+                new GameStateManager.StateAndWait(GameStateManager.GameState.PLAYING, 5f)));
     }
 
     public void IsPlaying()
@@ -86,9 +92,11 @@ public class GameStateManager : MonoBehaviour {
     {
         CurrentState = GameState.POSTWAVE;
         GameController.Instance.enabled = false;
+        UserStatus.Instance.SetPastKilled();
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.PostgameGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.GameplayGUI);
         GUIManager.Instance.MinimizeGUI(GUIManager.GUISystem.WaveGUI);
+        WaveSystem.NextWave();
     }
 
     public void IsUpgrading() { 
@@ -104,6 +112,7 @@ public class GameStateManager : MonoBehaviour {
     public void IsGameOver() { 
         CurrentState = GameState.GAMEOVER;
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameoverGUI);
+        WaveSystem.ResetWaveSystem();
         Application.LoadLevel("NewMainLevel");
     }
 
@@ -113,7 +122,7 @@ public class GameStateManager : MonoBehaviour {
 
         CheckForCastle();
 
-        switch (UserStatus.Instance.CastleLevel)
+        switch (UserData.Instance.castleLevel)
         {
             case 1:  castle = (GameObject)GameObject.Instantiate(Resources.Load<GameObject>("Prefabs/Castles/Faceted/Level1"));
                 break;
@@ -199,8 +208,7 @@ public class GameStateManager : MonoBehaviour {
 
     public void UpdateAndSave()
     {
-        UserStatus.Instance.UpdateUserDataValues();
-        // UserStatus.Instance.currentUser.SaveData();
+        UserData.Instance.SaveData();
     }
 
 }

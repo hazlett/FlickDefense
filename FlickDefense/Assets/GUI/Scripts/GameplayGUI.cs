@@ -56,7 +56,7 @@ public class GameplayGUI : MonoBehaviour
         if (!skillPopup)
         {
             GUI.Label(new Rect(screenWidth - screenWidth / 4 - 10, 10, screenWidth / 4, screenWidth / 16), "Enemies Remaining: " + WaveSystem.Instance.EnemyCount);
-            GUI.Label(new Rect(screenWidth / 2 - screenWidth / 8, 10, screenWidth / 4, screenWidth / 16), "Castle Health: " + UserStatus.Instance.CastleHealth);
+            GUI.Label(new Rect(screenWidth / 2 - screenWidth / 8, 10, screenWidth / 4, screenWidth / 16), "Castle Health: " + UserData.Instance.castleHealth);
         }
 
         if (cooldownTransparency < 1.0f)
@@ -112,7 +112,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void FireSkills()
     {
-        switch (UserStatus.Instance.FireLevel)
+        switch (UserData.Instance.fireLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 8f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), fireTexture[4]))
                 {
@@ -156,7 +156,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void IceSkills()
     {
-        switch (UserStatus.Instance.IceLevel)
+        switch (UserData.Instance.iceLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 11.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), iceTexture[4]))
                 {
@@ -200,7 +200,7 @@ public class GameplayGUI : MonoBehaviour
 
     private void LightningSkills()
     {
-        switch (UserStatus.Instance.LightningLevel)
+        switch (UserData.Instance.lightningLevel)
         {
             case 5: if (GUI.Button(new Rect(screenWidth * 11.5f / 15 - screenWidth / 20, screenHeight * 4.5f / 15 - screenWidth / 20, screenWidth / 10, screenWidth / 10), lightningTexture[4]))
                 {

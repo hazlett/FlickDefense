@@ -17,14 +17,14 @@ public class EnemySpawner : MonoBehaviour {
     }
 
     public List<SpawnParameters> EnemySpawns { get; private set; }
-    private static EnemySpawner instance = new EnemySpawner();
+    private static EnemySpawner instance;
     public static EnemySpawner Instance { get { return instance; } private set { } }
 
     void Awake()
     {
         instance = this;
         if (!AttachedToZone()) Debug.LogError("EnemySpawner must be attached to gameobject with a renderer");
-        Instance.EnemySpawns = new List<SpawnParameters>();
+        NewWave();
     }
 
 	// Use this for initialization
@@ -36,6 +36,11 @@ public class EnemySpawner : MonoBehaviour {
 	void Update () {
 	
 	}
+
+    public static void NewWave()
+    {
+        Instance.EnemySpawns = new List<SpawnParameters>();
+    }
 
     public void InitSpawns()
     {
