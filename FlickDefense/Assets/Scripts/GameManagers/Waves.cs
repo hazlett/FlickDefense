@@ -7,11 +7,7 @@ using System.IO;
 [XmlRoot]
 public class Waves  {
     [XmlElement]
-<<<<<<< HEAD
-    List<List<EnemySpawner.SpawnParameters>> Settings = new List<List<EnemySpawner.SpawnParameters>>();
-=======
-    public List<EnemySpawner.SpawnParameters> Settings = new List<EnemySpawner.SpawnParameters>();
->>>>>>> origin/master
+    public List<List<EnemySpawner.SpawnParameters>> Settings = new List<List<EnemySpawner.SpawnParameters>>();
 
     [XmlIgnore]
     public Dictionary<int, List<EnemySpawner.SpawnParameters>> WaveSettings;
@@ -31,13 +27,12 @@ public class Waves  {
     public List<EnemySpawner.SpawnParameters> GetWaveData(int waveNum)
     {
         if (WaveSettings.ContainsKey(waveNum)) return WaveSettings[waveNum];
-        //else
         return WaveSettings[0];
     }
 
     internal void LoadWaves()
     {
-        string path = "WaveSystem.xml";
+        string path = "WaveSettings.xml";
         XmlSerializer serializer = new XmlSerializer(typeof(Waves));
         if (File.Exists(path))
         {
@@ -46,13 +41,17 @@ public class Waves  {
             {
                 instance = serializer.Deserialize(stream) as Waves;
             }
-            Debug.Log("Settings: " + Settings.Count);
+            instance.WaveSettings = new Dictionary<int, List<EnemySpawner.SpawnParameters>>();
+
+            for (int i = 0; i < instance.Settings.Count; i++)
+            {
+                instance.WaveSettings.Add(i, instance.Settings[i]);
+            }
         }
     }
 
     internal void SaveWaves()
     {
-        Debug.Log("Saving Waves");
         instance.Settings = new List<List<EnemySpawner.SpawnParameters>>()
         {
             new List<EnemySpawner.SpawnParameters>()
@@ -69,7 +68,7 @@ public class Waves  {
         }
     };
         XmlSerializer xmls = new XmlSerializer(typeof(Waves));
-        using (FileStream stream = new FileStream("WaveSettings.xml", FileMode.Create))
+        using (FileStream stream = new FileStream("XMLTest.xml", FileMode.Create))
         {
             xmls.Serialize(stream, instance);
         }

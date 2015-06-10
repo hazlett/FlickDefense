@@ -1,5 +1,41 @@
 <?xml version="1.0" encoding="Windows-1252"?>
 <Waves xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
-  <Settings EnemyType="Grunt" Number="10" Freqeuncy="1" InitDelay="1" />
-  <Settings EnemyType="Archer" Number="5" Freqeuncy="1" InitDelay="1" />
+<!-- First Settings block is the iterative/post wave max -->
+ <Settings> 
+    <SpawnParameters EnemyType="Grunt" Number="3" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="3" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Bomber" Number="2" Freqeuncy="1" InitDelay="3" />
+    <SpawnParameters EnemyType="Catapult" Number="2" Freqeuncy="1" InitDelay="4" />
+    <SpawnParameters EnemyType="Dragon" Number="2" Freqeuncy="1" InitDelay="4" />
+    <SpawnParameters EnemyType="Boss" Number="1" Freqeuncy="10" InitDelay="8" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="8" Freqeuncy="1" InitDelay="1" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="10" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="5" Freqeuncy="1" InitDelay="1" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="12" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="7" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Bomber" Number="1" Freqeuncy="1" InitDelay="1" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="12" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="7" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Bomber" Number="3" Freqeuncy="1" InitDelay="1" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="10" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="5" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Bomber" Number="1" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Catapult" Number="1" Frequency="1" InitDelay="1" />
+  </Settings>
+  <Settings>
+    <SpawnParameters EnemyType="Grunt" Number="12" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Archer" Number="7" Freqeuncy="1" InitDelay="1" />
+    <SpawnParameters EnemyType="Bomber" Number="2" Freqeuncy="8" InitDelay="1" />
+    <SpawnParameters EnemyType="Catapult" Number="2" Frequency="5" InitDelay="1" />
+  </Settings>
 </Waves>
