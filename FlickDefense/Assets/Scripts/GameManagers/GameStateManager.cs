@@ -116,6 +116,7 @@ public class GameStateManager : MonoBehaviour {
         CurrentState = GameState.GAMEOVER;
         GUIManager.Instance.MaximizeGUI(GUIManager.GUISystem.GameoverGUI);
         WaveSystem.ResetWaveSystem();
+        UserData.Instance.SetDefaultValues();
         Application.LoadLevel("NewMainLevel");
     }
 
