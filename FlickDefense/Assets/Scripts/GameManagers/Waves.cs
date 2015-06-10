@@ -7,7 +7,7 @@ using System.IO;
 [XmlRoot]
 public class Waves  {
     [XmlElement]
-    List<EnemySpawner.SpawnParameters> Settings = new List<EnemySpawner.SpawnParameters>();
+    public List<EnemySpawner.SpawnParameters> Settings = new List<EnemySpawner.SpawnParameters>();
 
     [XmlIgnore]
     public Dictionary<int, EnemySpawner.SpawnParameters> WaveSettings;
@@ -56,7 +56,7 @@ public class Waves  {
 
         };
         XmlSerializer xmls = new XmlSerializer(typeof(Waves));
-        using (FileStream stream = new FileStream("XMLTest.xml", FileMode.Create))
+        using (FileStream stream = new FileStream("WaveSettings.xml", FileMode.Create))
         {
             xmls.Serialize(stream, instance);
         }

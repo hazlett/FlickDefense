@@ -6,7 +6,7 @@ using System.Xml.Serialization;
 
 public class EnemySpawner : MonoBehaviour {
 
-    [System.Serializable]
+    
     public class SpawnParameters
     {
         public SpawnParameters(Enemies type, int num, float freq, float delay) { EnemyType = type; Number = num; Freqeuncy = freq; InitDelay = delay; }

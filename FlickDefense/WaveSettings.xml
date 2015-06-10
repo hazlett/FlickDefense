@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<Waves xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Settings EnemyType="Grunt" Number="10" Freqeuncy="1" InitDelay="1" />
+  <Settings EnemyType="Archer" Number="5" Freqeuncy="1" InitDelay="1" />
+</Waves>
