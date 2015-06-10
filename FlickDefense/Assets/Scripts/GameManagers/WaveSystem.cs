@@ -29,6 +29,7 @@ public class WaveSystem : MonoBehaviour {
         ListOfEnemies = new List<GameObject>();
         Instance.ListOfEnemies = ListOfEnemies;
         if(Instance.EnemySpawns == null) Instance.EnemySpawns = new List<EnemySpawner.SpawnParameters>();
+        Waves.Instance.SaveWaves();
     }
 
     void Start ()

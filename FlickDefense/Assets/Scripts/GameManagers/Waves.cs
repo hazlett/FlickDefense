@@ -7,10 +7,10 @@ using System.IO;
 [XmlRoot]
 public class Waves  {
     [XmlElement]
-    List<EnemySpawner.SpawnParameters> Settings = new List<EnemySpawner.SpawnParameters>();
+    List<List<EnemySpawner.SpawnParameters>> Settings = new List<List<EnemySpawner.SpawnParameters>>();
 
     [XmlIgnore]
-    public Dictionary<int, EnemySpawner.SpawnParameters> WaveSettings;
+    public Dictionary<int, List<EnemySpawner.SpawnParameters>> WaveSettings;
     private static Waves instance;
     public static Waves Instance
     {
@@ -24,7 +24,7 @@ public class Waves  {
 
     public Waves() { }
 
-    public EnemySpawner.SpawnParameters GetWaveData(int waveNum)
+    public List<EnemySpawner.SpawnParameters> GetWaveData(int waveNum)
     {
         if (WaveSettings.ContainsKey(waveNum)) return WaveSettings[waveNum];
         //else
@@ -49,12 +49,21 @@ public class Waves  {
     internal void SaveWaves()
     {
         Debug.Log("Saving Waves");
-        instance.Settings = new List<EnemySpawner.SpawnParameters>()
+        instance.Settings = new List<List<EnemySpawner.SpawnParameters>>()
+        {
+            new List<EnemySpawner.SpawnParameters>()
         {
             new EnemySpawner.SpawnParameters(Enemies.Grunt, 10, 1.0f, 1.0f),
             new EnemySpawner.SpawnParameters(Enemies.Archer, 5, 1.0f, 1.0f)
 
-        };
+        },
+        new List<EnemySpawner.SpawnParameters>()
+        {
+            new EnemySpawner.SpawnParameters(Enemies.Grunt, 12, 1.0f, 1.0f),
+            new EnemySpawner.SpawnParameters(Enemies.Archer, 7, 1.0f, 1.0f),
+            new EnemySpawner.SpawnParameters(Enemies.Bomber, 1, 1.0f, 1.0f)
+        }
+    };
         XmlSerializer xmls = new XmlSerializer(typeof(Waves));
         using (FileStream stream = new FileStream("XMLTest.xml", FileMode.Create))
         {
