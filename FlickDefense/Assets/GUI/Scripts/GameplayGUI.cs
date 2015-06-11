@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 using System.Collections;
 using System.Text.RegularExpressions;
 using System;
@@ -9,8 +10,9 @@ public class GameplayGUI : MonoBehaviour
     public Texture2D[] fireTexture, lightningTexture, iceTexture;
     public Texture2D crackedScreen, popupWindow, currentSkillTexture, backdropActive, backdropInactive;
 
-    internal bool cracked, skillPopup;
+    internal bool cracked, skillPopup, paused;
 
+    private Canvas pauseCanvas;
     private Texture2D backdropCurrent;
     private SkillHandler.Skills currentSkill = SkillHandler.Skills.NONE;
     private Rect skillActivate;
@@ -18,8 +20,15 @@ public class GameplayGUI : MonoBehaviour
     private float screenHeight, screenWidth, updateGUI, cooldownTransparency, crackTime = 10.0f, crackTimer, crackedTransparency;
     private Vector2 labelSize = new Vector2(500, 200), buttonSize = new Vector2(500, 100), headerSize = new Vector2(750, 100);
 
+    void Start()
+    {
+        pauseCanvas = GameObject.Find("PauseCanvas").GetComponent<Canvas>();
+    }
+
     void OnEnable()
     {
+        paused = false;
+
         backdropCurrent = backdropInactive;
 
         updateGUI = 0.5f;
@@ -96,6 +105,13 @@ public class GameplayGUI : MonoBehaviour
             GUI.color = new Color(1, 1, 1, crackedTransparency);
             GUI.DrawTexture(new Rect(0, 0, screenWidth, screenHeight), crackedScreen);
             GUI.color = new Color(1, 1, 1, 1);
+        }
+
+        if (GUI.Button(new Rect(15, screenHeight - 265, 250, 250), crackedScreen)){
+
+            pauseCanvas.enabled = true;
+            GameStateManager.Instance.IsPaused();
+            this.enabled = false;
         }
     }
 
