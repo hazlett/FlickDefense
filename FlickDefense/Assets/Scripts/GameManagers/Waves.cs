@@ -3,6 +3,7 @@ using System.Collections;
 using System.Xml.Serialization;
 using System.Collections.Generic;
 using System.IO;
+using System.Xml;
 
 [XmlRoot]
 public class Waves  {
@@ -32,7 +33,34 @@ public class Waves  {
 
     internal void LoadWaves()
     {
-        Debug.Log("LoadWaves");
+#if UNITY_ANDROID || UNITY_IOS
+        LoadAndroid();
+#else
+        LoadPC();
+#endif
+    }
+    private void LoadAndroid()
+    {
+        Debug.Log("LoadWavesPHONE");
+        string path = Path.Combine(Application.streamingAssetsPath, "WaveSettings");
+        XmlSerializer serializer = new XmlSerializer(typeof(Waves));
+        if (File.Exists(path))
+        {
+            using (FileStream stream = new FileStream(path, FileMode.Open))
+            {
+                instance = serializer.Deserialize(stream) as Waves;
+            }
+            instance.WaveSettings = new Dictionary<int, List<EnemySpawner.SpawnParameters>>();
+
+            for (int i = 0; i < instance.Settings.Count; i++)
+            {
+                instance.WaveSettings.Add(i, instance.Settings[i]);
+            }
+        }
+    }
+    private void LoadPC()
+    {
+        Debug.Log("LoadWavesPC");
         string path = Path.Combine(Application.persistentDataPath, "WaveSettings.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(Waves));
         if (File.Exists(path))
@@ -49,7 +77,6 @@ public class Waves  {
             }
         }
     }
-
     internal void SaveWaves()
     {
         instance.Settings = new List<List<EnemySpawner.SpawnParameters>>()
