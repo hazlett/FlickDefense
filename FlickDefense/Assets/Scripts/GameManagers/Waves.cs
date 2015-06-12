@@ -33,7 +33,7 @@ public class Waves  {
     internal void LoadWaves()
     {
         Debug.Log("LoadWaves");
-        string path = "WaveSettings.xml";
+        string path = Path.Combine(Application.persistentDataPath, "WaveSettings.xml");
         XmlSerializer serializer = new XmlSerializer(typeof(Waves));
         if (File.Exists(path))
         {
@@ -67,8 +67,10 @@ public class Waves  {
             new EnemySpawner.SpawnParameters(Enemies.Bomber, 1, 1.0f, 1.0f)
         }
     };
+
+        string path = Path.Combine(Application.persistentDataPath, "XMLTest.xml");
         XmlSerializer xmls = new XmlSerializer(typeof(Waves));
-        using (FileStream stream = new FileStream("XMLTest.xml", FileMode.Create))
+        using (FileStream stream = new FileStream(path, FileMode.Create))
         {
             xmls.Serialize(stream, instance);
         }
