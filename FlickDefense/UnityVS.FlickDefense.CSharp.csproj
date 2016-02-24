@@ -60,7 +60,6 @@
     <Compile Include="Assets\GUI\Scripts\GameoverGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\GameplayGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\MainMenuGUI.cs" />
-    <Compile Include="Assets\GUI\Scripts\PauseController.cs" />
     <Compile Include="Assets\GUI\Scripts\PostgameGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\SkillGUI.cs" />
     <Compile Include="Assets\GUI\Scripts\UpgradeGUI.cs" />
