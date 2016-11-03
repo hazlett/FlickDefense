@@ -1,3 +1,5 @@
+// Upgrade NOTE: replaced '_Object2World' with 'unity_ObjectToWorld'
+
 // Upgrade NOTE: commented out 'float4 unity_LightmapST', a built-in variable
 // Upgrade NOTE: commented out 'sampler2D unity_Lightmap', a built-in variable
 // Upgrade NOTE: replaced tex2D unity_Lightmap with UNITY_SAMPLE_TEX2D
@@ -43,7 +45,7 @@
 	  	o.viewRefl = reflect (viewDir, v.normal);
 	  	#endif
 	  	
-		float3 worldNormal = mul ((float3x3)_Object2World, SCALED_NORMAL);
+		float3 worldNormal = mul ((float3x3)unity_ObjectToWorld, SCALED_NORMAL);
 		o.worldNormal = worldNormal;
 		
 		o.color.a = 1;
